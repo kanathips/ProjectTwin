@@ -1,0 +1,47 @@
+
+imagesPack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Triangel
+  rotate: false
+  xy: 1, 1
+  size: 184, 208
+  orig: 184, 208
+  offset: 0, 0
+  index: -1
+player0
+  rotate: false
+  xy: 187, 108
+  size: 102, 101
+  orig: 102, 101
+  offset: 0, 0
+  index: -1
+player1
+  rotate: false
+  xy: 187, 5
+  size: 102, 101
+  orig: 102, 101
+  offset: 0, 0
+  index: -1
+player2
+  rotate: false
+  xy: 291, 108
+  size: 102, 101
+  orig: 102, 101
+  offset: 0, 0
+  index: -1
+player3
+  rotate: false
+  xy: 291, 5
+  size: 102, 101
+  orig: 102, 101
+  offset: 0, 0
+  index: -1
+player4
+  rotate: false
+  xy: 395, 108
+  size: 102, 101
+  orig: 102, 101
+  offset: 0, 0
+  index: -1
