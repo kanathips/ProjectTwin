@@ -3,6 +3,8 @@ package com.projecttwin.utils;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.character.MainCharacter;
+import com.projecttwin.character.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.assets.AssetManager;
@@ -13,8 +15,10 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 public class Assets implements Disposable, AssetErrorListener{
 	public static final String TAG = Assets.class.getName();
 	public static final Assets instance = new Assets();
+	public TextureAtlas atlas;
 	private AssetManager assetManager;
-	
+	public Player player;
+	public MainCharacter charac;
 	private Assets(){}
 	
 	public void init(AssetManager assetManager){
@@ -25,9 +29,11 @@ public class Assets implements Disposable, AssetErrorListener{
 		Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames().size);
 		for (String a: assetManager.getAssetNames())
 			Gdx.app.debug(TAG, "asset: " + a);
-		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
+		atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 		for(Texture t: atlas.getTextures())
 			t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		player = new Player(atlas);
+		charac = new MainCharacter(atlas);
 	}
 	
 	@Override
