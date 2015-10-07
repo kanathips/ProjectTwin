@@ -13,7 +13,6 @@ public class WorldRender implements Disposable{
 	private OrthographicCamera camera;
 	private WorldController worldController;
 	private SpriteBatch batch;
-	private Sprite playerSprite;
 	
 	public WorldRender(WorldController worldController){
 		this.worldController = worldController;
@@ -32,11 +31,10 @@ public class WorldRender implements Disposable{
 		worldController.cameraHelper.applyTo(camera);
 		
 	}
-	public void renderPlayer(){
-		playerSprite = worldController.playerSprite;
+	public void renderPlayer(){;
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		playerSprite.draw(batch);
+		worldController.playerSprite.draw(batch);
 		batch.end();
 	}
 
