@@ -11,9 +11,9 @@ public class Player {
 	private Animation walkingRight;
 	private State state  = State.STANDING;
 	public boolean facingLeft = false;
-	private final float updateTrigger = 0.042f;
+	private final float updateTrigger = 0.1f;
 	private static int keyFrameIndex = 0;
-	private static float trigger = 0;
+	public static float trigger = 0;
 	public TextureRegion playerFrame;
 	private TextureAtlas atlas;
 	
@@ -23,27 +23,24 @@ public class Player {
 	}
 	
 	public void init(){
-		standRight = atlas.findRegion("player01");
+		standRight = atlas.findRegion("player00");
 		standLeft = new TextureRegion(standRight);
 		standLeft.flip(true, false);
 		playerFrame = standRight;
 		
-		TextureRegion[] walkingLeftFrame = new TextureRegion[9];
-		for(int i = 1; i < 9 ; i++){
-			walkingLeftFrame[i] = atlas.findRegion("player0" + i);
-			walkingLeftFrame[i].flip(true, false);
-		}
-		
+		TextureRegion[] walkingLeftFrame = new TextureRegion[8];
+		for(int i = 0; i < 8 ; i++)
+			walkingLeftFrame[i] = atlas.findRegion("player1" + i);
+	
 		walkingLeft = new Animation(updateTrigger, walkingLeftFrame);
-		walkingLeftFrame = null;
 		
-		TextureRegion[] walkingRightFrame = new TextureRegion[9];
-		for(int i = 1; i < 9; i++)
+		TextureRegion[] walkingRightFrame = new TextureRegion[8];
+		for(int i = 0; i < 8; i++)
 			walkingRightFrame[i] = atlas.findRegion("player0" + i);
-		
 		walkingRight = new Animation(updateTrigger, walkingRightFrame);
 		walkingRightFrame = null;
 	}
+	
 	public void setFacingLeft(boolean facing){
 		facingLeft = facing;
 	}
@@ -60,11 +57,16 @@ public class Player {
 		return state;
 	}
 	
+	public void setTrigger(float deltaTime){
+		trigger = deltaTime;
+	}
+	
 	public void update(float deltaTime){
 		trigger += deltaTime;
 		switch(state){
 			case WALKING:
-				playerFrame = facingLeft ? walkingLeft.getKeyFrame(trigger, true) : walkingRight.getKeyFrame(trigger, true); 
+				playerFrame = facingLeft ? walkingLeft.getKeyFrame(trigger, true) :  walkingRight.getKeyFrame(trigger, true);
+				System.out.println(playerFrame.getRegionHeight() + " " + playerFrame.getRegionHeight());
 				break;
 			case JUMPING:
 				if(facingLeft){
@@ -75,8 +77,7 @@ public class Player {
 				}
 				break;
 			case STANDING:
-				playerFrame = facingLeft ? standLeft : standRight;
-				break;
+					playerFrame = facingLeft ? standLeft : standRight;
 			default:
 				break;
 		}		

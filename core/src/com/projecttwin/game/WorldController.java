@@ -40,6 +40,7 @@ public class WorldController extends InputAdapter {
 		HandleInput(deltaTime);
 		cameraHelper.update(deltaTime);
 		player.update(deltaTime);
+		playerSprite.setRegion(player.playerFrame);
 	}
 
 	private void HandleInput(float deltaTime) {
@@ -108,7 +109,7 @@ public class WorldController extends InputAdapter {
 			System.out.println("player " + playerSprite.getX() + " " + playerSprite.getY() );
 		}
 		if(Keys.SPACE == keycode){
-			System.out.println("facing Left : " + player.facingLeft + " State : " + player.getState());
+			System.out.println("facing Left : " + player.facingLeft + " State : " + player.getState() + " Trigger Time : " + player.trigger + " playerFrame : " + player.playerFrame);
 		}
 		return false;
 	}
@@ -118,11 +119,13 @@ public class WorldController extends InputAdapter {
 		if(Keys.D == keycode){
 			player.setState(State.STANDING);
 			player.setFacingLeft(false);
+			player.setTrigger(0);
 			System.out.println("UP D");
 		}
 		if(Keys.A == keycode){
 			player.setState(State.STANDING);
 			player.setFacingLeft(true);
+			player.setTrigger(0);
 			System.out.println("UP A");
 		}
 		if(Keys.W == keycode){
