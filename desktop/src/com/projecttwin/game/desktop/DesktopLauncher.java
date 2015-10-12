@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		config.title = "Twin";
 		config.useGL30 = false;
 		config.width = 800;
-		config.height = 480;
+		config.height = 600;
 		new LwjglApplication(new ProjectTwin(), config);
 	}
 }

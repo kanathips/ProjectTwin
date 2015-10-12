@@ -3,6 +3,7 @@ package com.projecttwin.utils;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.character.Box;
 import com.projecttwin.character.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -16,7 +17,6 @@ public class Assets implements Disposable, AssetErrorListener{
 	public static final Assets instance = new Assets();
 	public TextureAtlas atlas;
 	private AssetManager assetManager;
-	public Player player;
 	private Assets(){}
 	
 	public void init(AssetManager assetManager){
@@ -30,7 +30,14 @@ public class Assets implements Disposable, AssetErrorListener{
 		atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 		for(Texture t: atlas.getTextures())
 			t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		player = new Player(atlas);
+	}
+	
+	public Box getBox(){
+		return new Box(atlas);
+	}
+	
+	public Player getPlayer(){
+		return new Player(atlas);
 	}
 	
 	@Override
