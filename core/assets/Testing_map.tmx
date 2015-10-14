@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="25" tilewidth="32" tileheight="32" nextobjectid="29">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="25" tilewidth="32" tileheight="32" nextobjectid="30">
  <tileset firstgid="1" name="scifi_platformTiles_32x32" tilewidth="32" tileheight="32" tilecount="805">
   <image source="D:/Projects/TestSpace/core/assets/tile/scifi_platformTiles_32x32.png" width="1120" height="736"/>
  </tileset>
  <imagelayer name="BG" visible="0">
   <image source="D:/Projects/TestSpace/core/assets/tile/scifi_platform_BG1.jpg"/>
  </imagelayer>
- <layer name="front" width="80" height="25">
+ <layer name="Wall" width="80" height="25">
   <data encoding="base64" compression="zlib">
-   eJztzdkJgDAQRdFJX2orbp24NRhtRf30kQpCfibIPXDhMRBiBgAAAAAAAAAA8C+nulSsYHv/X7If9aq7gu39f8lug1mnmuC/vf8v2b0a1KgmNXNLt9w3i1rVpnZ1cEu33DcffQjrBA==
+   eJztlckNAjEQBFdOCkgFSAXIY7nJgxvy4IYwqOf4be9KI/dI9RmN3J8uuQ5VNYUZzGEBS1jBGjZQN3zjOXcLO9jDAY5wgjNc4NrCjefcG9zhAU94wRs+8IVfCzeec5t2RP768Ej++syVv/JX/vrNlb/yV/76ze1AF3oh7qrd2z7bve1zyjuec/swgGGIu2r3ts92b/uc8o7n3BGMYRLirtq97bPd2z6nvOM5V/+v/l/9v35zS/Y3x03J/ua4KdnfHDcajUZT6vwB5pXOKw==
+  </data>
+ </layer>
+ <layer name="building" width="80" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt0ElOQlEQRuHHMgREZR20NusAEdR1SC/rAETBzYD061AURM4d3IT5Dc/k8Z/kG1VSSZXnKaWUUkoppZRSSh22JeZYYIgRPjDGBFPMHGazvf1Ln27yu19s8YkvrPCNH6yxcZht9vb/+XWQz52HPO8CJwgjgihOEcOZw8yw++Oh/770MF1x1zUSSCKFNDLI4tJhZtj9NwH93z13PSCHPG5RwB2KKDnMDLv/MaD/a3LXM55QRgVV1FBHw2Fm2P2tgP6vz10DtNFBFy/o4RVvDjPD7n8P6P+UUkodXzsopGak
   </data>
  </layer>
  <objectgroup name="WalkWay">
   <object id="18" name="leftWall" type="map" x="0" y="0">
-   <polyline points="0,0 0,608"/>
+   <polyline points="0,0 0,640"/>
   </object>
   <object id="20" name="rightWall" type="map" x="2560" y="3.55271e-14">
    <polyline points="0,0 0,640"/>
@@ -27,15 +32,13 @@
   <object id="28" name="building_floor" type="map" x="512" y="448">
    <polyline points="0,0 0,-32 896,-32 896,0"/>
   </object>
+  <object id="29" x="640" y="448">
+   <polyline points="0,0 640,0"/>
+  </object>
  </objectgroup>
- <layer name="building" width="80" height="25">
+ <layer name="front" width="80" height="25">
   <data encoding="base64" compression="zlib">
-   eJzt0ElOQlEQRuHHMgREZR20NusAEdR1SC/rAETBzYD061AURM4d3IT5Dc/k8Z/kG1VSSZXnKaWUUkoppZRSSh22JeZYYIgRPjDGBFPMHGazvf1Ln27yu19s8YkvrPCNH6yxcZht9vb/+XWQz52HPO8CJwgjgihOEcOZw8yw++Oh/770MF1x1zUSSCKFNDLI4tJhZtj9NwH93z13PSCHPG5RwB2KKDnMDLv/MaD/a3LXM55QRgVV1FBHw2Fm2P2tgP6vz10DtNFBFy/o4RVvDjPD7n8P6P+UUkodXzsopGak
-  </data>
- </layer>
- <layer name="Wall" width="80" height="25">
-  <data encoding="base64" compression="zlib">
-   eJztlckNAjEQBFdOCkgFSAXIY7nJgxvy4IYwqOf4be9KI/dI9RmN3J8uuQ5VNYUZzGEBS1jBGjZQN3zjOXcLO9jDAY5wgjNc4NrCjefcG9zhAU94wRs+8IVfCzeec5t2RP768Ej++syVv/JX/vrNlb/yV/76ze1AF3oh7qrd2z7bve1zyjuec/swgGGIu2r3ts92b/uc8o7n3BGMYRLirtq97bPd2z6nvOM5V/+v/l/9v35zS/Y3x03J/ua4KdnfHDcajUZT6vwB5pXOKw==
+   eJztzdkJgDAQRdFJX2orbp24NRhtRf30kQpCfibIPXDhMRBiBgAAAAAAAAAA8C+nulSsYHv/X7If9aq7gu39f8lug1mnmuC/vf8v2b0a1KgmNXNLt9w3i1rVpnZ1cEu33DcffQjrBA==
   </data>
  </layer>
 </map>

@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.Box;
@@ -68,16 +69,15 @@ public class WorldController extends InputAdapter implements Disposable{
 	public void update(float deltaTime){
 		HandleInput(deltaTime);
 		cameraHelper.update(deltaTime);
-		player.update(deltaTime);
-		playerSprite.setRegion(player.playerFrame);
-		//updateBox();
+		updateBox();
+		updatePlayer(deltaTime);
 	}
 
 	//Handle keyboard input method
 	private void HandleInput(float deltaTime) {
 		float cameraSpeed = 100 * deltaTime;
 		int acc = 5;
-		float playerSpeed = 50 * deltaTime;
+		float playerSpeed = 960 * 1000;
 		if(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT)){
 			cameraSpeed *= acc;
 			playerSpeed *= acc;
@@ -128,13 +128,18 @@ public class WorldController extends InputAdapter implements Disposable{
 	// Have a box movement bug here 
 	private void updateBox(){
 		for(int i = 0; i < boxSprites.length; i++){
-		worldPhysic.boxBodys[i].applyTorque(torque, true);
-		boxSprites[i].setPosition(worldPhysic.boxBodys[i].getPosition().x * Constants.PIXEL_to_METERS - boxSprites[i].getWidth() / 2 
-				, worldPhysic.boxBodys[i].getPosition().y * Constants.PIXEL_to_METERS - boxSprites[i].getHeight() / 2);
-		boxSprites[i].setRotation((float)Math.toDegrees(worldPhysic.boxBodys[i].getAngle()));
+			boxSprites[i].setPosition(worldPhysic.boxBodys[i].getPosition().x  - boxSprites[i].getWidth() / 2 
+					, worldPhysic.boxBodys[i].getPosition().y - boxSprites[i].getHeight() / 2);
+			boxSprites[i].setRotation((float)Math.toDegrees(worldPhysic.boxBodys[i].getAngle()));
 		}
 	}
 	
+	private void updatePlayer(float deltaTime){
+		player.update(deltaTime);
+		playerSprite.setRegion(player.playerFrame);
+		playerSprite.setPosition(worldPhysic.playerBody.getPosition().x - playerSprite.getWidth() / 2
+				, worldPhysic.playerBody.getPosition().y - playerSprite.getHeight() / 2);
+	}
 	//move camera
 	private void moveCamera(float x, float y) {
 		x += cameraHelper.position.x;
@@ -145,9 +150,9 @@ public class WorldController extends InputAdapter implements Disposable{
 	
 	//move player character
 	private void movePlayer(float x, float y){
-		x += playerSprite.getX();
-		y += playerSprite.getY();
-		playerSprite.setPosition(x, y);
+		x -= worldPhysic.playerBody.getLinearVelocity().x;
+		y -= worldPhysic.playerBody.getLinearVelocity().y;
+		worldPhysic.playerBody.applyForceToCenter(new Vector2(x, y), true);;
 	}
 		
 	@Override

@@ -61,7 +61,7 @@ public class WorldPhysic implements Disposable{
 	public void initPlayerBody(){
 		playerSprite = worldController.playerSprite;
 		bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
+		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set((playerSprite.getX() + playerSprite.getWidth() / 2),
 				(playerSprite.getY() + playerSprite.getHeight() / 2));
 		playerBody = world.createBody(bodyDef);
@@ -73,25 +73,12 @@ public class WorldPhysic implements Disposable{
 		fixtureDef.shape = shape;
 		fixtureDef.density = 0.1f;
 		playerBody.createFixture(fixtureDef);
+		playerBody.setFixedRotation(true);
 		shape.dispose();		
 	}
 	
 	public void update(float deltaTime){
-		world.step(deltaTime, 100, 100);
-		updatePlayer();
-		//updateBox();	
-	}
-
-	//update box body "Have bug"
-	public void updateBox(){
-		for(int i = 0; i < boxSprites.length; i++)
-			boxBodys[i].setTransform(boxSprites[i].getX(), boxSprites[i].getY(), boxBodys[i].getAngle());
-	}
-	
-	//update player body 
-	public void updatePlayer(){
-		playerSprite = worldController.playerSprite;
-		playerBody.setTransform(playerSprite.getX() + playerSprite.getOriginX(), playerSprite.getY() + playerSprite.getOriginY(), playerBody.getAngle());
+		world.step(deltaTime, 100, 100);	
 	}
 	
 	public void dispose(){

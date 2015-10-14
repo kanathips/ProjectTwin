@@ -32,7 +32,7 @@ public class WorldRender implements Disposable{
 		
 		camera.update();
 		//Uncomment to see a debug mode of box2d
-		//debugRenderer = new Box2DDebugRenderer();
+		debugRenderer = new Box2DDebugRenderer();
 	}
 	
 	public void render(){
@@ -58,8 +58,8 @@ public class WorldRender implements Disposable{
 			shapeRenderer.rect(worldController.boxSprites[i].getX(), worldController.boxSprites[i].getY(), worldController.boxSprites[i].getWidth(), worldController.boxSprites[i].getHeight());
 		}
 		//uncomment to see a debug mode of box2d 
-//			debugMatrix = batch.getProjectionMatrix();
-//			debugRenderer.render(worldPhysic.world, debugMatrix);
+			debugMatrix = batch.getProjectionMatrix();
+			debugRenderer.render(worldPhysic.world, debugMatrix);
 		batch.end();
 		shapeRenderer.end();
 	}
