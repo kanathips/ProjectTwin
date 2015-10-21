@@ -1,9 +1,18 @@
 package com.projecttwin.character;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.utils.Constants;
 
 public class Player implements Disposable{
 	private TextureRegion standLeft;
@@ -13,18 +22,22 @@ public class Player implements Disposable{
 	private Animation walkingRight;
 	private Animation sleepingLeft;
 	private Animation sleepingRight;
-	private State state  = State.STANDING;
-	public boolean facingLeft = false;
+	public static State state  = State.STANDING;
+	private static boolean facingLeft = false;
 	private final float walkUpdateTrigger = 0.1f;
 	private final float sleepUpdateTrigger = 0.3f;
-	public static float trigger = 0;
+	private static float trigger = 0;
 	public TextureRegion playerFrame;
 	private TextureAtlas atlas;
+	private BodyDef bodyDef;
+	private final static float moveSpeed = 2f;
+	private boolean atGround = true;
+	private boolean atLadder;; 
+	
 	public Player(TextureAtlas atlas){
 		this.atlas = atlas;
 		init();
 	}
-	
 	
 	// initial player character's animation
 	public void init(){
@@ -63,19 +76,52 @@ public class Player implements Disposable{
 		walkingLeftFrame = null;
 	}
 	
+	public Body getBody(World wolrd, Sprite sprite){
+		
+		bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.position.set(Constants.pixelsToMeters(sprite.getX() + sprite.getWidth() / 2),
+				Constants.pixelsToMeters(sprite.getY() + sprite.getHeight() / 2));
+		Body body = wolrd.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth() / 2), Constants.pixelsToMeters(sprite.getHeight() / 2));
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1;
+		fixtureDef.filter.categoryBits = Constants.CHARACTER_CATEGORY;
+		fixtureDef.filter.maskBits = ~Constants.CHARACTER_CATEGORY;
+		body.createFixture(fixtureDef).setUserData("player");
+		
+
+		shape.setAsBox(Constants.pixelsToMeters(5), 
+				Constants.pixelsToMeters(5), 
+				new Vector2(0, Constants.pixelsToMeters(-(sprite.getHeight() / 2))), 0);
+		FixtureDef sensorDef = new FixtureDef();
+		sensorDef.isSensor = true;
+		sensorDef.shape = shape;		
+		body.createFixture(sensorDef).setUserData("playerSensor");
+		
+		body.setFixedRotation(true);
+		//set name to player physic body
+		shape.dispose();
+		return body;
+	}
+	
 	// set status of player character to facing left side
 	public void setFacingLeft(boolean facing){
 		facingLeft = facing;
 	}
 	
 	// get status of player character that facing left side or not
-	public boolean getFacingLeft(){
+	public static boolean getFacingLeft(){
 		return facingLeft;
 	}
 	
 	// set player state
 	public void setState(State state){
-		this.state = state;
+		if(atGround)
+			Player.state = state;
 	}
 	
 	// get player state
@@ -86,6 +132,14 @@ public class Player implements Disposable{
 	//set trigger time
 	public void setTrigger(float deltaTime){
 		trigger = deltaTime;
+	}
+	
+	public boolean getAtGround(){
+		return atGround;
+	}
+	
+	public void setAtGround(boolean atGround){
+		this.atGround = atGround;
 	}
 	
 	//update player character animation method 
@@ -117,14 +171,36 @@ public class Player implements Disposable{
 					
 				}
 				break;
+			case CLIMBING:
+				break;
+			default:
+				break;
 		}		
 	}
 	
 	public static enum State{
-		STANDING, WALKING, JUMPING, POWERUSNG; 
+		STANDING, WALKING, JUMPING, POWERUSNG, CLIMBING; 
 	}
 	
 	public void dispose(){
 		atlas.dispose();
+	}
+
+
+	public float getTrigger() {
+		return trigger;
+	}
+
+
+	public static float getMovespeed() {
+		return moveSpeed;
+	}
+
+	public void setAtLadder(boolean atLadder) {
+		this.atLadder = atLadder;
+	}
+	
+	public boolean getAtLadder(){
+		return atLadder;
 	}
 }

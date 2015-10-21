@@ -11,6 +11,7 @@ public class CameraHelper {
 	public Vector2 position;
 	private float zoom;
 	private Sprite target;
+	public final float moveSpeed = 100;
 	
 	public CameraHelper(){
 		position = new Vector2(Constants.VIEWPORT_WIDTH / 2, Constants.VIEWPORT_HEIGHT / 2);
@@ -18,7 +19,7 @@ public class CameraHelper {
 	}
 	
 	//update cameraHelper to target position
-	public void update (float deltaTime){
+	public void update (){
 		if(!hasTarget()) return;
 		
 		position.x = target.getX() + target.getOriginX();
