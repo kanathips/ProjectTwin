@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.handeller.InputHandler;
 import com.projecttwin.utils.Constants;;
 
 /**
@@ -19,6 +20,7 @@ public class WorldRender implements Screen{
 	Box2DDebugRenderer debugRenderer;
 	Matrix4 debugMatrix;
 	WorldPhysic worldPhysic;
+	private InputHandler inputHandler;
 	public OrthographicCamera camera;
 	private WorldController worldController;
 	private SpriteBatch batch;
@@ -38,15 +40,20 @@ public class WorldRender implements Screen{
 		batch = new SpriteBatch();
 		debugRenderer = new Box2DDebugRenderer();
 		shapeRenderer = new ShapeRenderer();
+		inputHandler = new InputHandler();
+		
 	}
 	
 	@Override
 	public void render(float delta) {
+		inputHandler.updateKey();
+		new InputHandler();
 		renderMap();
 		renderObject();
 		WorldController.getCameraHelper().applyTo(camera); // apply update position to camera
 		worldController.update(delta);
 		worldPhysic.update(delta);
+		
 	}
 	
 	//render object

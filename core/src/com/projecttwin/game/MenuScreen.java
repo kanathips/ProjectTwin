@@ -32,8 +32,6 @@ public class MenuScreen extends Game implements ApplicationListener{
 	private World world;
 	private OrthographicCamera camera;
 	private PointLight point;
-	private InputHandler inputHandler;
-	private boolean check = false;
 	
 	public MenuScreen(WorldRender worldRender){
 		this.worldRender=worldRender;
@@ -72,7 +70,6 @@ public class MenuScreen extends Game implements ApplicationListener{
                 //button.setText("You clicked the button");
 
         		System.out.println("You clicked the button");
-        		check = true;
         		setScreen(worldRender);
                 dispose();
             } 
@@ -82,8 +79,6 @@ public class MenuScreen extends Game implements ApplicationListener{
   
         Gdx.input.setInputProcessor(stage);
   
-        
-        
         
 	}
 
@@ -102,13 +97,7 @@ public class MenuScreen extends Game implements ApplicationListener{
 		rayHandler.setCombinedMatrix(camera);
 		
 	    batch.begin();
-	    
         stage.draw();
-//        Gdx.input.setInputProcessor(inputHandler);
-//       
-//        inputHandler = new InputHandler();
-//		inputHandler.update();
-        
         batch.end();
 
         
