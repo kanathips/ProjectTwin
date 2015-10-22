@@ -20,7 +20,9 @@ public class Constants {
 	public static final short MAP_CATEGORY = 4;
 	public static final short STAIR_CATEGORY = 0;
 	public static final short OBJECT_CATEGORY = 2;
-	
+	public static float clickX;
+	public static float clickY;
+	public static boolean isClicking = false;
 	/**
 	 * Pixel to Meter converter
 	 * @param pixel that you want to convert to meter by pixel per meter scale

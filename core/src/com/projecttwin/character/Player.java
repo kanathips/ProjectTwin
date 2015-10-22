@@ -32,14 +32,17 @@ public class Player implements Disposable{
 	private BodyDef bodyDef;
 	private final static float moveSpeed = 2f;
 	private boolean atGround = true;
-	private boolean atLadder;; 
+	private static PlayerForce playerForce;
+	private Body forceBody;
 	
 	public Player(TextureAtlas atlas){
 		this.atlas = atlas;
 		init();
 	}
 	
-	// initial player character's animation
+	/**
+	 *  initial player character's animation
+	 */
 	public void init(){
 		standRight = atlas.findRegion("stand");
 		standLeft = new TextureRegion(standRight);
@@ -76,14 +79,20 @@ public class Player implements Disposable{
 		walkingLeftFrame = null;
 	}
 	
+	/**
+	 * Get player Physic body
+	 * @param wolrd  (Add player physic body to this world)
+	 * @param sprite (Use to reference size of player physic body)
+	 * @return
+	 */
 	public Body getBody(World wolrd, Sprite sprite){
+		
 		
 		bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(Constants.pixelsToMeters(sprite.getX() + sprite.getWidth() / 2),
 				Constants.pixelsToMeters(sprite.getY() + sprite.getHeight() / 2));
 		Body body = wolrd.createBody(bodyDef);
-		
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth() / 2), Constants.pixelsToMeters(sprite.getHeight() / 2));
 		FixtureDef fixtureDef = new FixtureDef();
@@ -94,7 +103,7 @@ public class Player implements Disposable{
 		body.createFixture(fixtureDef).setUserData("player");
 		
 
-		shape.setAsBox(Constants.pixelsToMeters(5), 
+		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth()/2 - 5), 
 				Constants.pixelsToMeters(5), 
 				new Vector2(0, Constants.pixelsToMeters(-(sprite.getHeight() / 2))), 0);
 		FixtureDef sensorDef = new FixtureDef();
@@ -142,7 +151,10 @@ public class Player implements Disposable{
 		this.atGround = atGround;
 	}
 	
-	//update player character animation method 
+	/**
+	 * update player animation
+	 * @param deltaTime
+	 */
 	public void update(float deltaTime){
 		trigger += deltaTime;
 		switch(state){
@@ -171,15 +183,13 @@ public class Player implements Disposable{
 					
 				}
 				break;
-			case CLIMBING:
-				break;
 			default:
 				break;
 		}		
 	}
 	
 	public static enum State{
-		STANDING, WALKING, JUMPING, POWERUSNG, CLIMBING; 
+		STANDING, WALKING, JUMPING, POWERUSNG; 
 	}
 	
 	public void dispose(){
@@ -194,13 +204,5 @@ public class Player implements Disposable{
 
 	public static float getMovespeed() {
 		return moveSpeed;
-	}
-
-	public void setAtLadder(boolean atLadder) {
-		this.atLadder = atLadder;
-	}
-	
-	public boolean getAtLadder(){
-		return atLadder;
 	}
 }

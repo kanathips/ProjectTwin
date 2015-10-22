@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="25" tilewidth="32" tileheight="32" nextobjectid="40">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="25" tilewidth="32" tileheight="32" nextobjectid="46">
  <tileset firstgid="1" name="scifi_platformTiles_32x32" tilewidth="32" tileheight="32" tilecount="805">
-  <image source="maps\scifi_platformTiles_32x32.png" width="1120" height="736"/>
+  <image source="maps/scifi_platformTiles_32x32.png" width="1120" height="736"/>
  </tileset>
  <imagelayer name="BG" visible="0">
-  <image source="maps\scifi_platform_BG1.jpg"/>
+  <image source="maps/scifi_platform_BG1.jpg"/>
  </imagelayer>
  <layer name="Wall" width="80" height="25">
   <data encoding="base64" compression="zlib">
@@ -34,6 +34,10 @@
   </object>
   <object id="29" name="ceil" x="640" y="384">
    <polyline points="0,0 640,0"/>
+  </object>
+  <object id="43" name="spring" x="224" y="576" width="64" height="64"/>
+  <object id="45" name="spring" x="416" y="640">
+   <polygon points="0,0 32,-64 64,0"/>
   </object>
  </objectgroup>
  <layer name="front" width="80" height="25">

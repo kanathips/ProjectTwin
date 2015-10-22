@@ -6,17 +6,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.projecttwin.character.Player;
-import com.projecttwin.character.Player.State;
-import com.projecttwin.game.WorldController;
-import com.projecttwin.game.WorldRender;
+import com.projecttwin.utils.Constants;
 
 public class InputHandler implements InputProcessor{
 	
 	private String[] keyList = {"A", "S", "D", "W", "SHIFT_LEFT", "SHIFT_RIGHT", "UP", "DOWN", "LEFT", "RIGHT", "R"};
 	public static TreeMap<String, Boolean> keyPressing = new TreeMap<String, Boolean>();
-	public static float clickX;
-	public static float clickY;
-	public static boolean isClicking;
 
 	public InputHandler() {
 		Gdx.input.setInputProcessor(this);
@@ -30,13 +25,10 @@ public class InputHandler implements InputProcessor{
 	
 	public void updateKey(){
 		if(keyPressing.get("UP")){
-			
+			System.out.println(CharacterControll.getPlayerState());
 		}
 		if(keyPressing.get("W")){
-			if(CharacterControll.getPlayerState() == State.CLIMBING)
-				CharacterControll.UpDownStair(0, 5);
-			else
-				CharacterControll.jump(Player.getMovespeed());
+			CharacterControll.jump(Player.getMovespeed());
 		}			
 		if(keyPressing.get("A") && keyPressing.get("D")){
 			CharacterControll.walk(0);
@@ -139,9 +131,9 @@ public class InputHandler implements InputProcessor{
 	}
 		
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		isClicking = true;
-		clickX = screenX;
-		clickY = screenY;
+		Constants.isClicking = true;
+		Constants.clickX = screenX;
+        Constants.clickY = screenY;
         return true;
 	}
 
@@ -152,17 +144,17 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		isClicking = false;
-		clickX = screenX;
-		clickY = screenY;
+		Constants.isClicking = false;
+		Constants.clickX = screenX;
+        Constants.clickY = screenY;
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		isClicking = true;
-		clickX = screenX;
-        clickY = screenY;
+		Constants.isClicking = true;
+		Constants.clickX = screenX;
+        Constants.clickY = screenY;
 		return false;
 	}
 

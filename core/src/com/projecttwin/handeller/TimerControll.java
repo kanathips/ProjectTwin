@@ -1,4 +1,4 @@
-package com.projecttwin.utils;
+package com.projecttwin.handeller;
 import com.badlogic.gdx.utils.Timer;
 /**
  * This class use to be Timer 

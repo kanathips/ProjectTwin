@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.character.PlayerForce;
 import com.projecttwin.utils.Constants;
 import com.projecttwin.utils.builders.MapBodyBuilder;
 import com.projecttwin.utils.builders.MapSensorBuilder;
@@ -29,6 +30,8 @@ public class WorldPhysic implements Disposable{
 	protected Array<Body> stairBody;
 	private MapBodyBuilder mapBodyBuilder;
 	private MapSensorBuilder stairBuilder;
+	private PlayerForce playerForce;
+	private Object forceBody;
 	public WorldPhysic(WorldController worldController) {
 		WorldPhysic.worldController = worldController;
 		init();
@@ -39,8 +42,9 @@ public class WorldPhysic implements Disposable{
 	public void init(){
 		world = new World(new Vector2(0, -9.8f), true);
 		playerBody = WorldController.getPlayer().getBody(world, WorldController.getPlayerSprite());
+		playerForce = new PlayerForce(world);
+		forceBody = playerForce.getPlayerForce(playerBody.getPosition());
 		boxBodys = WorldController.getBox().initBox(world, WorldController.getBoxSprites());
-		
 		try{
 			mapBodyBuilder = new MapBodyBuilder(worldController.getTiledMap(), Constants.ppm, world, "unwalkable", Constants.MAP_CATEGORY);
 			mapBody = mapBodyBuilder.buildShapes();
@@ -61,7 +65,12 @@ public class WorldPhysic implements Disposable{
 	 * @param deltaTime
 	 */
 	public void update(float deltaTime){
-		world.step(deltaTime, 6, 2);	
+		world.step(deltaTime, 6, 2);
+		
+		if(Constants.isClicking)
+			playerForce.update(deltaTime, playerBody.getPosition());
+		else
+			playerForce.destroy();
 	}
 	
 	public void dispose(){

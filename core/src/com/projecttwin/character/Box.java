@@ -33,15 +33,11 @@ public class Box {
 			
 			FixtureDef fixtureDef = new FixtureDef();
 			fixtureDef.shape = shape;
-			fixtureDef.density = 0;
+			fixtureDef.density = 1;
 			fixtureDef.restitution = 0.5f;
 			fixtureDef.filter.categoryBits = Constants.OBJECT_CATEGORY;
 			fixtureDef.filter.maskBits = -1;
-			bodys[i].createFixture(fixtureDef).setUserData("box");
-			
-			//set name and category to physic body
-    		//use in contact handler and filter
-			
+			bodys[i].createFixture(fixtureDef).setUserData("object");
 			shape.dispose();
 		}
 		return bodys;

@@ -23,7 +23,7 @@ public class CharacterControll extends WorldController{
 	public static boolean getPlayerFacingLeft(){
 		return Player.getFacingLeft();
 	}
-	
+
 	public static void updateBox(){
 		for(int i = 0; i < getBoxSprites().length; i++){
 			getBoxSprites()[i].setPosition(Constants.metersToPixels(WorldPhysic.boxBodys[i].getPosition().x) - getBoxSprites()[i].getWidth() / 2 
@@ -32,6 +32,10 @@ public class CharacterControll extends WorldController{
 		}
 	}
 	
+	/**
+	 * Use to update player animation position reference by player physic body
+	 * @param deltaTime
+	 */
 	public static void updatePlayer(float deltaTime){
 		getPlayer().update(deltaTime);
 		getPlayerSprite().setSize(getPlayer().playerFrame.getRegionWidth(), getPlayer().playerFrame.getRegionHeight());
@@ -41,6 +45,7 @@ public class CharacterControll extends WorldController{
 		if(Player.getFacingLeft())
 			getPlayerSprite().translate(startPlayerWidth - getPlayerSprite().getWidth(), 0);
 	}
+	
 	
 	public static void resetplayer(boolean isX){
 		getPlayer().setTrigger(0);
@@ -53,14 +58,14 @@ public class CharacterControll extends WorldController{
 		}
 	}
 	
+	/**
+	 * This method is use to control player physic body to jump
+	 * @param jumpSpeed
+	 */
 	public static void jump(float jumpSpeed){
 		if(getPlayer().getAtGround()){
-			WorldPhysic.playerBody.setLinearVelocity(WorldPhysic.playerBody.getLinearVelocity().x, jumpSpeed * 2);
+			WorldPhysic.playerBody.setLinearVelocity(new Vector2(WorldPhysic.playerBody.getLinearVelocity().x, jumpSpeed * 2));
 		}
-	}
-	
-	public static void UpDownStair(int x, int y){
-		WorldPhysic.playerBody.setTransform(x, y, 0);		
 	}
 	
 	public static State getPlayerState(){

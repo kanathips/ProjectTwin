@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.Box;
 import com.projecttwin.character.Player;
+import com.projecttwin.character.PlayerForce;
 import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.utils.Assets;
 import com.projecttwin.utils.CameraHelper;
@@ -34,7 +35,7 @@ public class WorldController implements Disposable{
 	public static float startPlayerHeigth;
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
-	private static OrthogonalTiledMapRenderer tiledMapRenderer;	
+	private static OrthogonalTiledMapRenderer tiledMapRenderer;
 	
 	public enum StageLevel{
 		INTRO, ONE, TWO, THREE, FOUR, FIVE;
@@ -131,12 +132,12 @@ public class WorldController implements Disposable{
 		
 		cameraHelper = new CameraHelper();
 		cameraHelper.setTarget(playerSprite);
-		
 		tiledMap = new TmxMapLoader().load("Testing_map.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
 	}
 	
 	public void update(float deltaTime){
+			
 		cameraHelper.update();
 		CharacterControll.updateBox();
 		CharacterControll.updatePlayer(deltaTime);
