@@ -40,6 +40,7 @@ public class WorldPhysic implements Disposable{
 	 * This method use to initial physic world and create other physic object
 	 */
 	public void init(){
+		
 		world = new World(new Vector2(0, -9.8f), true);
 		playerBody = WorldController.getPlayer().getBody(world, WorldController.getPlayerSprite());
 		playerForce = new PlayerForce(world);
@@ -51,7 +52,8 @@ public class WorldPhysic implements Disposable{
 			// TODO find how to print list of map body that have been create
 			stairBuilder = new MapSensorBuilder(worldController.getTiledMap(), Constants.ppm, world, "walkable");
 			stairBody = stairBuilder.buildShapes();
-			// TODO find how to print list of map sensor that have been create
+			//TODO find how to print list of map sensor that have been create
+			
 		}catch(NullPointerException e){
 			Gdx.app.debug(TAG, "World Physic have an error on create map");
 		}

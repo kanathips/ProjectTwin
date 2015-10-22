@@ -15,16 +15,18 @@ import com.projecttwin.utils.Constants;;
  * @author NewWy
  *
  */
-public class WorldRender implements Disposable, Screen{
+public class WorldRender implements Screen{
+	Box2DDebugRenderer debugRenderer;
+	Matrix4 debugMatrix;
+	WorldPhysic worldPhysic;
 	public OrthographicCamera camera;
 	private WorldController worldController;
 	private SpriteBatch batch;
-	Box2DDebugRenderer debugRenderer;
-	Matrix4 debugMatrix;
 	private ShapeRenderer shapeRenderer;	
 
 	public WorldRender(WorldController worldController, WorldPhysic worldPhysic) {
 		this.worldController = worldController;
+		this.worldPhysic = worldPhysic;
 		init();
 	}
 
@@ -38,10 +40,13 @@ public class WorldRender implements Disposable, Screen{
 		shapeRenderer = new ShapeRenderer();
 	}
 	
-	public void render(){
+	@Override
+	public void render(float delta) {
 		renderMap();
 		renderObject();
 		WorldController.getCameraHelper().applyTo(camera); // apply update position to camera
+		worldController.update(delta);
+		worldPhysic.update(delta);
 	}
 	
 	//render object
@@ -80,11 +85,7 @@ public class WorldRender implements Disposable, Screen{
 		
 	}
 
-	@Override
-	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void pause() {

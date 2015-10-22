@@ -19,7 +19,7 @@ public class InputHandler implements InputProcessor{
 			keyPressing.put(s, false);
 	}
 	
-	public void update(float deltaTime){
+	public void update(){
 		updateKey();
 	}
 	
