@@ -5,14 +5,13 @@ import java.util.TreeMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.Player;
 import com.projecttwin.utils.Constants;
 
-public class InputHandler implements InputProcessor,Disposable{
+public class InputHandler implements InputProcessor{
 	
 	private String[] keyList = {"A", "S", "D", "W", "SHIFT_LEFT", "SHIFT_RIGHT", "UP", "DOWN", "LEFT", "RIGHT", "R"};
-	private static TreeMap<String, Boolean> keyPressing = new TreeMap<String, Boolean>();
+	public static TreeMap<String, Boolean> keyPressing = new TreeMap<String, Boolean>();
 
 	public InputHandler() {
 		Gdx.input.setInputProcessor(this);
@@ -20,10 +19,9 @@ public class InputHandler implements InputProcessor,Disposable{
 			keyPressing.put(s, false);
 	}
 	
-//	public void update(){
-//		updateKey();
-//		
-//	}
+	public void update(){
+		updateKey();
+	}
 	
 	public void updateKey(){
 		if(keyPressing.get("UP")){
@@ -31,7 +29,6 @@ public class InputHandler implements InputProcessor,Disposable{
 		}
 		if(keyPressing.get("W")){
 			CharacterControll.jump(Player.getMovespeed());
-			
 		}			
 		if(keyPressing.get("A") && keyPressing.get("D")){
 			CharacterControll.walk(0);
@@ -44,12 +41,10 @@ public class InputHandler implements InputProcessor,Disposable{
 			CharacterControll.setPlayerFacingLeft(false);
 			CharacterControll.walk(Player.getMovespeed());
 		}
-		
 	}
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		System.out.println(keycode);
 		switch(keycode){
 			case(Keys.ESCAPE):
 				Gdx.app.exit(); 
@@ -77,19 +72,15 @@ public class InputHandler implements InputProcessor,Disposable{
 				break;
 			case(Keys.A):
 				keyPressing.put("A", true);
-				System.out.println(keyPressing);
 				break;
 			case(Keys.S): 
 				keyPressing.put("S", true);
-				System.out.println(keyPressing);
 				break;
 			case(Keys.D): 
 				keyPressing.put("D", true);
-				System.out.println(keyPressing);
 				break;
 			case(Keys.W):
 				keyPressing.put("W", true);
-				System.out.println(keyPressing);
 				break;
 		}
 		return false;		
@@ -176,11 +167,4 @@ public class InputHandler implements InputProcessor,Disposable{
 	public boolean scrolled(int amount) {
 		return false;
 	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
