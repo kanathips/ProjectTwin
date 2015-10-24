@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="Untitled-1" tilewidth="32" tileheight="32" tilecount="192">
+  <image source="../../../../../Desktop/Untitled-1.png" width="512" height="384"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJybxcDAMAsHpjdww4EHyi0ge1cB8WogXonEHii3DAYw6hbsYNQt2AHMLYO5fBmIPI0rTAZLvI2C4Qd8gdgPiOORsD8QBwyAW2KBOAwLThgAt8zE4Zb4QeSW/EHkltFwoW+4MAIxExAzAzELkW7BFi74zOkE4i4g7ibA7sQj1onDLYTMRGeHUhGD7A+ngJ1KRZwGxOkUsAHB51m7
+  </data>
+ </layer>
+ <objectgroup name="unwalkable">
+  <object id="1" name="spring" x="320" y="704">
+   <polyline points="0,0 32,-32 96,-32 128,0"/>
+  </object>
+  <object id="8" name="floor" x="0" y="0">
+   <polyline points="0,0 224,0 224,96 64,96 64,256 224,256 224,352 0,352 0,0"/>
+  </object>
+  <object id="9" name="floor" x="0" y="704">
+   <polyline points="0,0 0,96 1120,96 1120,0 768,0 768,-224 736,-256 576,-256 544,-224 544,0 0,0"/>
+  </object>
+  <object id="11" name="spring" x="896" y="704">
+   <polyline points="0,0 32,-32 64,-32 96,-32 128,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="walkable"/>
+</map>

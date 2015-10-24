@@ -32,7 +32,6 @@ public class MenuScreen extends Game implements ApplicationListener{
 	private World world;
 	private OrthographicCamera camera;
 	private PointLight point;
-	private InputHandler inputHandler;
 	private boolean check = false;
 	
 	public MenuScreen(WorldRender worldRender){
