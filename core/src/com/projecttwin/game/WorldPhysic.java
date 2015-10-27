@@ -3,7 +3,9 @@ package com.projecttwin.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.PlayerForce;
@@ -31,7 +33,8 @@ public class WorldPhysic implements Disposable{
 	private MapBodyBuilder mapBodyBuilder;
 	private MapSensorBuilder stairBuilder;
 	private PlayerForce playerForce;
-	private Object forceBody;
+	private Body forceBody;
+	
 	public WorldPhysic(WorldController worldController) {
 		WorldPhysic.worldController = worldController;
 		init();
@@ -40,7 +43,6 @@ public class WorldPhysic implements Disposable{
 	 * This method use to initial physic world and create other physic object
 	 */
 	public void init(){
-		
 		world = new World(new Vector2(0, -9.8f), true);
 		playerBody = WorldController.getPlayer().getBody(world, WorldController.getPlayerSprite());
 		playerForce = new PlayerForce(world);
@@ -52,8 +54,7 @@ public class WorldPhysic implements Disposable{
 			// TODO find how to print list of map body that have been create
 			stairBuilder = new MapSensorBuilder(worldController.getTiledMap(), Constants.ppm, world, "walkable");
 			stairBody = stairBuilder.buildShapes();
-			//TODO find how to print list of map sensor that have been create
-			
+			// TODO find how to print list of map sensor that have been create
 		}catch(NullPointerException e){
 			Gdx.app.debug(TAG, "World Physic have an error on create map");
 		}
@@ -68,16 +69,17 @@ public class WorldPhysic implements Disposable{
 	 */
 	public void update(float deltaTime){
 		world.step(deltaTime, 6, 2);
-		
-		if(Constants.isClicking)
-			playerForce.update(deltaTime, playerBody.getPosition());
-		else
+		playerForce.updatePosition(playerBody.getPosition());
+		if(Constants.clickedLeft){
+			playerForce.update();
+//			playerForce.selectBox(Constants.clickX, Constants.clickY, world);
+		}
+		else if(Constants.clickedRight)
 			playerForce.destroy();
 	}
 	
 	public void dispose(){
 		world.dispose();
-		
 	}
 	
 }

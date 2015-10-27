@@ -1,11 +1,11 @@
 package com.projecttwin.game;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-//import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.utils.Constants;;
@@ -15,18 +15,16 @@ import com.projecttwin.utils.Constants;;
  * @author NewWy
  *
  */
-public class WorldRender implements Screen{
-	Box2DDebugRenderer debugRenderer;
-	Matrix4 debugMatrix;
-	WorldPhysic worldPhysic;
-	public OrthographicCamera camera;
+public class WorldRender implements Disposable{
+	public static OrthographicCamera camera;
 	private WorldController worldController;
 	private SpriteBatch batch;
+	Box2DDebugRenderer debugRenderer;
+	Matrix4 debugMatrix;
 	private ShapeRenderer shapeRenderer;	
-
+	Vector3 position;
 	public WorldRender(WorldController worldController, WorldPhysic worldPhysic) {
 		this.worldController = worldController;
-		this.worldPhysic = worldPhysic;
 		init();
 	}
 
@@ -38,15 +36,14 @@ public class WorldRender implements Screen{
 		batch = new SpriteBatch();
 		debugRenderer = new Box2DDebugRenderer();
 		shapeRenderer = new ShapeRenderer();
+		position = new Vector3(100, 100, 0);
+		camera.unproject(position);
 	}
 	
-	@Override
-	public void render(float delta) {
+	public void render(){
 		renderMap();
 		renderObject();
 		WorldController.getCameraHelper().applyTo(camera); // apply update position to camera
-		worldController.update(delta);
-		worldPhysic.update(delta);
 	}
 	
 	//render object
@@ -58,6 +55,10 @@ public class WorldRender implements Screen{
 			WorldController.getBoxSprites()[i].draw(batch);
 		}
 		batch.end();
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.circle(Constants.clickPosition.x, Constants.clickPosition.y, 20);
+		shapeRenderer.end();
 		debugMatrix = batch.getProjectionMatrix().cpy().scl(Constants.ppm);
 		debugRenderer.render(WorldPhysic.world, debugMatrix);
 	}
@@ -77,31 +78,5 @@ public class WorldRender implements Screen{
 	public void dispose(){
 		batch.dispose();
 		shapeRenderer.dispose();
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
 	}
 }

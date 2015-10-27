@@ -32,8 +32,6 @@ public class Player implements Disposable{
 	private BodyDef bodyDef;
 	private final static float moveSpeed = 2f;
 	private boolean atGround = true;
-	private static PlayerForce playerForce;
-	private Body forceBody;
 	
 	public Player(TextureAtlas atlas){
 		this.atlas = atlas;
@@ -74,7 +72,6 @@ public class Player implements Disposable{
 		}
 		sleepingLeft = new Animation(sleepUpdateTrigger, sleepingLeftFrame);
 		
-		
 		walkingRightFrame = null;
 		walkingLeftFrame = null;
 	}
@@ -101,7 +98,7 @@ public class Player implements Disposable{
 		fixtureDef.filter.categoryBits = Constants.CHARACTER_CATEGORY;
 		fixtureDef.filter.maskBits = ~Constants.CHARACTER_CATEGORY;
 		body.createFixture(fixtureDef).setUserData("player");
-		
+		body.setBullet(true);
 
 		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth()/2 - 5), 
 				Constants.pixelsToMeters(5), 

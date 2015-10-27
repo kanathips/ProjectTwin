@@ -6,7 +6,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.projecttwin.utils.Constants;
 
 public class PlayerForce {
@@ -22,13 +24,14 @@ public class PlayerForce {
 	}
 	
 	public Body getPlayerForce(float x, float y){
-		radius = min_radius;
+		radius = Constants.pixelsToMeters(min_radius);
 		BodyDef bdef = new BodyDef();
 		bdef.position.set(x, y);
+		bdef.type = BodyType.StaticBody;
 		body = world.createBody(bdef);
-		
+		body.setActive(false);
 		CircleShape shape = new CircleShape();
-		shape.setRadius(Constants.pixelsToMeters(radius));
+		shape.setRadius(radius);
 		
 		FixtureDef fdef = new FixtureDef();
 		fdef.shape = shape;
@@ -38,11 +41,7 @@ public class PlayerForce {
 		return body;
 	}
 	
-	public Body getPlayerForce(Vector2 position){
-		return getPlayerForce(position.x, position.y);
-	}
-	
-	public void update(float deltaTime, float x, float y){
+	public void update(){
 		body.setActive(true);
 		CircleShape shape = new CircleShape();
 		radius += Constants.pixelsToMeters(increate_rate);
@@ -50,7 +49,6 @@ public class PlayerForce {
 		shape.setRadius(radius);
 		
 		body.destroyFixture(body.getFixtureList().first());
-		body.setTransform(x,  y, 0);
 		FixtureDef fdef = new FixtureDef();
 		fdef.shape = shape;
 		fdef.isSensor = true;
@@ -58,10 +56,15 @@ public class PlayerForce {
 		shape.dispose();
 	}
 	
-	public void update(float deltaTime, Vector2 position){
-		update(deltaTime, position.x, position.y);
+	public void updatePosition(Vector2 position){
+		updatePosition(position.x, position.y);
 	}
 	
+	private void updatePosition(float x, float y) {
+		body.setTransform(x, y, 0);
+		
+	}
+
 	public void destroy(){
 		CircleShape shape = new CircleShape();
 		radius = Constants.pixelsToMeters(min_radius);
@@ -72,11 +75,31 @@ public class PlayerForce {
 		fdef.shape = shape;
 		fdef.isSensor = true;
 		body.createFixture(fdef).setUserData("power");
+
 		shape.dispose();
 	}
 
 	public float getRadius() {
 		return radius;
+	}
+
+	public Body selectBox(float clickX, float clickY, World world){
+		Body force;
+		BodyDef bdef = new BodyDef();
+		bdef.position.set(Constants.pixelsToMeters(clickX), Constants.pixelsToMeters(clickY));
+		force = world.createBody(bdef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(Constants.pixelsToMeters(10), Constants.pixelsToMeters(10));
+		FixtureDef fdef = new FixtureDef();
+		fdef.shape = shape;
+		fdef.isSensor = true;
+		force.createFixture(fdef).setUserData("force");
+		return force;
+	}
+	
+	public Body getPlayerForce(Vector2 position) {
+		return getPlayerForce(position.x, position.y);
 	}
 	
 }

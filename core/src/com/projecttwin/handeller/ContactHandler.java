@@ -11,6 +11,7 @@ import com.projecttwin.character.Player;
 import com.projecttwin.character.Player.State;
 import com.projecttwin.game.WorldController;
 import com.projecttwin.game.WorldPhysic;
+import com.projecttwin.utils.Constants;
 import com.projecttwin.utils.Pair;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -30,6 +31,7 @@ public class ContactHandler extends WorldController implements ContactListener{
 	private String TAG = "ContactHandler Class";
 	private String[] floor = {"floor", "object"};
 	private String[] jumpable = {"playerSensor", "object"};
+	private String[] forceable = {"object"};
 	private static int no = 0;
 	
 	/**
@@ -58,6 +60,11 @@ public class ContactHandler extends WorldController implements ContactListener{
 				getPlayer().setAtGround(true);
 				getPlayer().setState(State.STANDING);
 			}
+			
+			if(checkAlotThing("player", floor, objectA, objectB)){
+				Constants.hitWall  = true;
+			}
+			
 			//check that player or object on spring or not
 			focusTarget = checkAlotThing("spring", jumpable, objectA, objectB, true);
 			focusBody = focusTarget.getSecond();
@@ -70,13 +77,21 @@ public class ContactHandler extends WorldController implements ContactListener{
 				else
 					focusBody.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed()*4));
 			}
+			
+			//check power area is contact on object or not
+			focusTarget = checkAlotThing("power", forceable, objectA, objectB, true);
+			focusBody = focusTarget.getSecond();
+			if(focusTarget.getFirst()){
+					focusBody.setLinearVelocity(new Vector2(0,0));
+					focusBody.setGravityScale(0);
+					focusBody.setAngularVelocity(0);
+			}
 		}catch(NullPointerException e){
 			Gdx.app.debug("#" + no + " " + TAG, objectA.getClass().toString() + " " + objectB.getClass().toString() + " Contact Error (Begin)");
+			no++;
 		}
-		no++;
 	}
 
-	
 
 	/**
 	 * This method use to manage when objects in box2d world are end contact to each other
@@ -92,6 +107,11 @@ public class ContactHandler extends WorldController implements ContactListener{
 		Pair<Boolean, Body> focusTarget;
 		Body focusBody;
 		try{
+			
+			if(checkAlotThing("player", floor, objectA, objectB)){
+				Constants.hitWall  = false;
+			}
+			
 			if(checkAlotThing("playerSensor", floor, objectA, objectB)){
 				getPlayer().setAtGround(false);
 				getPlayer().setState(State.JUMPING);
@@ -107,10 +127,17 @@ public class ContactHandler extends WorldController implements ContactListener{
 				else
 					focusBody.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed()*4));
 			}
+			
+			focusTarget = checkAlotThing("power", forceable, objectA, objectB, true);
+			focusBody = focusTarget.getSecond();
+			if(focusTarget.getFirst()){
+					focusBody.setGravityScale(1);
+					focusBody.setAngularVelocity(1);
+			}
 		}catch(NullPointerException e){
 			Gdx.app.debug("#" + no + " " + TAG, objectA.getClass().toString() + " " + objectB.getClass().toString() + " Contact Error (end)");
+			no++;
 		}
-		no++;
 	}
 
 	public Pair<Boolean, Body> checkAlotThing(String target, String[] other, Fixture objectA, Fixture objectB, boolean focusB){

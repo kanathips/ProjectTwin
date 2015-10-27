@@ -11,7 +11,8 @@ public class CharacterControll extends WorldController{
 	
 	//move player character
 	public static void walk(float walkSpeed){
-		getPlayer().setState(State.WALKING);
+		if(getPlayerState() == State.STANDING || getPlayerState() == State.WALKING )
+			getPlayer().setState(State.WALKING);
 		walkSpeed -= WorldPhysic.playerBody.getLinearVelocity().x;
 		WorldPhysic.playerBody.applyLinearImpulse(new Vector2(walkSpeed, 0), WorldPhysic.playerBody.getWorldCenter(), true);		
 	}
@@ -64,6 +65,7 @@ public class CharacterControll extends WorldController{
 	 */
 	public static void jump(float jumpSpeed){
 		if(getPlayer().getAtGround()){
+			getPlayer().setState(State.JUMPING);
 			WorldPhysic.playerBody.setLinearVelocity(new Vector2(WorldPhysic.playerBody.getLinearVelocity().x, jumpSpeed * 2));
 		}
 	}

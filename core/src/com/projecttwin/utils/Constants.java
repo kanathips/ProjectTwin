@@ -1,6 +1,8 @@
 package com.projecttwin.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * This class use to declare Constants data of the project
@@ -22,7 +24,11 @@ public class Constants {
 	public static final short OBJECT_CATEGORY = 2;
 	public static float clickX;
 	public static float clickY;
-	public static boolean isClicking = false;
+	public static Vector3 clickPosition = new Vector3(0,0,0);
+	public static boolean isClicking;
+	public static boolean clickedLeft = false;
+	public static boolean clickedRight = false;
+	public static boolean hitWall;
 	/**
 	 * Pixel to Meter converter
 	 * @param pixel that you want to convert to meter by pixel per meter scale

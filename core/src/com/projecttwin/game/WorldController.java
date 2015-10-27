@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.Box;
 import com.projecttwin.character.Player;
-import com.projecttwin.character.PlayerForce;
 import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.utils.Assets;
 import com.projecttwin.utils.CameraHelper;
@@ -121,7 +120,7 @@ public class WorldController implements Disposable{
 		startPlayerWidth = playerSprite.getWidth();
 		
 		box = Assets.instance.getBox();
-		boxSprites = new Sprite[3];
+		boxSprites = new Sprite[5];
 		for(int i = 0; i < boxSprites.length; i++){
 			boxSprites[i] = new Sprite(box.boxTextute);
 			float randomX = MathUtils.random(100, Constants.VIEWPORT_WIDTH - 100);
@@ -132,7 +131,8 @@ public class WorldController implements Disposable{
 		
 		cameraHelper = new CameraHelper();
 		cameraHelper.setTarget(playerSprite);
-		tiledMap = new TmxMapLoader().load("Testing_map.tmx");
+		tiledMap = new TmxMapLoader().load("untitiled.tmx");
+//		tiledMap = new TmxMapLoader().load("Testing_map.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
 	}
 	
