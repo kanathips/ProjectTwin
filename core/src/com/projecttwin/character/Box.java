@@ -1,5 +1,6 @@
 package com.projecttwin.character;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,14 +17,28 @@ public class Box {
 	public static float torque = 0.0f;
 	
 	public Box(TextureAtlas atlas){
-		boxTextute = atlas.findRegion("Box");
+		try{
+			boxTextute = atlas.findRegion("Box");
+			Gdx.app.debug(Constants.no + " Box", "Create Box Complete");
+			Constants.no++;
+		}catch(Exception e){
+			Gdx.app.debug(Constants.no + " Box", "Create Box Error");
+			Constants.no++;		
+		}
 	}
 	
+	/**
+	 * create box body following sprite array
+	 * @param world
+	 * @param sprites
+	 * @return body of box
+	 */
 	public Body[] initBox(World world, Sprite[] sprites){
 		Body[] bodys = new Body[sprites.length];
 		for(int i = 0; i < sprites.length; i++){
 			BodyDef bodyDef = new BodyDef();
 			bodyDef.type = BodyType.DynamicBody;
+			bodyDef.allowSleep = false;
 			bodyDef.position.set(Constants.pixelsToMeters(sprites[i].getX() + sprites[i].getWidth() / 2),
 					Constants.pixelsToMeters(sprites[i].getY() + sprites[i].getHeight() / 2));
 			bodys[i] = world.createBody(bodyDef);

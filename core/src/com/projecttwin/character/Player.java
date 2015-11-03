@@ -1,5 +1,6 @@
 package com.projecttwin.character;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -30,12 +31,26 @@ public class Player implements Disposable{
 	public TextureRegion playerFrame;
 	private TextureAtlas atlas;
 	private BodyDef bodyDef;
+	private int powerType = 1;
+	private Animation pullingLeft;
+	private float pullUpdateTrigger = 0.3f;
+	private Animation pullingRight;
+	private Animation pushingLeft;
+	private float pushUpdateTrigger = 0.3f;
+	private Animation pushingRight;
 	private final static float moveSpeed = 2f;
-	private boolean atGround = true;
+	private static boolean atGround = true;
 	
 	public Player(TextureAtlas atlas){
 		this.atlas = atlas;
-		init();
+		try{
+			init();
+			Gdx.app.debug(Constants.no + " Player", "Create Player Complete");
+			Constants.no++;
+		}catch(Exception e){
+			Gdx.app.debug(Constants.no + " Player", "Create Player Error");
+			Constants.no++;
+		}
 	}
 	
 	/**
@@ -48,12 +63,12 @@ public class Player implements Disposable{
 		playerFrame = standRight;
 		
 		TextureRegion[] walkingRightFrame = new TextureRegion[11];
-		for(int i = 0; i < 11; i++)
+		for(int i = 0; i < walkingRightFrame.length; i++)
 			walkingRightFrame[i] = atlas.findRegion("walk" + i); 
 		walkingRight = new Animation(walkUpdateTrigger, walkingRightFrame);
 		
 		TextureRegion[] walkingLeftFrame = new TextureRegion[11];
-		for(int i = 0; i < 11 ; i++){
+		for(int i = 0; i < walkingLeftFrame.length ; i++){
 			walkingLeftFrame[i] = new TextureRegion(walkingRightFrame[i]);
 			walkingLeftFrame[i].flip(true, false);
 		}
@@ -61,17 +76,44 @@ public class Player implements Disposable{
 		
 
 		TextureRegion[] sleepingRightFrame = new TextureRegion[6];
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < sleepingRightFrame.length; i++)
 			sleepingRightFrame[i] = atlas.findRegion("sleep" + i);
 		sleepingRight = new Animation(sleepUpdateTrigger, sleepingRightFrame);
 		
 		TextureRegion[] sleepingLeftFrame = new TextureRegion[6];
-		for(int i = 0; i < 6; i++){
+		for(int i = 0; i < sleepingLeftFrame.length; i++){
 			sleepingLeftFrame[i] = new TextureRegion(sleepingRightFrame[i]);
 			sleepingLeftFrame[i].flip(true, false);
 		}
 		sleepingLeft = new Animation(sleepUpdateTrigger, sleepingLeftFrame);
 		
+		TextureRegion[] pullingRightFrame = new TextureRegion[4];
+		for(int i = 0; i < pullingRightFrame.length; i++)
+			pullingRightFrame[i] = atlas.findRegion("pull" + i);
+		pullingRight = new Animation(pullUpdateTrigger, pullingRightFrame);
+		
+		TextureRegion[] pullingLeftFrame = new TextureRegion[4];
+		for(int i = 0; i < pullingLeftFrame.length; i++){
+			pullingLeftFrame[i] = new TextureRegion(pullingRightFrame[i]);
+			pullingLeftFrame[i].flip(true, false);
+		}
+		pullingLeft = new Animation(pullUpdateTrigger, pullingLeftFrame);
+		
+		TextureRegion[] pushingRightFrame = new TextureRegion[4];
+		for(int i = 0; i < pushingRightFrame.length; i++){
+			pushingRightFrame[i] = atlas.findRegion("push" + i);
+		}
+		pushingRight = new Animation(pushUpdateTrigger, pushingRightFrame);
+		
+		TextureRegion[] pushingLeftFrame = new TextureRegion[4];
+		for(int i = 0; i < pushingLeftFrame.length; i++){
+			pushingLeftFrame[i] = new TextureRegion(pushingRightFrame[i]);
+			pushingLeftFrame[i].flip(true, false);
+		}
+		pushingLeft = new Animation(pushUpdateTrigger, pushingLeftFrame);
+		
+		pullingLeftFrame = null;
+		pullingRightFrame = null;
 		walkingRightFrame = null;
 		walkingLeftFrame = null;
 	}
@@ -91,7 +133,7 @@ public class Player implements Disposable{
 				Constants.pixelsToMeters(sprite.getY() + sprite.getHeight() / 2));
 		Body body = wolrd.createBody(bodyDef);
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth() / 2), Constants.pixelsToMeters(sprite.getHeight() / 2));
+		shape.setAsBox(Constants.pixelsToMeters(15), Constants.pixelsToMeters(35));
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1;
@@ -100,9 +142,9 @@ public class Player implements Disposable{
 		body.createFixture(fixtureDef).setUserData("player");
 		body.setBullet(true);
 
-		shape.setAsBox(Constants.pixelsToMeters(sprite.getWidth()/2 - 5), 
+		shape.setAsBox(Constants.pixelsToMeters(10), 
 				Constants.pixelsToMeters(5), 
-				new Vector2(0, Constants.pixelsToMeters(-(sprite.getHeight() / 2))), 0);
+				new Vector2(0, Constants.pixelsToMeters(-35.5f)), 0);
 		FixtureDef sensorDef = new FixtureDef();
 		sensorDef.isSensor = true;
 		sensorDef.shape = shape;		
@@ -125,7 +167,7 @@ public class Player implements Disposable{
 	}
 	
 	// set player state
-	public void setState(State state){
+	public static void setState(State state){
 		if(atGround)
 			Player.state = state;
 	}
@@ -145,7 +187,7 @@ public class Player implements Disposable{
 	}
 	
 	public void setAtGround(boolean atGround){
-		this.atGround = atGround;
+		Player.atGround = atGround;
 	}
 	
 	/**
@@ -173,18 +215,17 @@ public class Player implements Disposable{
 					playerFrame = facingLeft ? standLeft : standRight;					
 				break;
 			case POWERUSNG:
-				if(facingLeft){
-					
-				}
-				else{
-					
-				}
+				if(powerType == 1)
+					playerFrame = facingLeft ? pullingLeft.getKeyFrame(trigger, true) : pullingRight.getKeyFrame(trigger, true);
+				else
+					playerFrame = facingLeft ? pushingLeft.getKeyFrame(trigger, true) : pushingRight.getKeyFrame(trigger, true);
+				
 				break;
 			default:
 				break;
 		}		
 	}
-	
+		
 	public static enum State{
 		STANDING, WALKING, JUMPING, POWERUSNG; 
 	}
@@ -198,8 +239,15 @@ public class Player implements Disposable{
 		return trigger;
 	}
 
+	public static void resetTrigger(){
+		trigger = 0;
+	}
 
 	public static float getMovespeed() {
 		return moveSpeed;
+	}
+
+	public void setPowerType(int i) {
+		this.powerType = i;
 	}
 }

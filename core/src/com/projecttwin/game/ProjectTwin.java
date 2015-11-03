@@ -22,20 +22,18 @@ public class ProjectTwin extends GameState {
 	
 	public ProjectTwin(GameStateManager gsm) {
 		super(gsm);
+		Assets.instance.init(new AssetManager());
 		create();
 	}
 	
 	@Override
 	public void create () {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		Assets.instance.init(new AssetManager());
 		worldController = new WorldController();
 		worldPhysic = new WorldPhysic(worldController);
 		new ContactHandler(); 
 		inputHandler = new InputHandler();
 		worldRender = new WorldRender(worldController, worldPhysic);
-		
-
 	}
 
 	@Override
@@ -43,11 +41,10 @@ public class ProjectTwin extends GameState {
 		deltaTime = Gdx.graphics.getDeltaTime();
 		worldController.update(deltaTime);
 		worldPhysic.update(deltaTime);
-		inputHandler.update(deltaTime);	
-//		Gdx.gl.glClearColor(102/255f, 221/255f, 170/255f, 1);
+		inputHandler.update();	
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
-		worldRender.render();
+		worldRender.render(deltaTime);
 		Gdx.graphics.setTitle("Twin" + " -- FPS: " + Gdx.graphics.getFramesPerSecond());
 	}
 	
@@ -67,7 +64,6 @@ public class ProjectTwin extends GameState {
 	@Override
 	public void update(float deltaTime) {
 		// TODO Auto-generated method stub
-		
 		
 	}
 }

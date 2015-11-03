@@ -4,9 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
-import com.projecttwin.character.Box;
 import com.projecttwin.character.Player;
 import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.utils.Assets;
@@ -25,20 +23,14 @@ import com.projecttwin.utils.Constants;
 public class WorldController implements Disposable{
 	public static final String TAG = WorldController.class.getName();
 	private static CameraHelper cameraHelper;
-	protected StageLevel level;
 	private static Sprite playerSprite;
 	private static Sprite[] boxSprites;
 	private static Player player;
-	private static Box box;
 	public static float startPlayerWidth;
 	public static float startPlayerHeigth;
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
-	
-	public enum StageLevel{
-		INTRO, ONE, TWO, THREE, FOUR, FIVE;
-	}
 	
 	public static CameraHelper getCameraHelper() {
 		return cameraHelper;
@@ -72,14 +64,6 @@ public class WorldController implements Disposable{
 		WorldController.player = player;
 	}
 
-	public static Box getBox() {
-		return box;
-	}
-
-	public static void setBox(Box box) {
-		WorldController.box = box;
-	}
-
 	public WorldPhysic getWorldPhysic() {
 		return worldPhysic;
 	}
@@ -111,35 +95,20 @@ public class WorldController implements Disposable{
 	}
 	
 	public void init(){
-		level = StageLevel.INTRO;
 		player = Assets.instance.getPlayer();
-		
+		player.setPowerType(Constants.powerType);
 		playerSprite = new Sprite(player.playerFrame);
 		playerSprite.setPosition(50, 160);
 		startPlayerHeigth = playerSprite.getHeight();
 		startPlayerWidth = playerSprite.getWidth();
 		
-		box = Assets.instance.getBox();
-		boxSprites = new Sprite[5];
-		for(int i = 0; i < boxSprites.length; i++){
-			boxSprites[i] = new Sprite(box.boxTextute);
-			float randomX = MathUtils.random(100, Constants.VIEWPORT_WIDTH - 100);
-			float randomY = MathUtils.random(100, Constants.VIEWPORT_HEIGHT - 100);
-			boxSprites[i].setOriginCenter();
-			boxSprites[i].setPosition(randomX, randomY);
-		}		
-		
-		cameraHelper = new CameraHelper();
-		cameraHelper.setTarget(playerSprite);
-		tiledMap = new TmxMapLoader().load("untitiled.tmx");
-//		tiledMap = new TmxMapLoader().load("Testing_map.tmx");
+		tiledMap = new TmxMapLoader().load("untitled.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
 	}
 	
 	public void update(float deltaTime){
-			
-		cameraHelper.update();
-		CharacterControll.updateBox();
+		if(!Constants.power)
+			player.setPowerType(Constants.powerType);
 		CharacterControll.updatePlayer(deltaTime);
 	}
 

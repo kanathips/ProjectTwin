@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.projecttwin.utils.Pair;
 
 public class MapBodyBuilder extends AbstractMapBuilder {
 
@@ -27,6 +28,26 @@ public class MapBodyBuilder extends AbstractMapBuilder {
    		this.world = world;
    		this.layer = layer;
 	}
+   	
+   	
+   	
+	public void setMapCategory(short mapCategory) {
+		this.mapCategory = mapCategory;
+	}
+
+
+
+	public void setTiledMap(TiledMap tiledMap) {
+		this.tiledMap = tiledMap;
+	}
+
+
+
+	public void setLayer(String layer) {
+		this.layer = layer;
+	}
+
+
 
 	public Array<Body> buildShapes() {
         MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
@@ -46,7 +67,14 @@ public class MapBodyBuilder extends AbstractMapBuilder {
             BodyDef bd = new BodyDef();
             bd.type = BodyType.StaticBody;
             Body body = world.createBody(bd);
-            body.createFixture(fdef).setUserData(name);
+            if(name.equals("gate") || name.equals("button")){
+            	body.createFixture(fdef).setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
+            	body.setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
+            }
+            else{
+            	body.createFixture(fdef).setUserData(name);
+            	body.setUserData(name);
+            }
             
             //set name and category to physic body
     		//use in contact handler and filter

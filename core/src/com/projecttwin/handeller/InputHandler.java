@@ -5,45 +5,61 @@ import java.util.TreeMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.math.Vector2;
 import com.projecttwin.character.Player;
+import com.projecttwin.character.PlayerForce;
+import com.projecttwin.character.Player.State;
 import com.projecttwin.game.WorldRender;
 import com.projecttwin.utils.Constants;
-
-public class InputHandler implements InputProcessor,Disposable{
+/**
+ * This class is Handle Input form mouse and keyboard such as key down, up, press and mouse click  
+ * @author NewWy
+ */
+public class InputHandler implements InputProcessor{
 	
-	private String[] keyList = {"A", "S", "D", "W", "SHIFT_LEFT", "SHIFT_RIGHT", "UP", "DOWN", "LEFT", "RIGHT", "R"};
+	private String[] keyList = {"A", "S", "D", "W", "SHIFT_LEFT", "SHIFT_RIGHT", "UP", "DOWN", "LEFT", "RIGHT", "R", "F"};
 	public static TreeMap<String, Boolean> keyPressing = new TreeMap<String, Boolean>();
-	public static boolean power = false;
+	
+	/**
+	 * Initial InputHandler class, set InputProcessor to this class
+	 */
 	public InputHandler() {
 		Gdx.input.setInputProcessor(this);
 		for(String s: keyList)
 			keyPressing.put(s, false);
 	}
-	
-	public void update(float deltaTime){
+	/**
+	 * update InputHandler and key press method
+	 */
+	public void update(){
 		updateKey();
 	}
+	
+	/**
+	 * when press or stroke keyboard to this class
+	 */
 	//TODO find the way how to stop player movement when collide with a wall
 	public void updateKey(){
 		if(keyPressing.get("UP")){
 			System.out.println(CharacterControll.getPlayerState());
 		}
-		if(keyPressing.get("W") && !power ){
+		if(keyPressing.get("W") && !Constants.power ){
+			Player.resetTrigger();
 			CharacterControll.jump(Player.getMovespeed());
-		}			
-		if(keyPressing.get("A") && keyPressing.get("D") && !power){
+		}
+		if(keyPressing.get("A") && keyPressing.get("D") && !Constants.power){
 			CharacterControll.walk(0);
 		}
-		else if(keyPressing.get("A") && !power){
+		else if(keyPressing.get("A") && !Constants.power){
 			CharacterControll.setPlayerFacingLeft(true);
 			CharacterControll.walk(-Player.getMovespeed());
 		}
-		else if(keyPressing.get("D") && !power){
+		else if(keyPressing.get("D") && !Constants.power){
 			CharacterControll.setPlayerFacingLeft(false);
 			CharacterControll.walk(Player.getMovespeed());
 		}
 	}
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		switch(keycode){
@@ -83,6 +99,10 @@ public class InputHandler implements InputProcessor,Disposable{
 			case(Keys.W):
 				keyPressing.put("W", true);
 				break;
+			case(Keys.F):
+				if(!Constants.power)
+					Constants.powerType = Constants.powerType == 1 ? 0 : 1;
+				break;
 		}
 		return false;		
 	}
@@ -109,23 +129,30 @@ public class InputHandler implements InputProcessor,Disposable{
 				keyPressing.put("RIGHT", false);
 				break;
 			case(Keys.A):
-				CharacterControll.resetplayer(true);
+				if(CharacterControll.getPlayerState() == State.WALKING)
+					CharacterControll.resetplayer(true);
 				keyPressing.put("A", false);
 				break;
 			case(Keys.S):
-				CharacterControll.resetplayer(false);
+				if(CharacterControll.getPlayerState() == State.WALKING)
+					CharacterControll.resetplayer(false);
 				keyPressing.put("S", false);
 				break;
 			case(Keys.D):
-				CharacterControll.resetplayer(true);
+				if(CharacterControll.getPlayerState() == State.WALKING)
+					CharacterControll.resetplayer(true);
 				keyPressing.put("D", false);
 				break;
 			case(Keys.W):
-				CharacterControll.resetplayer(false);
+				if(CharacterControll.getPlayerState() == State.WALKING)
+					CharacterControll.resetplayer(false);
 				keyPressing.put("W", false);
 				break;
 			case(Keys.R):
 				keyPressing.put("R", false);
+				break;
+			case(Keys.F):
+				keyPressing.put("F", false);
 				break;
 		}
 		return false;
@@ -133,16 +160,17 @@ public class InputHandler implements InputProcessor,Disposable{
 		
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		Constants.isClicking = true;
-		Constants.clickX = screenX;
-        Constants.clickY = screenY;
-        Constants.clickPosition.set(screenX, screenY, 0);
-        WorldRender.camera.unproject(Constants.clickPosition);
-        if(button == 0 && !power){
+		Constants.button = button;
+        if(button == 0 && !Constants.power){
         	Constants.clickedLeft = true;
-        	power = true;        	
+        	Constants.power = true; 
         }
         if(button == 1)
         	Constants.clickedRight = true;
+		
+        if(Constants.button == 0 && Constants.power && Constants.isClicking && Constants.haveObjectinPower){
+        	PlayerForce.applyPowerToObject(Constants.bodyInPower, new Vector2(Constants.clickX , Constants.clickY), Constants.powerType);
+		}
         return true;
 	}
 
@@ -154,42 +182,32 @@ public class InputHandler implements InputProcessor,Disposable{
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		Constants.isClicking = false;
-		Constants.clickX = screenX;
-        Constants.clickY = screenY;
-        Constants.clickPosition.set(screenX, screenY, 0);
-        WorldRender.camera.unproject(Constants.clickPosition);
+		Constants.button = button;
         if(button == 0)
         	Constants.clickedLeft = false;
         if(button == 1){
         	Constants.clickedRight = false;
-        	power = false;
+        	Constants.power = false;
         }
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		Constants.isClicking = true;
-		Constants.clickX = screenX;
-        Constants.clickY = screenY;
-        Constants.clickPosition.set(screenX, screenY, 0);
-        WorldRender.camera.unproject(Constants.clickPosition);
 		return false;
 	}
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
+        Constants.clickPosition.set(screenX, screenY, 0);
+        WorldRender.camera.unproject(Constants.clickPosition);
+		Constants.clickX = Constants.clickPosition.x;
+		Constants.clickY = Constants.clickPosition.y;
 		return false;
 	}
 
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 }

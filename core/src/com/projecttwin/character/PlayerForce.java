@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.projecttwin.utils.Constants;
@@ -18,7 +17,8 @@ public class PlayerForce {
 	private float radius;
 	private final float min_radius  = 5;
 	private final float max_radius = 300;
-	private final float increate_rate = 1;
+	private final float increate_rate = 2;
+	
 	public PlayerForce(World world){
 		this.world = world;
 	}
@@ -60,9 +60,8 @@ public class PlayerForce {
 		updatePosition(position.x, position.y);
 	}
 	
-	private void updatePosition(float x, float y) {
+	public void updatePosition(float x, float y) {
 		body.setTransform(x, y, 0);
-		
 	}
 
 	public void destroy(){
@@ -83,23 +82,25 @@ public class PlayerForce {
 		return radius;
 	}
 
-	public Body selectBox(float clickX, float clickY, World world){
-		Body force;
-		BodyDef bdef = new BodyDef();
-		bdef.position.set(Constants.pixelsToMeters(clickX), Constants.pixelsToMeters(clickY));
-		force = world.createBody(bdef);
-		
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(Constants.pixelsToMeters(10), Constants.pixelsToMeters(10));
-		FixtureDef fdef = new FixtureDef();
-		fdef.shape = shape;
-		fdef.isSensor = true;
-		force.createFixture(fdef).setUserData("force");
-		return force;
-	}
 	
 	public Body getPlayerForce(Vector2 position) {
 		return getPlayerForce(position.x, position.y);
+	}
+	
+	
+	/**
+	 * 
+	 * @param object that you want to apply force to
+	 * @param destination 
+	 * @param powerType  if mode true = pull mode otherwise push 
+	 */
+	public static void applyPowerToObject(Body object, Vector2 destination, int powerType ){
+		
+		double degree = Constants.getAngle(new Vector2(Constants.metersToPixels(object.getPosition().x), Constants.metersToPixels(object.getPosition().y)), destination);
+		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree))) * 2;
+		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree))) * 2;
+		if((powerType == 1 && degree > 90 && degree < 270) || (powerType == 0 && (degree > 270 || degree < 90)))
+			Constants.bodyInPower.applyForce((float)xPow, (float)yPow, Constants.bodyInPower.getPosition().x, Constants.bodyInPower.getPosition().y, true);
 	}
 	
 }

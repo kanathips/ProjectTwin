@@ -29,13 +29,10 @@ import com.badlogic.gdx.physics.box2d.Body;
 public class ContactHandler extends WorldController implements ContactListener{
 
 	private String TAG = "ContactHandler Class";
-	private String[] floor = {"floor", "object"};
-	private String[] jumpable = {"playerSensor", "object"};
-	private String[] forceable = {"object"};
-	private static int no = 0;
+
 	
 	/**
-	 *  
+	 *  Initial
 	 */
 	public ContactHandler() {
 		WorldPhysic.world.setContactListener(this);
@@ -56,42 +53,44 @@ public class ContactHandler extends WorldController implements ContactListener{
 		Body focusBody;
 		try{
 			/*Check an player at the ground event and change state to STANDING*/
-			if(checkAlotThing("playerSensor", floor, objectA, objectB)){
+			if(checkAlotThing("playerSensor", Constants.floor, objectA, objectB)){
 				getPlayer().setAtGround(true);
-				getPlayer().setState(State.STANDING);
+				Player.setState(State.STANDING);
 			}
 			
-			if(checkAlotThing("player", floor, objectA, objectB)){
+			if(checkAlotThing("player", Constants.floor, objectA, objectB)){
 				Constants.hitWall  = true;
 			}
 			
 			//check that player or object on spring or not
-			focusTarget = checkAlotThing("spring", jumpable, objectA, objectB, true);
-			focusBody = focusTarget.getSecond();
+			focusTarget = checkAlotThing("spring", Constants.jumpable, objectA, objectB, true);
 			if(focusTarget.getFirst()){
+				focusBody = focusTarget.getSecond();
 				if(focusBody.equals(WorldPhysic.playerBody)){
 					getPlayer().setAtGround(true);
-					getPlayer().setState(State.STANDING);
+					getPlayer();
+					Player.setState(State.STANDING);
 					CharacterControll.jump(Player.getMovespeed()*2);
 				}
 				else
 					focusBody.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed()*4));
 			}
 			
-			//check power area is contact on object or not
-			focusTarget = checkAlotThing("power", forceable, objectA, objectB, true);
-			focusBody = focusTarget.getSecond();
+//			//check power area is contact on object or not
+			focusTarget = checkAlotThing("power", Constants.forceable, objectA, objectB, true);
 			if(focusTarget.getFirst()){
+					focusBody = focusTarget.getSecond();
 					focusBody.setLinearVelocity(new Vector2(0,0));
 					focusBody.setGravityScale(0);
 					focusBody.setAngularVelocity(0);
-			}
+			}			
 		}catch(NullPointerException e){
-			Gdx.app.debug("#" + no + " " + TAG, objectA.getClass().toString() + " " + objectB.getClass().toString() + " Contact Error (Begin)");
-			no++;
+			Gdx.app.debug("#" + Constants.no + " " + TAG, objectA.getUserData() + " " + objectB.getUserData() + " Contact Error (Begin)");
+			Constants.no++;
 		}
 	}
 
+	
 
 	/**
 	 * This method use to manage when objects in box2d world are end contact to each other
@@ -108,51 +107,57 @@ public class ContactHandler extends WorldController implements ContactListener{
 		Body focusBody;
 		try{
 			
-			if(checkAlotThing("player", floor, objectA, objectB)){
+			if(checkAlotThing("player", Constants.floor, objectA, objectB)){
 				Constants.hitWall  = false;
 			}
 			
-			if(checkAlotThing("playerSensor", floor, objectA, objectB)){
+			if(checkAlotThing("playerSensor", Constants.floor, objectA, objectB)){
 				getPlayer().setAtGround(false);
-				getPlayer().setState(State.JUMPING);
+				Player.setState(State.JUMPING);
 			}
-			focusTarget = checkAlotThing("spring", jumpable, objectA, objectB, true);
+			
+			focusTarget = checkAlotThing("spring", Constants.jumpable, objectA, objectB, true);
 			focusBody = focusTarget.getSecond();
 			if(focusTarget.getFirst()){
 				if(focusBody.equals(WorldPhysic.playerBody)){
 					getPlayer().setAtGround(false);
-					getPlayer().setState(State.JUMPING);
+					Player.setState(State.JUMPING);
 					CharacterControll.jump(Player.getMovespeed()*2);
+					Player.resetTrigger();
 				}
 				else
 					focusBody.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed()*4));
 			}
 			
-			focusTarget = checkAlotThing("power", forceable, objectA, objectB, true);
+			focusTarget = checkAlotThing("power", Constants.forceable, objectA, objectB, true);
 			focusBody = focusTarget.getSecond();
 			if(focusTarget.getFirst()){
 					focusBody.setGravityScale(1);
 					focusBody.setAngularVelocity(1);
 			}
 		}catch(NullPointerException e){
-			Gdx.app.debug("#" + no + " " + TAG, objectA.getClass().toString() + " " + objectB.getClass().toString() + " Contact Error (end)");
-			no++;
+			Gdx.app.debug("#" + Constants.no + " " + TAG, objectA.getUserData() + " " + objectB.getUserData() + " Contact Error (end)");
+			Constants.no++;
 		}
 	}
 
+	
+	@SuppressWarnings("unchecked")
 	public Pair<Boolean, Body> checkAlotThing(String target, String[] other, Fixture objectA, Fixture objectB, boolean focusB){
 		boolean found = false;
 		Body body = null;
 		if(objectA.getUserData().equals(target)){
 			for(String s: other){
-				if(objectB.getUserData().equals(s)){
+				if((objectB.getUserData() instanceof Pair && ((Pair<String, String>) objectB.getUserData()).getFirst().equals(s)) 
+						|| objectB.getUserData().equals(s)){
 					found = true;
 					body = objectB.getBody();
 				}
 			}
 		}else if(objectB.getUserData().equals(target)){
 			for(String s: other){
-				if(objectA.getUserData().equals(s)){
+				if((objectA.getUserData() instanceof Pair && ((Pair<String, String>) objectA.getUserData()).getFirst().equals(s)) 
+						|| objectA.getUserData().equals(s)){
 					found = true;
 					body = objectA.getBody();
 				}
@@ -161,18 +166,23 @@ public class ContactHandler extends WorldController implements ContactListener{
 		return new Pair<Boolean, Body>(found, body);		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private boolean checkAlotThing(String target, String[] other, Fixture objectA, Fixture objectB) {
 		boolean found = false;
 		if(objectA.getUserData().equals(target)){
 			for(String s: other){
-				if(objectB.getUserData().equals(s))
+				if((objectB.getUserData() instanceof Pair && ((Pair<String, String>) objectB.getUserData()).getFirst().equals(s)) 
+						|| objectB.getUserData().equals(s)){
 					found = true;
+				}
 			}
 		}
 		else if(objectB.getUserData().equals(target)){
 			for(String s: other){
-				if(objectA.getUserData().equals(s))
+				if((objectA.getUserData() instanceof Pair && ((Pair<String, String>) objectA.getUserData()).getFirst().equals(s)) 
+						|| objectA.getUserData().equals(s)){
 					found = true;
+				}
 			}
 		}
 		return found;
@@ -184,6 +194,7 @@ public class ContactHandler extends WorldController implements ContactListener{
 		}
 		return false;
 	}
+	
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub

@@ -4,13 +4,12 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.projecttwin.game.ProjectTwin;
 
 
 public class GameCore implements ApplicationListener {
 	
 	public static final String TITLE = "Twin";
-	public static final int V_WIDTH = 1280;
+	public static final int V_WIDTH = 1024;
 	public static final int V_HEIGHT = 768;
 	
 	public static final float STEP = 1 / 60f;

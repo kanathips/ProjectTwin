@@ -11,10 +11,11 @@ public class CharacterControll extends WorldController{
 	
 	//move player character
 	public static void walk(float walkSpeed){
-		if(getPlayerState() == State.STANDING || getPlayerState() == State.WALKING )
-			getPlayer().setState(State.WALKING);
+		if(getPlayerState() == State.STANDING || getPlayerState() == State.WALKING ) {
+			Player.setState(State.WALKING);
+		}
 		walkSpeed -= WorldPhysic.playerBody.getLinearVelocity().x;
-		WorldPhysic.playerBody.applyLinearImpulse(new Vector2(walkSpeed, 0), WorldPhysic.playerBody.getWorldCenter(), true);		
+		WorldPhysic.playerBody.applyForce(new Vector2(walkSpeed, 0), WorldPhysic.playerBody.getWorldCenter(), true);		
 	}
 	
 	public static void setPlayerFacingLeft(boolean isFacingLeft){
@@ -23,14 +24,6 @@ public class CharacterControll extends WorldController{
 	
 	public static boolean getPlayerFacingLeft(){
 		return Player.getFacingLeft();
-	}
-
-	public static void updateBox(){
-		for(int i = 0; i < getBoxSprites().length; i++){
-			getBoxSprites()[i].setPosition(Constants.metersToPixels(WorldPhysic.boxBodys[i].getPosition().x) - getBoxSprites()[i].getWidth() / 2 
-					, Constants.metersToPixels(WorldPhysic.boxBodys[i].getPosition().y) - getBoxSprites()[i].getHeight() / 2);
-			getBoxSprites()[i].setRotation((float)Math.toDegrees(WorldPhysic.boxBodys[i].getAngle()));
-		}
 	}
 	
 	/**
@@ -49,10 +42,10 @@ public class CharacterControll extends WorldController{
 	
 	
 	public static void resetplayer(boolean isX){
-		getPlayer().setTrigger(0);
+		Player.resetTrigger();
 		if(isX){
 			WorldPhysic.playerBody.setLinearVelocity(0, WorldPhysic.playerBody.getLinearVelocity().y);
-			getPlayer().setState(State.STANDING);
+			Player.setState(State.STANDING);
 		}
 		else{
 			WorldPhysic.playerBody.setLinearVelocity(WorldPhysic.playerBody.getLinearVelocity().x, 0);
@@ -65,7 +58,7 @@ public class CharacterControll extends WorldController{
 	 */
 	public static void jump(float jumpSpeed){
 		if(getPlayer().getAtGround()){
-			getPlayer().setState(State.JUMPING);
+			Player.setState(State.JUMPING);
 			WorldPhysic.playerBody.setLinearVelocity(new Vector2(WorldPhysic.playerBody.getLinearVelocity().x, jumpSpeed * 2));
 		}
 	}

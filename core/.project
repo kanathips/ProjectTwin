@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/com/projecttwin/utils/BodyEditorLoader.java</name>
-			<type>1</type>
-			<locationURI>PROJECT_LOC/library/BodyEditorLoader.java</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
