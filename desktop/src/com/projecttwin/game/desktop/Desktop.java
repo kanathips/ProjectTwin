@@ -1,4 +1,4 @@
-package com.projecttwin.game;
+package com.projecttwin.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
