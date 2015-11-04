@@ -5,16 +5,19 @@ import java.util.TreeMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.utils.Array;
 import com.projecttwin.game.WorldPhysic;
 import com.projecttwin.utils.Constants;
 import com.projecttwin.utils.Pair;
 
 public class DoorControll {
-	private WorldPhysic worldPhysic;
 	private TreeMap<String, Boolean> command;
+	private Array<Body> gateBodies;
+	private Array<Body> buttonBodies;
 	public DoorControll(WorldPhysic worldPhysic){
-		this.worldPhysic = worldPhysic;
 		command = new TreeMap<String, Boolean>();
+		gateBodies = worldPhysic.gateButtonBody.getFirst();
+		buttonBodies = worldPhysic.gateButtonBody.getSecond();
 	}
 	
 	
@@ -61,16 +64,26 @@ public class DoorControll {
 				close(i);
 			}
 		}
-		for(Body b : worldPhysic.buttonBody){
+		for(Body b : buttonBodies){
 			command.put(((Pair<String, String>) b.getUserData()).getSecond(), false);
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void open(String link){
-
+		for(Body b: gateBodies){
+			if(((Pair<String, String>)b.getUserData()).getSecond().equals(link)){
+				b.setActive(true);
+			}
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void close(String link){
-
+		for(Body b: gateBodies){
+			if(((Pair<String, String>)b.getUserData()).getSecond().equals(link)){
+				b.setActive(false);
+			}
+		}
 	}
 }

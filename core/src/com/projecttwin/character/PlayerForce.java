@@ -13,10 +13,10 @@ import com.projecttwin.utils.Constants;
 public class PlayerForce {
 	
 	private World world;
-	private Body body;
+	private static Body body;
 	private float radius;
 	private final float min_radius  = 5;
-	private final float max_radius = 300;
+	private final float max_radius = 200;
 	private final float increate_rate = 2;
 	
 	public PlayerForce(World world){
@@ -95,12 +95,27 @@ public class PlayerForce {
 	 * @param powerType  if mode true = pull mode otherwise push 
 	 */
 	public static void applyPowerToObject(Body object, Vector2 destination, int powerType ){
-		
+		boolean fire = false;
 		double degree = Constants.getAngle(new Vector2(Constants.metersToPixels(object.getPosition().x), Constants.metersToPixels(object.getPosition().y)), destination);
-		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree))) * 2;
-		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree))) * 2;
-		if((powerType == 1 && degree > 90 && degree < 270) || (powerType == 0 && (degree > 270 || degree < 90)))
-			Constants.bodyInPower.applyForce((float)xPow, (float)yPow, Constants.bodyInPower.getPosition().x, Constants.bodyInPower.getPosition().y, true);
+		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree)));
+		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree)));
+		
+		//push = 0	pull = 1
+		if(powerType == 0){
+			if(!(body.getPosition().x < object.getPosition().x) && degree < 270 && degree > 90){
+				System.out.println("here");
+				fire = true;
+			}
+			else if(!(body.getPosition().x > object.getPosition().x) && degree > 270 || degree < 90)
+				fire = true;
+		}
+		else if (powerType == 1){
+			if(!(body.getPosition().x > object.getPosition().x) && degree < 270 && degree > 90)
+				fire = true;
+			else if(!(body.getPosition().x < object.getPosition().x) && degree > 270 || degree < 90)
+				fire = true;
+		}
+		if(fire)
+			object.applyForce((float)xPow, (float)yPow, object.getPosition().x, Constants.bodyInPower.getPosition().y, true);
 	}
-	
 }

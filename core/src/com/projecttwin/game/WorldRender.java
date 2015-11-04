@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -110,17 +112,21 @@ public class WorldRender implements Disposable{
 	public void renderForce(float deltaTime){
 		batch.setProjectionMatrix(camera.combined);
 		float i = 360 * deltaTime;
+		i = Constants.powerType == 1 ? i * -1 : i;
+		img.rotate(i);
 		if(Constants.power){
-			batch.begin();
 			img.setSize(Constants.metersToPixels(worldPhysic.playerForce.getRadius() * 2), Constants.metersToPixels(worldPhysic.playerForce.getRadius() * 2));
 			img.setOriginCenter();
 			img.setPosition(Constants.metersToPixels(worldPhysic.forceBody.getPosition().x) - img.getWidth() / 2, Constants.metersToPixels(worldPhysic.forceBody.getPosition().y) - img.getHeight() / 2);
-			if(Constants.powerType == 1)
-				img.rotate(-i);
-			else
-				img.rotate(i);
+			batch.begin();
 			img.draw(batch);
 			batch.end();
+			if(Constants.haveObjectinPower){
+				shapeRenderer.setColor(0, 0, 255, 1);
+				shapeRenderer.begin(ShapeType.Line);			
+				shapeRenderer.line(new Vector2(Constants.clickX, Constants.clickY), Constants.metersToPixels(Constants.bodyInPower.getPosition()));
+				shapeRenderer.end();
+			}
 		}
 	}
 	

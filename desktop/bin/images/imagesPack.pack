@@ -108,95 +108,95 @@ sleep0
   orig: 46, 70
   offset: 0, 0
   index: -1
-Box
-  rotate: false
-  xy: 517, 94
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
 sleep1
   rotate: false
-  xy: 583, 88
+  xy: 517, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep5
   rotate: false
-  xy: 583, 88
+  xy: 517, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep3
   rotate: false
-  xy: 632, 88
+  xy: 566, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep4
   rotate: false
-  xy: 681, 88
+  xy: 615, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 stand
   rotate: false
-  xy: 730, 88
+  xy: 664, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk0
   rotate: false
-  xy: 730, 88
+  xy: 664, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk1
   rotate: false
-  xy: 779, 88
+  xy: 713, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk10
   rotate: false
-  xy: 828, 88
+  xy: 762, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk2
   rotate: false
-  xy: 877, 88
+  xy: 811, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk4
   rotate: false
-  xy: 926, 88
+  xy: 860, 88
+  size: 47, 70
+  orig: 47, 70
+  offset: 0, 0
+  index: -1
+walk6
+  rotate: false
+  xy: 909, 88
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep2
   rotate: false
-  xy: 975, 88
+  xy: 958, 88
   size: 46, 70
   orig: 46, 70
   offset: 0, 0
   index: -1
-walk6
+Box
   rotate: false
-  xy: 517, 22
-  size: 47, 70
-  orig: 47, 70
+  xy: 1, 4
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 walk3
@@ -208,28 +208,28 @@ walk3
   index: -1
 walk7
   rotate: false
-  xy: 566, 16
+  xy: 517, 16
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk8
   rotate: false
-  xy: 615, 16
+  xy: 566, 16
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk9
   rotate: false
-  xy: 664, 16
+  xy: 615, 16
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk5
   rotate: false
-  xy: 713, 16
+  xy: 664, 16
   size: 46, 70
   orig: 46, 70
   offset: 0, 0

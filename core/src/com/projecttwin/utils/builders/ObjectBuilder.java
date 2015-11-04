@@ -115,4 +115,8 @@ public class ObjectBuilder {
 		return shape;
           
 	  }
+	  
+	  public void dispose(){
+		  world.dispose();
+	  }
 }

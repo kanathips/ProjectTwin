@@ -16,6 +16,8 @@ import com.projecttwin.handeller.DoorControll;
 import com.projecttwin.character.Player;
 import com.projecttwin.character.Player.State;
 import com.projecttwin.utils.Constants;
+import com.projecttwin.utils.Pair;
+import com.projecttwin.utils.builders.GateButtonBuilder;
 import com.projecttwin.utils.builders.MapBodyBuilder;
 import com.projecttwin.utils.builders.ObjectBuilder;
 /**
@@ -43,8 +45,9 @@ public class WorldPhysic implements Disposable{
 
 	public static Array<Body> boxBodys;
 	private ObjectBuilder boxBuilder;
-	public Array<Body> buttonBody;
 	private DoorControll doorControll;
+	private GateButtonBuilder gateButtonBuilder;
+	public Pair<Array<Body>, Array<Body>> gateButtonBody;
 	
 	public WorldPhysic(WorldController worldController) {
 		WorldPhysic.worldController = worldController;
@@ -66,8 +69,9 @@ public class WorldPhysic implements Disposable{
 			//create box
 			boxBuilder = new ObjectBuilder(worldController.getTiledMap(), 100, world, "box", Constants.OBJECT_CATEGORY);
 			boxBodys = boxBuilder.buildShapes();
-			mapBodyBuilder.setLayer("button");
-			buttonBody = mapBodyBuilder.buildShapes();
+			//create button
+			gateButtonBuilder = new GateButtonBuilder(worldController.getTiledMap(), Constants.ppm, world, "button", Constants.MAP_CATEGORY);
+			gateButtonBody = gateButtonBuilder.buildShapes();
 		}catch(NullPointerException e){
 			Gdx.app.debug(TAG, "World Physic have an error on create map");
 		}
@@ -124,7 +128,10 @@ public class WorldPhysic implements Disposable{
 	}
 	
 	public void dispose(){
-		world.dispose();
+		mapBodyBuilder.dispose();
+		boxBuilder.dispose();
+		gateButtonBuilder.dispose();
+		world.dispose();		
 	}
 	
 }

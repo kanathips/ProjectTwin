@@ -1,7 +1,6 @@
 package com.projecttwin.game;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -39,13 +38,9 @@ public class ProjectTwin extends GameState {
 	@Override
 	public void render () {
 		deltaTime = Gdx.graphics.getDeltaTime();
-		worldController.update(deltaTime);
-		worldPhysic.update(deltaTime);
-		inputHandler.update();	
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
 		worldRender.render(deltaTime);
-		Gdx.graphics.setTitle("Twin" + " -- FPS: " + Gdx.graphics.getFramesPerSecond());
 	}
 	
 	@Override
@@ -63,7 +58,9 @@ public class ProjectTwin extends GameState {
 
 	@Override
 	public void update(float deltaTime) {
-		// TODO Auto-generated method stub
-		
+		worldController.update(deltaTime);
+		worldPhysic.update(deltaTime);
+		inputHandler.update();	
+		Gdx.graphics.setTitle("Twin" + " -- FPS: " + Gdx.graphics.getFramesPerSecond());		
 	}
 }

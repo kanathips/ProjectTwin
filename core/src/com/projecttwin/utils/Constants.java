@@ -32,7 +32,7 @@ public class Constants {
 	public static boolean hitWall;
 	public static boolean power = false;
 	
-	public static String[] floor = {"floor", "box", "button"};
+	public static String[] floor = {"floor", "box", "button", "gate"};
 	public static String[] jumpable = {"playerSensor", "box"};
 	public static String[] forceable = {"box"};
 	public static int no = 0;
@@ -74,7 +74,6 @@ public class Constants {
 	public static double getAngle(Vector2 centerPt, Vector2 targetPt)
 	{
 	    double theta = Math.atan2(targetPt.y - centerPt.y, targetPt.x - centerPt.x);
-//	    theta -= Math.PI/2.0;
 	    double angle = Math.toDegrees(theta);
 	    if (angle < 0) {
 	        angle += 360;

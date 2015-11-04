@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="38">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="66">
  <tileset firstgid="1" name="Tile" tilewidth="32" tileheight="32" tilecount="240">
   <image source="maps/Tile.png" width="640" height="384"/>
  </tileset>
@@ -7,46 +7,61 @@
   <image source="maps/scifi_platformTiles_32x32.png" width="1120" height="736"/>
  </tileset>
  <objectgroup name="unwalkable">
-  <object id="1" name="floor" x="0" y="6.65024e-14">
-   <polyline points="0,0 0,768 1024,768 1024,15.6735"/>
+  <object id="40" name="floor" x="0" y="0">
+   <polyline points="0,0 1024,0 1024,768 0,768 0,0"/>
   </object>
-  <object id="13" name="edge" x="0" y="0">
-   <polyline points="0,0 1024,0 1024,32"/>
+  <object id="41" name="floor" x="0" y="736">
+   <polyline points="0,0 96,0 96,32"/>
   </object>
-  <object id="26" name="floor" x="0" y="736">
-   <polyline points="288,0 544,0 544,-128 608,-128 608,0 1024,0"/>
+  <object id="42" name="floor" x="288" y="768">
+   <polyline points="0,0 0,-32 256,-32 256,-160 320,-160 320,-32 512,-32 512,0"/>
   </object>
-  <object id="27" name="floor" x="624" y="608" width="32" height="16"/>
-  <object id="28" name="floor" x="656" y="640" width="32" height="16"/>
-  <object id="29" name="floor" x="688" y="672" width="32" height="16"/>
-  <object id="30" name="floor" x="720" y="704" width="32" height="16"/>
-  <object id="31" name="floor" x="496" y="608" width="32" height="16"/>
-  <object id="32" name="floor" x="464" y="640" width="32" height="16"/>
-  <object id="33" name="floor" x="432" y="672" width="32" height="16"/>
-  <object id="34" name="floor" x="400" y="704" width="32" height="16"/>
-  <object id="35" name="floor" x="96" y="736">
-   <polyline points="0,0 -96,0"/>
+  <object id="45" name="floor" x="928" y="768">
+   <polyline points="0,0 0,-32 96,-32"/>
   </object>
+  <object id="46" name="floor" x="704" y="544" width="160" height="16"/>
+  <object id="47" name="floor" x="496" y="608" width="32" height="16"/>
+  <object id="48" name="floor" x="464" y="640" width="32" height="16"/>
+  <object id="49" name="floor" x="432" y="672" width="32" height="16"/>
+  <object id="50" name="floor" x="400" y="704" width="32" height="16"/>
+  <object id="51" name="floor" x="720" y="704" width="32" height="16"/>
+  <object id="52" name="floor" x="688" y="672" width="32" height="16"/>
+  <object id="53" name="floor" x="656" y="640" width="32" height="16"/>
+  <object id="54" name="floor" x="624" y="608" width="32" height="16"/>
  </objectgroup>
  <objectgroup name="box">
-  <object id="17" name="box" x="784" y="480" width="64" height="64"/>
-  <object id="18" name="box" x="544" y="528" width="64" height="64"/>
+  <object id="55" name="box" x="336" y="704" width="32" height="32"/>
+  <object id="56" name="box" x="752" y="512" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="button">
-  <object id="22" name="button" x="304" y="720" width="64" height="16">
-   <properties>
-    <property name="link" value="2"/>
-   </properties>
-  </object>
-  <object id="23" name="button" x="928" y="720" width="64" height="16">
+  <object id="57" name="button" x="32" y="720" width="48" height="16">
    <properties>
     <property name="link" value="1"/>
    </properties>
   </object>
-  <object id="24" name="button" x="32" y="720" width="64" height="16">
+  <object id="59" name="button" x="944" y="720" width="48" height="16">
+   <properties>
+    <property name="link" value="2"/>
+   </properties>
+  </object>
+  <object id="61" name="button" x="544" y="592" width="64" height="16">
    <properties>
     <property name="link" value="3"/>
    </properties>
+  </object>
+  <object id="62" name="gate" x="96" y="736">
+   <properties>
+    <property name="link" value="1"/>
+    <property name="status" value="inActive"/>
+   </properties>
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object id="64" name="gate" x="720" y="544">
+   <properties>
+    <property name="link" value="2"/>
+    <property name="status" value="acti"/>
+   </properties>
+   <polyline points="0,0 0,-80 80,-80 80,0"/>
   </object>
  </objectgroup>
  <imagelayer name="Image Layer 1" visible="0">
@@ -57,9 +72,9 @@
    eJztmksOAUEURSvVU5+lEEvx2RS2gilWgSkWQFuEl3ijCjHpziluneTl5qR71jmzDuH/2cXPz7bx9Vzt9n5nu4vgXf3UmVchLOyWlaavbNd2G1E/2B7tTqKuDt0f7XR/tNP90a4O3R/tdH+00/3Rrg7dH+10f7TT/dGuDt0f7XR/tNP90a4O3R/tdH+00/3Rrg7dH+10f7TT/dGuDt0f7XR/tNP90a5O2sPN/4m4+9a+j/j+/V/3tIdv0L223X/Ht+vb8+1n0mvpv1nSHga+w+T7jzLptfTfbv9j34nv1HeWSa+l/2ah+6Od7o92uj/a1XkCjuGbfw==
   </data>
  </layer>
- <layer name="Tile Layer 1" width="64" height="48">
+ <layer name="Front" width="64" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1kEOgjAQQFGuoWAcTgAex/tfxE3ZNDEqhLY2723+orSZpAs6DAAAAAAAAAAAUM49Nd50LjgLsF8cXO/JmHqrOkUZcfL3/2hJfVSd4lxReX/Ler7/aPy8FvR8/y3b/rtT1uePzfd/20vqmvV68NxP3d4ZL9T4CAo=
+   eJzt1jEOwiAUgOFeQ63xeQLrcbyE9x9d6ELStNUUkHzf8g8F8hIGOgwAAAAAAAAAAFDOLTUWei84C/C9+PF7Ty6p16pTlBEHr/9Hj9Rn1SmOFZX3t6zn+4/Gz2tBz/ffsvndHbO+djbfv7Wn1Cnreec575Xm6+f/jA8NZwlS
   </data>
  </layer>
  <objectgroup name="gate"/>

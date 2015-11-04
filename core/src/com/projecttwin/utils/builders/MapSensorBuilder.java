@@ -25,7 +25,6 @@ public class MapSensorBuilder extends AbstractMapBuilder {
    		this.layer = layer;
 	}
 
-	@Override
 	public Array<Body> buildShapes() {
 		MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
 
@@ -53,7 +52,7 @@ public class MapSensorBuilder extends AbstractMapBuilder {
 
 	@Override
 	public void dispose() {
-
+		world.dispose();
 	}
 
 }
