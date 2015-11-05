@@ -17,9 +17,10 @@ import com.projecttwin.character.Player;
 import com.projecttwin.character.Player.State;
 import com.projecttwin.utils.Constants;
 import com.projecttwin.utils.Pair;
-import com.projecttwin.utils.builders.GateButtonBuilder;
-import com.projecttwin.utils.builders.MapBodyBuilder;
-import com.projecttwin.utils.builders.ObjectBuilder;
+import com.projecttwin.builders.GateButtonBuilder;
+import com.projecttwin.builders.MapBodyBuilder;
+import com.projecttwin.builders.MapSensorBuilder;
+import com.projecttwin.builders.ObjectBuilder;
 /**
  * This class is major class you must always use this class to create box2d physic world
  * <p><b>Thing this class do :</b>
@@ -48,6 +49,8 @@ public class WorldPhysic implements Disposable{
 	private DoorControll doorControll;
 	private GateButtonBuilder gateButtonBuilder;
 	public Pair<Array<Body>, Array<Body>> gateButtonBody;
+	private MapSensorBuilder sensorBuilder;
+	private Array<Body> sensorBody;
 	
 	public WorldPhysic(WorldController worldController) {
 		WorldPhysic.worldController = worldController;
@@ -69,6 +72,8 @@ public class WorldPhysic implements Disposable{
 			//create box
 			boxBuilder = new ObjectBuilder(worldController.getTiledMap(), 100, world, "box", Constants.OBJECT_CATEGORY);
 			boxBodys = boxBuilder.buildShapes();
+			sensorBuilder = new MapSensorBuilder(worldController.getTiledMap(), Constants.ppm, world, "sensor");
+			sensorBody = sensorBuilder.buildShapes();
 			//create button
 			gateButtonBuilder = new GateButtonBuilder(worldController.getTiledMap(), Constants.ppm, world, "button", Constants.MAP_CATEGORY);
 			gateButtonBody = gateButtonBuilder.buildShapes();
@@ -131,6 +136,7 @@ public class WorldPhysic implements Disposable{
 		mapBodyBuilder.dispose();
 		boxBuilder.dispose();
 		gateButtonBuilder.dispose();
+		sensorBuilder.dispose();
 		world.dispose();		
 	}
 	

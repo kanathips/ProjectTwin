@@ -58,8 +58,9 @@ public class ContactHandler extends WorldController implements ContactListener{
 				Player.setState(State.STANDING);
 			}
 			
-			if(checkAlotThing("player", Constants.floor, objectA, objectB)){
-				Constants.hitWall  = true;
+			
+			if(checkAlotThing("playerSensor", Constants.dead, objectA, objectB)){
+				Constants.gameOver = true;
 			}
 			
 			//check that player or object on spring or not
@@ -105,17 +106,7 @@ public class ContactHandler extends WorldController implements ContactListener{
 		Fixture objectB = contact.getFixtureB();
 		Pair<Boolean, Body> focusTarget;
 		Body focusBody;
-		try{
-			
-			if(checkAlotThing("player", Constants.floor, objectA, objectB)){
-				Constants.hitWall  = false;
-			}
-			
-			if(checkAlotThing("playerSensor", Constants.floor, objectA, objectB)){
-				getPlayer().setAtGround(false);
-				Player.setState(State.JUMPING);
-			}
-			
+		try{			
 			focusTarget = checkAlotThing("spring", Constants.jumpable, objectA, objectB, true);
 			focusBody = focusTarget.getSecond();
 			if(focusTarget.getFirst()){

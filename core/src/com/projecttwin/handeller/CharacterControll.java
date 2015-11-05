@@ -58,6 +58,7 @@ public class CharacterControll extends WorldController{
 	 */
 	public static void jump(float jumpSpeed){
 		if(getPlayer().getAtGround()){
+			getPlayer().setAtGround(false);
 			Player.setState(State.JUMPING);
 			WorldPhysic.playerBody.setLinearVelocity(new Vector2(WorldPhysic.playerBody.getLinearVelocity().x, jumpSpeed * 2));
 		}

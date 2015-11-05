@@ -1,4 +1,4 @@
-package com.projecttwin.utils.builders;
+package com.projecttwin.builders;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;

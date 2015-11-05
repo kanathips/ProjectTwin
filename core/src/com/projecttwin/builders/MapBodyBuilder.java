@@ -1,37 +1,58 @@
-package com.projecttwin.utils.builders;
+package com.projecttwin.builders;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 import com.projecttwin.utils.Pair;
 
-public class GateButtonBuilder extends AbstractMapBuilder {
+public class MapBodyBuilder extends AbstractMapBuilder {
 
-	private TiledMap tiledMap;
+    // The pixels per tile. If your tiles are 16x16, this is set to 16f
+
 	private short mapCategory;
+	private TiledMap tiledMap;
 	private World world;
 	private String layer;
 
-	public GateButtonBuilder(TiledMap tiledMap, float ppt, World world, String layer, short mapCategory) {
+   	public MapBodyBuilder(TiledMap tiledMap, float ppt, World world, String layer, short mapCategory) {
    		super(ppt);
    		this.tiledMap = tiledMap;
    		this.mapCategory = mapCategory;
    		this.world = world;
    		this.layer = layer;
 	}
+   	
+   	
+   	
+	public void setMapCategory(short mapCategory) {
+		this.mapCategory = mapCategory;
+	}
 
-	public Pair<Array<Body>, Array<Body>> buildShapes() {
+
+
+	public void setTiledMap(TiledMap tiledMap) {
+		this.tiledMap = tiledMap;
+	}
+
+
+
+	public void setLayer(String layer) {
+		this.layer = layer;
+	}
+
+
+
+	public Array<Body> buildShapes() {
         MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
 
-        Array<Body> buttonBodies = new Array<Body>();
-        Array<Body> gateBodies = new Array<Body>();
+        Array<Body> bodies = new Array<Body>();
         
         for(MapObject object : objects) {
             
@@ -46,23 +67,26 @@ public class GateButtonBuilder extends AbstractMapBuilder {
             BodyDef bd = new BodyDef();
             bd.type = BodyType.StaticBody;
             Body body = world.createBody(bd);
-            body.createFixture(fdef).setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
-            body.setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
+            if(name.equals("gate") || name.equals("button")){
+            	body.createFixture(fdef).setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
+            	body.setUserData(new Pair<String, String>(name, (String) object.getProperties().get("link")));
+            }
+            else{
+            	body.createFixture(fdef).setUserData(name);
+            	body.setUserData(name);
+            }
             
             //set name and category to physic body
     		//use in contact handler and filter
-            if(name.equals("button"))
-            	buttonBodies.add(body);
-            else if(name.equals("gate"))
-            	gateBodies.add(body);
+            
+            bodies.add(body);
             shape.dispose();
         }
-        return new Pair<Array<Body>, Array<Body>>(gateBodies, buttonBodies);
+        return bodies;
     }
 
 	@Override
 	public void dispose() {
-		world.dispose();
+		world.dispose();		
 	}
-
 }

@@ -5,232 +5,232 @@ filter: Nearest,Nearest
 repeat: none
 Triangel
   rotate: false
-  xy: 1, 38
+  xy: 1, 35
   size: 184, 208
   orig: 184, 208
   offset: 0, 0
   index: -1
 player0
   rotate: false
-  xy: 187, 145
+  xy: 187, 142
   size: 102, 101
   orig: 102, 101
   offset: 0, 0
   index: -1
 player1
   rotate: false
-  xy: 187, 42
+  xy: 187, 39
   size: 102, 101
   orig: 102, 101
   offset: 0, 0
   index: -1
 player2
   rotate: false
-  xy: 291, 145
+  xy: 291, 142
   size: 102, 101
   orig: 102, 101
   offset: 0, 0
   index: -1
 player3
   rotate: false
-  xy: 291, 42
+  xy: 291, 39
   size: 102, 101
   orig: 102, 101
   offset: 0, 0
   index: -1
-player4
+star
   rotate: false
-  xy: 395, 145
-  size: 102, 101
-  orig: 102, 101
+  xy: 395, 162
+  size: 86, 81
+  orig: 86, 81
   offset: 0, 0
   index: -1
 push0
   rotate: false
-  xy: 395, 57
+  xy: 395, 74
   size: 72, 86
   orig: 72, 86
   offset: 0, 0
   index: -1
 pull0
   rotate: false
-  xy: 499, 160
+  xy: 483, 157
   size: 69, 86
   orig: 69, 86
   offset: 0, 0
   index: -1
 pull1
   rotate: false
-  xy: 570, 160
+  xy: 554, 157
   size: 68, 86
   orig: 68, 86
   offset: 0, 0
   index: -1
 push1
   rotate: false
-  xy: 640, 160
+  xy: 624, 157
   size: 68, 86
   orig: 68, 86
   offset: 0, 0
   index: -1
 push3
   rotate: false
-  xy: 710, 160
+  xy: 694, 157
   size: 67, 86
   orig: 67, 86
   offset: 0, 0
   index: -1
 pull3
   rotate: false
-  xy: 779, 160
+  xy: 763, 157
   size: 66, 86
   orig: 66, 86
   offset: 0, 0
   index: -1
 pull2
   rotate: false
-  xy: 847, 160
+  xy: 831, 157
   size: 65, 86
   orig: 65, 86
   offset: 0, 0
   index: -1
 push2
   rotate: false
-  xy: 914, 160
+  xy: 898, 157
   size: 63, 86
   orig: 63, 86
   offset: 0, 0
   index: -1
-sleep0
-  rotate: false
-  xy: 469, 73
-  size: 46, 70
-  orig: 46, 70
-  offset: 0, 0
-  index: -1
 sleep1
   rotate: false
-  xy: 517, 88
+  xy: 963, 173
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep5
   rotate: false
-  xy: 517, 88
+  xy: 963, 173
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep3
   rotate: false
-  xy: 566, 88
+  xy: 469, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep4
   rotate: false
-  xy: 615, 88
+  xy: 518, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 stand
   rotate: false
-  xy: 664, 88
+  xy: 567, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk0
   rotate: false
-  xy: 664, 88
+  xy: 567, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk1
   rotate: false
-  xy: 713, 88
+  xy: 616, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk10
   rotate: false
-  xy: 762, 88
+  xy: 665, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk2
   rotate: false
-  xy: 811, 88
+  xy: 714, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk4
   rotate: false
-  xy: 860, 88
+  xy: 763, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk6
   rotate: false
-  xy: 909, 88
+  xy: 812, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
-sleep2
-  rotate: false
-  xy: 958, 88
-  size: 46, 70
-  orig: 46, 70
-  offset: 0, 0
-  index: -1
-Box
-  rotate: false
-  xy: 1, 4
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-walk3
-  rotate: false
-  xy: 469, 1
-  size: 46, 70
-  orig: 46, 70
-  offset: 0, 0
-  index: -1
 walk7
   rotate: false
-  xy: 517, 16
+  xy: 861, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk8
   rotate: false
-  xy: 566, 16
+  xy: 910, 85
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk9
   rotate: false
-  xy: 615, 16
+  xy: 395, 2
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
-walk5
+sleep0
   rotate: false
-  xy: 664, 16
+  xy: 444, 2
   size: 46, 70
   orig: 46, 70
+  offset: 0, 0
+  index: -1
+sleep2
+  rotate: false
+  xy: 492, 13
+  size: 46, 70
+  orig: 46, 70
+  offset: 0, 0
+  index: -1
+walk3
+  rotate: false
+  xy: 540, 13
+  size: 46, 70
+  orig: 46, 70
+  offset: 0, 0
+  index: -1
+walk5
+  rotate: false
+  xy: 588, 13
+  size: 46, 70
+  orig: 46, 70
+  offset: 0, 0
+  index: -1
+Box
+  rotate: false
+  xy: 1, 1
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1

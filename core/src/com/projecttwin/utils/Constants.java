@@ -18,28 +18,29 @@ public class Constants {
 	public static final String TEXTURE_ATLAS_OBJECTS = "images/imagesPack.pack";
 	public static float MAP_WIDTH = 2500;
 	public static float MAP_HEIGHT = 800;
-	
 	public static final short CHARACTER_CATEGORY = 1;
 	public static final short MAP_CATEGORY = 4;
 	public static final short STAIR_CATEGORY = 0;
 	public static final short OBJECT_CATEGORY = 2;
 	public static float clickX;
 	public static float clickY;
-	public static Vector3 clickPosition = new Vector3(0,0, 0);
+	public static Vector3 clickPosition;
 	public static boolean isClicking;
-	public static boolean clickedLeft = false;
-	public static boolean clickedRight = false;
+	public static boolean clickedLeft;
+	public static boolean clickedRight;
 	public static boolean hitWall;
-	public static boolean power = false;
+	public static boolean power;
 	
-	public static String[] floor = {"floor", "box", "button", "gate"};
-	public static String[] jumpable = {"playerSensor", "box"};
-	public static String[] forceable = {"box"};
-	public static int no = 0;
-	public static int button = 0;
+	public static String[] floor;
+	public static String[] jumpable;
+	public static String[] forceable;
+	public static int no;
+	public static int button;
 	public static Body bodyInPower;
-	public static boolean haveObjectinPower = false;
-	public static int powerType = 1;
+	public static boolean haveObjectinPower;
+	public static int powerType;
+	public static boolean gameOver;
+	public static String[] dead;
 	
 	/**
 	 * Pixel to Meter converter
@@ -80,5 +81,24 @@ public class Constants {
 	    }
 
 	    return angle;
+	}
+	
+	public static void setting(){		
+		clickX = 0.0f;
+		clickY = 0.0f;
+		clickPosition = new Vector3(0,0, 0);
+		isClicking = false;
+		clickedLeft = false;
+		clickedRight = false;
+		power = false;
+		gameOver = false;
+		floor = new String[]{"floor", "box", "button", "gate"};
+		jumpable = new String[]{"playerSensor", "box"};
+		forceable = new String[]{"box"};
+		dead = new String[]{"acid", "sprike"};
+		no = 0;
+		button = 0;
+		haveObjectinPower = false;
+		powerType = 1;
 	}
 }

@@ -7,8 +7,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.character.Player;
 import com.projecttwin.handeller.CharacterControll;
+import com.projecttwin.handeller.Timer;
 import com.projecttwin.utils.Assets;
-import com.projecttwin.utils.CameraHelper;
 import com.projecttwin.utils.Constants;
 /**
  * This class is initial starter instants and create object in this game
@@ -22,7 +22,6 @@ import com.projecttwin.utils.Constants;
  */
 public class WorldController implements Disposable{
 	public static final String TAG = WorldController.class.getName();
-	private static CameraHelper cameraHelper;
 	private static Sprite playerSprite;
 	private static Sprite[] boxSprites;
 	private static Player player;
@@ -32,14 +31,6 @@ public class WorldController implements Disposable{
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
 	
-	public static CameraHelper getCameraHelper() {
-		return cameraHelper;
-	}
-
-	public static void setCameraHelper(CameraHelper cameraHelper) {
-		WorldController.cameraHelper = cameraHelper;
-	}
-
 	public static Sprite getPlayerSprite() {
 		return playerSprite;
 	}
@@ -63,6 +54,8 @@ public class WorldController implements Disposable{
 	public static void setPlayer(Player player) {
 		WorldController.player = player;
 	}
+
+	private Timer timer;
 
 	public WorldPhysic getWorldPhysic() {
 		return worldPhysic;
@@ -101,7 +94,8 @@ public class WorldController implements Disposable{
 		playerSprite.setPosition(50, 160);
 		startPlayerHeigth = playerSprite.getHeight();
 		startPlayerWidth = playerSprite.getWidth();
-		
+		timer = new Timer(180);
+		timer.start();
 		tiledMap = new TmxMapLoader().load("untitled.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
 	}
@@ -110,6 +104,10 @@ public class WorldController implements Disposable{
 		if(!Constants.power)
 			player.setPowerType(Constants.powerType);
 		CharacterControll.updatePlayer(deltaTime);
+		if (timer.hasCompleted()) {
+			System.out.println("Game Over");
+			Constants.gameOver = true;			
+		}
 	}
 
 	public void dispose(){

@@ -9,6 +9,7 @@ import com.projecttwin.gameState.GameStateManager;
 import com.projecttwin.handeller.ContactHandler;
 import com.projecttwin.handeller.InputHandler;
 import com.projecttwin.utils.Assets;
+import com.projecttwin.utils.Constants;
 
 public class ProjectTwin extends GameState {
 	
@@ -27,6 +28,7 @@ public class ProjectTwin extends GameState {
 	
 	@Override
 	public void create () {
+		Constants.setting();
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		worldController = new WorldController();
 		worldPhysic = new WorldPhysic(worldController);
@@ -57,7 +59,10 @@ public class ProjectTwin extends GameState {
 	}
 
 	@Override
-	public void update(float deltaTime) {
+	public void update(float deltaTime){
+		if(Constants.gameOver){
+			create();
+		}
 		worldController.update(deltaTime);
 		worldPhysic.update(deltaTime);
 		inputHandler.update();	

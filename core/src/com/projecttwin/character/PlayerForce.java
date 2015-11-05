@@ -97,8 +97,8 @@ public class PlayerForce {
 	public static void applyPowerToObject(Body object, Vector2 destination, int powerType ){
 		boolean fire = false;
 		double degree = Constants.getAngle(new Vector2(Constants.metersToPixels(object.getPosition().x), Constants.metersToPixels(object.getPosition().y)), destination);
-		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree)));
-		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree)));
+		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree)) * 0.5f);
+		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree)) * 0.5f);
 		
 		//push = 0	pull = 1
 		if(powerType == 0){

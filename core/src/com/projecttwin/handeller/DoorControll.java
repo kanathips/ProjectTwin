@@ -19,7 +19,7 @@ public class DoorControll {
 		gateBodies = worldPhysic.gateButtonBody.getFirst();
 		buttonBodies = worldPhysic.gateButtonBody.getSecond();
 	}
-	
+		
 	
 	@SuppressWarnings("unchecked")
 	public void checkDoor(){

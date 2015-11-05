@@ -6,9 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.projecttwin.character.Player;
 import com.projecttwin.character.PlayerForce;
 import com.projecttwin.character.Player.State;
+import com.projecttwin.game.WorldPhysic;
 import com.projecttwin.game.WorldRender;
 import com.projecttwin.utils.Constants;
 /**
@@ -41,7 +43,9 @@ public class InputHandler implements InputProcessor{
 	//TODO find the way how to stop player movement when collide with a wall
 	public void updateKey(){
 		if(keyPressing.get("UP")){
-			System.out.println(CharacterControll.getPlayerState());
+			for(Contact c: WorldPhysic.world.getContactList())
+				System.out.print("[ " + c.getFixtureA().getUserData() + " " + c.getFixtureB().getUserData() + "] ");
+			System.out.println();
 		}
 		if(keyPressing.get("W") && !Constants.power ){
 			Player.resetTrigger();
@@ -68,6 +72,7 @@ public class InputHandler implements InputProcessor{
 				break;
 			case(Keys.R):
 				keyPressing.put("R", true);
+				Constants.gameOver = true;
 				break;
 			case(Keys.SHIFT_LEFT):
 				keyPressing.put("SHIFT_LEFT", true);
