@@ -3,7 +3,9 @@ package com.projecttwin.utils;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.utils.Disposable;
+import com.projecttwin.character.Ball;
 import com.projecttwin.character.Box;
+import com.projecttwin.character.Hud;
 import com.projecttwin.character.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -40,6 +42,13 @@ public class Assets implements Disposable, AssetErrorListener{
 		return new Player(atlas);
 	}
 	
+	public Hud getHud(){
+		return new Hud(atlas);
+	}
+	
+	public Ball getBall(){
+		return new Ball(atlas);
+	}
 	@Override
 	public void error(AssetDescriptor asset, Throwable throwable) {
 		Gdx.app.error(TAG, "Couldn't load asset '" + asset.fileName + "'", (Exception)throwable);

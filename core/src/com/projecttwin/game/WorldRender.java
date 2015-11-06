@@ -1,5 +1,7 @@
 package com.projecttwin.game;
 
+import java.util.TreeMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,6 +36,8 @@ public class WorldRender implements Disposable{
 	private WorldPhysic worldPhysic;
 	private Array<Sprite> boxSprite;
 	private Sprite img;
+	private OrthographicCamera hudCam;
+	private TreeMap<String, Sprite> hudTexture;
 	
 	public WorldRender(WorldController worldController, WorldPhysic worldPhysic) {
 		this.worldController = worldController;
@@ -49,11 +53,15 @@ public class WorldRender implements Disposable{
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 		camera.update();
+		hudCam = new OrthographicCamera();
+		hudCam.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
+		hudCam.update();
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		boxSprite = getBoxSprite(WorldPhysic.boxBodys);
 		img = new Sprite(new Texture(Gdx.files.internal("images/force.png")));
 		img.setSize(worldPhysic.playerForce.getRadius() * 2, worldPhysic.playerForce.getRadius() * 2);
+		hudTexture = Assets.instance.getHud().getTexture();
 	}
 	
 	/**
@@ -63,12 +71,26 @@ public class WorldRender implements Disposable{
 		renderMap();
 		renderForce(deltaTime);
 		renderObject();
-		worldPhysic.render(batch);
+//		worldPhysic.render(batch);
+		renderHud();
 	}
 	
-	/**
-	 * render player and box form worldController
-	 */
+	public void renderHud(){
+		batch.setProjectionMatrix(hudCam.combined);
+		Long timeLeft = worldController.getTimer().getTimeLeft();
+		int size = timeLeft.toString().length();
+		for(int i = 0; i < size; i++){
+			char s = timeLeft.toString().toCharArray()[i];
+			Sprite sprite = hudTexture.get("" + s);
+			sprite.setPosition(Constants.VIEWPORT_WIDTH - (sprite.getWidth() * (size - i) + 20), Constants.VIEWPORT_HEIGHT - sprite.getHeight() - 20);
+			if(timeLeft > 20 || timeLeft % 2 == 0){
+				batch.begin();
+				sprite.draw(batch);
+				batch.end();
+			}
+		}
+		
+	}
 	
 	public void renderObject(){
 		batch.setProjectionMatrix(camera.combined);

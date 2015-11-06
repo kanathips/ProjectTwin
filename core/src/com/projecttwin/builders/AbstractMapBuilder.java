@@ -2,11 +2,13 @@ package com.projecttwin.builders;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.ChainShape;
@@ -38,12 +40,12 @@ public abstract class AbstractMapBuilder {
 	    return polygon;
 	}
 
-	    protected static CircleShape getCircle(CircleMapObject circleObject) {
-	        Circle circle = circleObject.getCircle();
+	    protected static CircleShape getCircle(EllipseMapObject ellipseMapObject) {
+	        Ellipse ellipse = ellipseMapObject.getEllipse();
 	        CircleShape circleShape = new CircleShape();
-	        name = circleObject.getName();
-	        circleShape.setRadius(circle.radius / ppt);
-	        circleShape.setPosition(new Vector2(circle.x / ppt, circle.y / ppt));
+	        name = ellipseMapObject.getName();
+	        circleShape.setRadius(ellipse.width / 2 / ppt);
+	        circleShape.setPosition(new Vector2(ellipse.x / ppt, ellipse.y / ppt));
 	        return circleShape;
 	    }
 
@@ -94,8 +96,8 @@ public abstract class AbstractMapBuilder {
           else if (object instanceof PolylineMapObject) {
               shape = getPolyline((PolylineMapObject)object);
           }
-          else if (object instanceof CircleMapObject) {
-              shape = getCircle((CircleMapObject)object);
+          else if (object instanceof EllipseMapObject) {
+              shape = getCircle((EllipseMapObject)object);
           }
           else {
               return null;

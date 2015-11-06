@@ -31,6 +31,14 @@ public class WorldController implements Disposable{
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
 	
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
 	public static Sprite getPlayerSprite() {
 		return playerSprite;
 	}
@@ -94,8 +102,8 @@ public class WorldController implements Disposable{
 		playerSprite.setPosition(50, 160);
 		startPlayerHeigth = playerSprite.getHeight();
 		startPlayerWidth = playerSprite.getWidth();
-		timer = new Timer(180);
-		timer.start();
+		setTimer(new Timer(180));
+		getTimer().start();
 		tiledMap = new TmxMapLoader().load("untitled.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
 	}
@@ -104,7 +112,7 @@ public class WorldController implements Disposable{
 		if(!Constants.power)
 			player.setPowerType(Constants.powerType);
 		CharacterControll.updatePlayer(deltaTime);
-		if (timer.hasCompleted()) {
+		if (getTimer().hasCompleted()) {
 			System.out.println("Game Over");
 			Constants.gameOver = true;			
 		}

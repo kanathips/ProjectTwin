@@ -63,6 +63,7 @@ public class MapBodyBuilder extends AbstractMapBuilder {
             FixtureDef fdef = new FixtureDef();
             fdef.density = 1;
             fdef.shape = shape;
+            fdef.restitution = 0.3f;
             fdef.filter.categoryBits = mapCategory;
             BodyDef bd = new BodyDef();
             bd.type = BodyType.StaticBody;

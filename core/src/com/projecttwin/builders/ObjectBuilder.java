@@ -2,11 +2,11 @@ package com.projecttwin.builders;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.CircleMapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -82,16 +82,15 @@ public class ObjectBuilder {
 	    return new Pair<PolygonShape, Vector2>(polygon, new Vector2((rectangle.x + rectangle.width * 0.5f) / ppt,
     			(rectangle.y + rectangle.height * 0.5f ) / ppt));
 	}
-
-	protected static Pair<CircleShape, Vector2> getCircle(CircleMapObject circleObject) {
-		Circle circle = circleObject.getCircle();
-	        CircleShape circleShape = new CircleShape();
-	        name = circleObject.getName();
-	        circleShape.setRadius(circle.radius / ppt);
-	        circleShape.setPosition(new Vector2(circle.x / ppt, circle.y / ppt));
-	        return new Pair<CircleShape, Vector2>(circleShape, new Vector2(circle.x / ppt, circle.y / ppt));
-	    }
-	    
+	
+	protected static Pair<CircleShape, Vector2> getCircle(EllipseMapObject ellipseMapObject) {
+        Ellipse ellipse = ellipseMapObject.getEllipse();
+        CircleShape circleShape = new CircleShape();
+        name = ellipseMapObject.getName();
+        circleShape.setRadius(ellipse.width / 2 / ppt);
+        return new Pair<CircleShape, Vector2>(circleShape, new Vector2(ellipse.x / ppt, ellipse.y / ppt));
+    }
+	
 	  protected Shape checkShape(MapObject object){
 		  
 		  if (object instanceof TextureMapObject) {
@@ -104,8 +103,8 @@ public class ObjectBuilder {
               shape = data.getFirst();
               position = data.getSecond();
           }
-          else if (object instanceof CircleMapObject) {
-        	  Pair<CircleShape, Vector2> data = getCircle((CircleMapObject)object);
+          else if (object instanceof EllipseMapObject){
+        	  Pair<CircleShape, Vector2> data = getCircle((EllipseMapObject)object);
               shape = data.getFirst();
               position = data.getSecond();
           }

@@ -32,7 +32,7 @@ public class DoorControll {
 			if ((fixtureA.getUserData() instanceof Pair) && (((Pair<String, String>) fixtureA.getUserData()).getFirst().equals("button"))){
 				link  = ((Pair<String, String>) fixtureA.getUserData()).getSecond();
 				for(String s: Constants.jumpable){
-					if(fixtureB.getUserData().equals(s)){
+					if(fixtureB.getUserData().equals(s) && !s.equals("floor")){
 						trigger = true;	
 						break;
 					}
@@ -45,7 +45,7 @@ public class DoorControll {
 			if ((fixtureB.getUserData() instanceof Pair) && (((Pair<String, String>) fixtureB.getUserData()).getFirst().equals("button"))){
 				link  = ((Pair<String, String>) fixtureB.getUserData()).getSecond();
 				for(String s: Constants.jumpable){
-					if(fixtureA.getUserData().equals(s)){
+					if(fixtureA.getUserData().equals(s) && !s.equals("floor")){
 						trigger = true;
 						break;
 					}
