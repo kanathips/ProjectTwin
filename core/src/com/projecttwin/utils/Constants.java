@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 /**
  * This class use to declare Constants data of the project
+ * 
  * @author NewWy
  * @category utility
  */
@@ -30,7 +31,7 @@ public class Constants {
 	public static boolean clickedRight;
 	public static boolean hitWall;
 	public static boolean power;
-	
+
 	public static String[] floor;
 	public static String[] jumpable;
 	public static String[] forceable;
@@ -41,28 +42,32 @@ public class Constants {
 	public static int powerType;
 	public static boolean gameOver;
 	public static String[] dead;
-	
+
 	/**
 	 * Pixel to Meter converter
-	 * @param pixel that you want to convert to meter by pixel per meter scale
-	 * @return <b>(pixel / ppm)</b> how much meter in box2d by ppm scale    
+	 * 
+	 * @param pixel
+	 *            that you want to convert to meter by pixel per meter scale
+	 * @return <b>(pixel / ppm)</b> how much meter in box2d by ppm scale
 	 */
-	public static float pixelsToMeters(float pixel){
+	public static float pixelsToMeters(float pixel) {
 		return pixel / ppm;
 	}
-	
-	public static Vector2 pixelsToMeters(Vector2 position){
+
+	public static Vector2 pixelsToMeters(Vector2 position) {
 		float x = pixelsToMeters(position.x);
 		float y = pixelsToMeters(position.y);
 		return new Vector2(x, y);
 	}
-	
+
 	/**
 	 * Meter to Pixel Converter
-	 * @param meter that you want to convert to pixel by meter per pixel scale
-	 * @return <b>(meter * ppm)</b> how much pixel in box2d by ppm scale 
+	 * 
+	 * @param meter
+	 *            that you want to convert to pixel by meter per pixel scale
+	 * @return <b>(meter * ppm)</b> how much pixel in box2d by ppm scale
 	 */
-	public static float metersToPixels(float meter){
+	public static float metersToPixels(float meter) {
 		return meter * ppm;
 	}
 
@@ -71,31 +76,30 @@ public class Constants {
 		float y = metersToPixels(position.y);
 		return new Vector2(x, y);
 	}
-	
-	public static double getAngle(Vector2 centerPt, Vector2 targetPt)
-	{
-	    double theta = Math.atan2(targetPt.y - centerPt.y, targetPt.x - centerPt.x);
-	    double angle = Math.toDegrees(theta);
-	    if (angle < 0) {
-	        angle += 360;
-	    }
 
-	    return angle;
+	public static double getAngle(Vector2 centerPt, Vector2 targetPt) {
+		double theta = Math.atan2(targetPt.y - centerPt.y, targetPt.x - centerPt.x);
+		double angle = Math.toDegrees(theta);
+		if (angle < 0) {
+			angle += 360;
+		}
+
+		return angle;
 	}
-	
-	public static void setting(){		
+
+	public static void setting() {
 		clickX = 0.0f;
 		clickY = 0.0f;
-		clickPosition = new Vector3(0,0, 0);
+		clickPosition = new Vector3(0, 0, 0);
 		isClicking = false;
 		clickedLeft = false;
 		clickedRight = false;
 		power = false;
 		gameOver = false;
-		floor = new String[]{"floor", "box", "button", "gate"};
-		jumpable = new String[]{"playerSensor", "box"};
-		forceable = new String[]{"box"};
-		dead = new String[]{"acid", "sprike"};
+		floor = new String[] { "floor", "box", "button", "gate" };
+		jumpable = new String[] { "playerSensor", "box" };
+		forceable = new String[] { "box" };
+		dead = new String[] { "acid", "sprike" };
 		no = 0;
 		button = 0;
 		haveObjectinPower = false;

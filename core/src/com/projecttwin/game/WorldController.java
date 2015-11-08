@@ -10,17 +10,24 @@ import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.handeller.Timer;
 import com.projecttwin.utils.Assets;
 import com.projecttwin.utils.Constants;
+
 /**
  * This class is initial starter instants and create object in this game
- * <p><b>Thing this class do : </b>
- * <p>create player texture
- * <p>create game state
- * <p>something
- * <p>something
+ * <p>
+ * <b>Thing this class do : </b>
+ * <p>
+ * create player texture
+ * <p>
+ * create game state
+ * <p>
+ * something
+ * <p>
+ * something
+ * 
  * @author NewWy
  *
  */
-public class WorldController implements Disposable{
+public class WorldController implements Disposable {
 	public static final String TAG = WorldController.class.getName();
 	private static Sprite playerSprite;
 	private static Sprite[] boxSprites;
@@ -30,7 +37,7 @@ public class WorldController implements Disposable{
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
-	
+
 	public Timer getTimer() {
 		return timer;
 	}
@@ -89,13 +96,11 @@ public class WorldController implements Disposable{
 		WorldController.tiledMapRenderer = tiledMapRenderer;
 	}
 
-
-	
-	public WorldController(){
+	public WorldController() {
 		init();
 	}
-	
-	public void init(){
+
+	public void init() {
 		player = Assets.instance.getPlayer();
 		player.setPowerType(Constants.powerType);
 		playerSprite = new Sprite(player.playerFrame);
@@ -105,21 +110,20 @@ public class WorldController implements Disposable{
 		setTimer(new Timer(180));
 		getTimer().start();
 		tiledMap = new TmxMapLoader().load("untitled.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
-	
-	public void update(float deltaTime){
-		if(!Constants.power)
+
+	public void update(float deltaTime) {
+		if (!Constants.power)
 			player.setPowerType(Constants.powerType);
 		CharacterControll.updatePlayer(deltaTime);
 		if (getTimer().hasCompleted()) {
-			System.out.println("Game Over");
-			Constants.gameOver = true;			
+			Constants.gameOver = true;
 		}
 	}
 
-	public void dispose(){
+	public void dispose() {
 		player.dispose();
 	}
-	
+
 }

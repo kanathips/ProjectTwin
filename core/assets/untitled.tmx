@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="115">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="117">
  <tileset firstgid="1" name="Tile" tilewidth="32" tileheight="32" tilecount="240">
   <image source="maps/Tile.png" width="640" height="384"/>
  </tileset>
@@ -49,9 +49,9 @@
   <object id="98" name="floor" x="0" y="688" width="32" height="16"/>
  </objectgroup>
  <objectgroup name="box">
-  <object id="56" name="box" x="320" y="704" width="32" height="32"/>
-  <object id="86" name="box" x="560" y="576" width="32" height="32"/>
-  <object id="114" name="box" x="288" y="400" width="32" height="32">
+  <object id="56" name="box" x="968" y="688" width="32" height="32"/>
+  <object id="86" name="box" x="768" y="480" width="32" height="32"/>
+  <object id="114" name="ball" type="green" x="528" y="272" width="32" height="32">
    <ellipse/>
   </object>
  </objectgroup>
@@ -59,28 +59,26 @@
   <object id="92" name="gate" x="96" y="736">
    <properties>
     <property name="link" value="2"/>
-    <property name="status" value="inActive"/>
+    <property name="status" value="-1"/>
    </properties>
    <polyline points="0,0 192,0"/>
   </object>
-  <object id="93" name="button" x="768" y="528" width="48" height="16">
+  <object id="93" name="button" x="766" y="528" width="48" height="16">
    <properties>
     <property name="link" value="1"/>
+    <property name="status" value="-1"/>
    </properties>
   </object>
-  <object id="95" name="button" x="944" y="720" width="48" height="16">
+  <object id="95" name="button" x="960" y="720" width="48" height="16">
    <properties>
     <property name="link" value="2"/>
+    <property name="status" value="-1"/>
    </properties>
   </object>
   <object id="96" name="gate" x="176" y="512" width="64" height="16">
    <properties>
     <property name="link" value="1"/>
-   </properties>
-  </object>
-  <object id="100" name="gate" x="176" y="368" width="64" height="16">
-   <properties>
-    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
    </properties>
   </object>
  </objectgroup>
@@ -92,6 +90,6 @@
    <polyline points="0,0 128,0"/>
   </object>
   <object id="108" name="star" x="96" y="288" width="32" height="32"/>
-  <object id="109" name="star" x="528" y="272" width="32" height="32"/>
+  <object id="109" name="star" x="560" y="560" width="32" height="32"/>
  </objectgroup>
 </map>

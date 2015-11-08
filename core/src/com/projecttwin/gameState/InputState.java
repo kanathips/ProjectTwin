@@ -10,7 +10,7 @@ public abstract class InputState {
 	protected SpriteBatch spriteBatch;
 	protected OrthographicCamera camera;
 	protected OrthographicCamera hudCam;
-	
+
 	protected InputState(GameStateManager gsm) {
 		this.gsm = gsm;
 		game = gsm.gameCore();

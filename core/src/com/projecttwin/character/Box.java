@@ -7,15 +7,15 @@ import com.projecttwin.utils.Constants;
 
 public class Box {
 	public TextureRegion boxTextute;
-	
-	public Box(TextureAtlas atlas){
-		try{
+
+	public Box(TextureAtlas atlas) {
+		try {
 			boxTextute = atlas.findRegion("Box");
 			Gdx.app.debug(Constants.no + " Box", "Create Box Complete");
 			Constants.no++;
-		}catch(Exception e){
+		} catch (Exception e) {
 			Gdx.app.debug(Constants.no + " Box", "Create Box Error");
-			Constants.no++;		
+			Constants.no++;
 		}
 	}
 }
