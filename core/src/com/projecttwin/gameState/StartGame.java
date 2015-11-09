@@ -45,7 +45,7 @@ public class StartGame extends GameState implements EventListener{
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		
-		include_state.renderStartGame(deltaTime);
+		include_state.renderStartGame(deltaTime,false);
 		
 		spriteBatch.end();
 		

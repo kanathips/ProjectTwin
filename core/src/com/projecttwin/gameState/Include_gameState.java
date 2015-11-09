@@ -110,8 +110,8 @@ public class Include_gameState extends GameState{
 				sprite_circle.get(1).getWidth()/1.2f,sprite_circle.get(1).getHeight()/1.2f);
 		sprite_circle.get(1).setOriginCenter();
 	}
-	public void renderStartGame(float deltaTime){
-		if(start_to_menu){
+	public void renderStartGame(float deltaTime,boolean check){
+		if(start_to_menu || check == true){
 			if(signal_load){
 				spriteBatch.draw(effect_ligh.getKeyFrame(deltaTime,true), 0,Constants.VIEWPORT_HEIGHT/2.5f,1024,250);
 				bg_load.draw(spriteBatch);
@@ -149,7 +149,7 @@ public class Include_gameState extends GameState{
 		}
 		if((Gdx.input.justTouched() && alpha_lo == 1) || start_to_menu == false){ 
 			start_to_menu = false;
-			renderMenuState(deltaTime);
+			renderMenuState(deltaTime,false);
 						
 		}
 		
@@ -182,8 +182,8 @@ public class Include_gameState extends GameState{
 		cage.get(index_ar1).setAlpha(alpha);
 		cage.get(index_ar1).draw(spriteBatch);
 	}
-	public void renderMenuState(float deltaTime){
-		if(start_to_menu == false && menu_to_selectStage == true){
+	public void renderMenuState(float deltaTime,boolean check){
+		if(start_to_menu == false && menu_to_selectStage == true || check == true){
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			deltaTime_eff += Gdx.graphics.getDeltaTime();
@@ -240,12 +240,12 @@ public class Include_gameState extends GameState{
 		}
 		if(alpha_st == 1 && Gdx.input.isButtonPressed(Input.Buttons.LEFT) || menu_to_selectStage == false){
 			menu_to_selectStage = false;
-			renderSelectStage();
+			renderSelectStage(false);
 		}
 
 		if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
 			start_to_menu = true;
-			renderStartGame(deltaTime);
+			renderStartGame(deltaTime,false);
 		}
 	}
 	
@@ -257,8 +257,8 @@ public class Include_gameState extends GameState{
 			index_x += arr_select.get(0).getWidth();
 		}
 	}
-	public void renderSelectStage(){
-		if(menu_to_selectStage == false){
+	public void renderSelectStage(boolean check){
+		if(menu_to_selectStage == false || check == true){
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
