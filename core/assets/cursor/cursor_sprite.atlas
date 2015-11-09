@@ -1,0 +1,143 @@
+
+cursor_sprite.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cursor (1)
+  rotate: false
+  xy: 1, 517
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (10)
+  rotate: false
+  xy: 1, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (2)
+  rotate: false
+  xy: 1, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (3)
+  rotate: false
+  xy: 259, 517
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (9)
+  rotate: false
+  xy: 259, 517
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (4)
+  rotate: false
+  xy: 1, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (8)
+  rotate: false
+  xy: 1, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (5)
+  rotate: false
+  xy: 259, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (7)
+  rotate: false
+  xy: 259, 259
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+cursor (6)
+  rotate: false
+  xy: 517, 517
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+cursor_sprite2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+images/cursor
+  rotate: false
+  xy: 1, 325
+  size: 161, 160
+  orig: 161, 160
+  offset: 0, 0
+  index: 1
+images/cursor
+  rotate: false
+  xy: 1, 163
+  size: 161, 160
+  orig: 161, 160
+  offset: 0, 0
+  index: 3
+images/cursor
+  rotate: false
+  xy: 164, 325
+  size: 161, 160
+  orig: 161, 160
+  offset: 0, 0
+  index: 7
+images/cursor
+  rotate: false
+  xy: 1, 1
+  size: 161, 160
+  orig: 161, 160
+  offset: 0, 0
+  index: 9
+images/cursor
+  rotate: false
+  xy: 164, 163
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: 2
+images/cursor
+  rotate: false
+  xy: 327, 326
+  size: 161, 159
+  orig: 161, 159
+  offset: 0, 0
+  index: 4
+images/cursor
+  rotate: false
+  xy: 164, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: 8
+images/cursor
+  rotate: false
+  xy: 327, 165
+  size: 161, 159
+  orig: 161, 159
+  offset: 0, 0
+  index: 6
+images/cursor
+  rotate: false
+  xy: 326, 4
+  size: 160, 159
+  orig: 160, 159
+  offset: 0, 0
+  index: 5
