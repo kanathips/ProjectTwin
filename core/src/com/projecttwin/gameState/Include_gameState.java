@@ -2,6 +2,8 @@ package com.projecttwin.gameState;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,15 +20,11 @@ import com.projecttwin.game.ProjectTwin;
 import com.projecttwin.utils.Constants;
 
 public class Include_gameState extends GameState{
-	//---------------------include gameState---------------
-	private boolean start_to_menu = true;
-	private boolean menu_to_selectStage = true;
 	
 	//----------------------core game-----------------------
 	
 	private SpriteBatch spriteBatch;
 	private Vector2 location_cursor = new Vector2(0,0);
-	private OrthographicCamera camera;
 	
 	//----------------------start game-----------------------
 	
@@ -62,6 +60,10 @@ public class Include_gameState extends GameState{
 	
 	private Array<Sprite> arr_select = new Array<Sprite>();
 	private float index_x=0f;
+	private float alpha_star=0f;
+	private int clear_stage=1;
+	private int count_star=0;
+	public static int stage;
 	
 	protected Include_gameState(GameStateManager gsm,SpriteBatch spriteBatch,Vector2 location_cursor,boolean signal_load,OrthographicCamera camera){
 		super(gsm);
@@ -110,48 +112,49 @@ public class Include_gameState extends GameState{
 				sprite_circle.get(1).getWidth()/1.2f,sprite_circle.get(1).getHeight()/1.2f);
 		sprite_circle.get(1).setOriginCenter();
 	}
-	public void renderStartGame(float deltaTime,boolean check){
-		if(start_to_menu || check == true){
-			if(signal_load){
-				spriteBatch.draw(effect_ligh.getKeyFrame(deltaTime,true), 0,Constants.VIEWPORT_HEIGHT/2.5f,1024,250);
-				bg_load.draw(spriteBatch);
-				current_load = load.getKeyFrame(deltaTime,true);	
-				spriteBatch.draw(current_load,Constants.VIEWPORT_WIDTH-current_load.getRegionWidth(),0,
-						current_load.getRegionWidth()*1.2f,current_load.getRegionHeight()*1.2f);
-				timer_load += 0.005;
-			}
-			
-			if(timer_load >= 1 || signal_load == false){
-				bg_load.setAlpha(0);
-				spriteBatch.draw(background, 0,0,Constants.VIEWPORT_WIDTH,Constants.VIEWPORT_HEIGHT);
-				
-				alpha_lo+= 0.005;
-				if(alpha_lo >= 1)	alpha_lo = 1;
-				sprite_logo.setAlpha(alpha_lo);
-				sprite_logo.draw(spriteBatch);
-				
-				
-				current_start = start.getKeyFrame(deltaTime,true);
-				if(alpha_lo == 1)					
-				spriteBatch.draw(current_start,Constants.VIEWPORT_WIDTH/1.5f,0,	//Constants.VIEWPORT_HEIGHT/8f
-						current_start.getRegionWidth()/1.6f,current_start.getRegionHeight()/1.6f);
-				
-				sprite_circle.get(0).rotate(10);
-				sprite_circle.get(0).draw(spriteBatch);
-			
-				sprite_circle.get(1).rotate(5);
-				sprite_circle.get(1).draw(spriteBatch);
-				
-				timer_load=1;
-			}
-			
-			
+	public void renderStartGame(float deltaTime){
+		
+		if(signal_load){
+			spriteBatch.draw(effect_ligh.getKeyFrame(deltaTime,true), 0,Constants.VIEWPORT_HEIGHT/2.5f,1024,250);
+			bg_load.draw(spriteBatch);
+			current_load = load.getKeyFrame(deltaTime,true);	
+			spriteBatch.draw(current_load,Constants.VIEWPORT_WIDTH-current_load.getRegionWidth(),0,
+					current_load.getRegionWidth()*1.2f,current_load.getRegionHeight()*1.2f);
+			timer_load += 0.005;
 		}
-		if((Gdx.input.justTouched() && alpha_lo == 1) || start_to_menu == false){ 
-			start_to_menu = false;
-			renderMenuState(deltaTime,false);
-						
+		
+		if(timer_load >= 1 || signal_load == false){
+			bg_load.setAlpha(0);
+			spriteBatch.draw(background, 0,0,Constants.VIEWPORT_WIDTH,Constants.VIEWPORT_HEIGHT);
+				
+			alpha_lo+= 0.005;
+			if(alpha_lo >= 1)	alpha_lo = 1;
+			sprite_logo.setAlpha(alpha_lo);
+			sprite_logo.draw(spriteBatch);
+				
+				
+			current_start = start.getKeyFrame(deltaTime,true);
+			if(alpha_lo == 1)					
+			spriteBatch.draw(current_start,Constants.VIEWPORT_WIDTH/1.5f,0,	//Constants.VIEWPORT_HEIGHT/8f
+					current_start.getRegionWidth()/1.6f,current_start.getRegionHeight()/1.6f);
+				
+			sprite_circle.get(0).rotate(10);
+			sprite_circle.get(0).draw(spriteBatch);
+			
+			sprite_circle.get(1).rotate(5);
+			sprite_circle.get(1).draw(spriteBatch);
+				
+			timer_load=1;
 		}
+//		
+		Gdx.input.setInputProcessor(new InputAdapter() {
+		    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		        if (button == Buttons.LEFT) {//&& alpha_lo == 1
+		        	gsm.setState(new MenuState(gsm));
+		        }
+				return false;
+		    }
+		});
 		
 	}
 	
@@ -182,102 +185,133 @@ public class Include_gameState extends GameState{
 		cage.get(index_ar1).setAlpha(alpha);
 		cage.get(index_ar1).draw(spriteBatch);
 	}
-	public void renderMenuState(float deltaTime,boolean check){
-		if(start_to_menu == false && menu_to_selectStage == true || check == true){
-			Gdx.gl.glClearColor(0, 0, 0, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			deltaTime_eff += Gdx.graphics.getDeltaTime();
-			
-			
-			if(change_eff == false )
-				sprite_eff.setBounds(0, runy_eff, sprite_eff.getWidth(), sprite_eff.getHeight());
+	public void renderMenuState(float deltaTime){
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		deltaTime_eff += Gdx.graphics.getDeltaTime();
+		
+		if(change_eff == false )
+			sprite_eff.setBounds(0, runy_eff, sprite_eff.getWidth(), sprite_eff.getHeight());
+		else 
+			sprite_eff.setBounds(Constants.VIEWPORT_WIDTH-sprite_eff.getWidth()/1.2f, runy_eff, sprite_eff.getWidth(), sprite_eff.getHeight());
+		
+		sprite_eff.draw(spriteBatch);
+		runy_eff-=15;
+		
+		if(runy_eff <= 0){
+			sprite_eff.setAlpha(0);
+			if(deltaTime_eff >= 1.5) deltaTime_eff = 0.7f;
+			if(change_eff == false)
+				spriteBatch.draw(effect.getKeyFrame(deltaTime_eff,false), 0,0);
 			else 
-				sprite_eff.setBounds(Constants.VIEWPORT_WIDTH-sprite_eff.getWidth()/1.2f, runy_eff, sprite_eff.getWidth(), sprite_eff.getHeight());
+				spriteBatch.draw(effect.getKeyFrame(deltaTime_eff,false), Constants.VIEWPORT_WIDTH-sprite_eff.getWidth()/1.2f,0);
 			
-			sprite_eff.draw(spriteBatch);
-			runy_eff-=15;
-			
-			if(runy_eff <= 0){
-				sprite_eff.setAlpha(0);
-				if(deltaTime_eff >= 1.5) deltaTime_eff = 0.7f;
-				if(change_eff == false)
-					spriteBatch.draw(effect.getKeyFrame(deltaTime_eff,false), 0,0);
-				else 
-					spriteBatch.draw(effect.getKeyFrame(deltaTime_eff,false), Constants.VIEWPORT_WIDTH-sprite_eff.getWidth()/1.2f,0);
-				
-				if(effect.isAnimationFinished(deltaTime_eff)){
-					runy_eff = Constants.VIEWPORT_HEIGHT;
-					sprite_eff.setAlpha(1);
-					deltaTime_eff = 0f;
-					change_eff = !change_eff;
-				}
+			if(effect.isAnimationFinished(deltaTime_eff)){
+				runy_eff = Constants.VIEWPORT_HEIGHT;
+				sprite_eff.setAlpha(1);
+				deltaTime_eff = 0f;
+				change_eff = !change_eff;
 			}
-			
-			
-			for(int i = 0;i<=3;i++)
-				cage.get(i*2).draw(spriteBatch);
-			
-			//-------------------------------------------------------------------
-			
-			if(location_cursor.x >= cage.get(0).getWidth()/1.5f && location_cursor.x <= Constants.VIEWPORT_WIDTH-cage.get(0).getWidth()/1.5f)
-			{
-				alpha_st = (location_cursor.y <= cage.get(1).getHeight())? 1 : 0;
-				alpha_hw = (location_cursor.y > cage.get(1).getHeight() && location_cursor.y <= cage.get(1).getHeight()*2) ? 1 : 0;
-				alpha_hi = (location_cursor.y > cage.get(1).getHeight()*2 && location_cursor.y <= cage.get(1).getHeight()*3) ? 1 : 0;
-				alpha_cr = (location_cursor.y > cage.get(1).getHeight()*3 && location_cursor.y <= cage.get(1).getHeight()*4) ? 1 : 0;
-			}
-			else
-			{
-				alpha_st = 0;	alpha_hw = 0;	alpha_hi = 0;	alpha_cr = 0;
-			}
-			
-			setRenderMenu(1,0,alpha_st);
-			setRenderMenu(3,2,alpha_hw);
-			setRenderMenu(5,4,alpha_hi);
-			setRenderMenu(7,6,alpha_cr);
-			
-			
 		}
-		if(alpha_st == 1 && Gdx.input.isButtonPressed(Input.Buttons.LEFT) || menu_to_selectStage == false){
-			menu_to_selectStage = false;
-			renderSelectStage(false);
+		
+		
+		for(int i = 0;i<=3;i++)
+			cage.get(i*2).draw(spriteBatch);
+		
+		//-------------------------------------------------------------------
+		
+		if(location_cursor.x >= cage.get(0).getWidth()/1.5f && location_cursor.x <= Constants.VIEWPORT_WIDTH-cage.get(0).getWidth()/1.5f)
+		{
+			alpha_st = (location_cursor.y <= cage.get(1).getHeight())? 1 : 0;
+			alpha_hw = (location_cursor.y > cage.get(1).getHeight() && location_cursor.y <= cage.get(1).getHeight()*2) ? 1 : 0;
+			alpha_hi = (location_cursor.y > cage.get(1).getHeight()*2 && location_cursor.y <= cage.get(1).getHeight()*3) ? 1 : 0;
+			alpha_cr = (location_cursor.y > cage.get(1).getHeight()*3 && location_cursor.y <= cage.get(1).getHeight()*4) ? 1 : 0;
 		}
-
-		if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
-			start_to_menu = true;
-			renderStartGame(deltaTime,false);
+		else
+		{
+			alpha_st = 0;	alpha_hw = 0;	alpha_hi = 0;	alpha_cr = 0;
 		}
+		
+		setRenderMenu(1,0,alpha_st);
+		setRenderMenu(3,2,alpha_hw);
+		setRenderMenu(5,4,alpha_hi);
+		setRenderMenu(7,6,alpha_cr);
+		
+		Gdx.input.setInputProcessor(new InputAdapter() {
+		    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		        if (button == Buttons.LEFT&& alpha_st == 1) {
+		        	gsm.setState(new SelectStage(gsm));
+		        }
+				return false;
+		    }
+		});
+		
+		
+		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))
+			gsm.setState(new StartGame(gsm,false));
+		
 	}
 	
 	public void createSelectStage(){
-		for(int i = 0;i <= 5;i++)	arr_select.add(new Sprite(new Texture(Gdx.files.internal("selectStage/stage"+(i+1)+".png"))));
+		for(int i = 0;i <= 9;i++)	arr_select.add(new Sprite(new Texture(Gdx.files.internal("selectStage/stage"+(i+1)+".png"))));
 		
-		for(int i = 0;i <= 4 ;i++)	{
-			arr_select.get(i).setBounds(index_x, 0, arr_select.get(0).getWidth(), arr_select.get(0).getHeight());
-			index_x += arr_select.get(0).getWidth();
+		for(int i = 0;i <= 4;i++){
+			arr_select.get(i).setBounds(index_x, 0, arr_select.get(1).getWidth(), arr_select.get(1).getHeight());
+			index_x += arr_select.get(1).getWidth();
 		}
+		
 	}
-	public void renderSelectStage(boolean check){
-		if(menu_to_selectStage == false || check == true){
-			Gdx.gl.glClearColor(0, 0, 0, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	public void renderSelectStage(){
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		for(int i=0;i<=4;i++)	arr_select.get(i).draw(spriteBatch);
+		
+		for(int i=1;i<=clear_stage;i++){
 			
-			for(int i=0;i<=4;i++)	arr_select.get(i).draw(spriteBatch);
-			
-			for(int i=1;i<=5;i++){
+			if(location_cursor.x > 205*(i-1) &&location_cursor.x <= 205*i){
+				alpha_star = 1;
+				arr_select.get(9).setBounds(205*(i-1), 0, arr_select.get(0).getWidth(), arr_select.get(0).getHeight());
+				arr_select.get(9).setAlpha(alpha_star);
+				arr_select.get(9).draw(spriteBatch);
+				stage = i;
 				
-				if(location_cursor.x > 205*(i-1) &&location_cursor.x <= 205*i){
-					arr_select.get(5).setBounds(205*(i-1), 0, arr_select.get(0).getWidth(), arr_select.get(0).getHeight());
-					arr_select.get(5).setAlpha(1);
-					arr_select.get(5).draw(spriteBatch);
-					
-					if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-						if(i==1)	gsm.setState(new ProjectTwin(gsm));
-					}
-				}
-				else
-					arr_select.get(5).setAlpha(0);
+				Gdx.input.setInputProcessor(new InputAdapter() {
+				    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+				        if (button == Buttons.LEFT && alpha_star == 1) {
+				        	gsm.setState(new ProjectTwin(gsm,SelectStage.stage));
+				        }
+						return false;
+				    }
+				});
+				
 			}
+			else{
+				alpha_star = 0f;
+				arr_select.get(9).setAlpha(alpha_star);
+			}
+				
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))		
+			gsm.setState(new MenuState(gsm));
+		
+			
+		
+		for(int i=5;i<=8;i++){
+			index_x = 0;
+			for(int j = 1;j<=5;j++){
+				arr_select.get(i).setPosition(index_x, 0);
+				index_x+=arr_select.get(0).getWidth();
+				spriteBatch.begin();
+				arr_select.get(i).draw(spriteBatch);
+				spriteBatch.end();
+			}
+			if(i >= 6 )	arr_select.get(i).setAlpha(0);
+//			if((i >= 7 || i == 5) && count_star == 1)	arr_select.get(i).setAlpha(0);
+//			if((i == 8 || i <= 6)&& count_star == 2)	arr_select.get(i).setAlpha(0);
+//			if(i <= 7 && count_star == 3)	arr_select.get(i).setAlpha(0);
+			
 		}
 	}
 

@@ -105,6 +105,7 @@ public class GameCore implements ApplicationListener {
 	public OrthographicCamera getCamera() { return camera; }
 	public OrthographicCamera getHUDCamera() { return hudCam; }
 	
+	
 	public void resize(int w, int h) {}
 	public void pause() {}
 	public void resume() {}
