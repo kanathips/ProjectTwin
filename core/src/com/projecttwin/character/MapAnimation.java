@@ -2,17 +2,12 @@ package com.projecttwin.character;
 
 import java.util.TreeMap;
 
-<<<<<<< HEAD
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-=======
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
->>>>>>> origin/master
 
 public class MapAnimation {
 
@@ -28,16 +23,11 @@ public class MapAnimation {
 	private void init() {
 		textureTree.put("switchOff", new Sprite(atlas.findRegion("switch0")));
 		textureTree.put("switchOn", new Sprite(atlas.findRegion("switch1")));
-<<<<<<< HEAD
-=======
-		textureTree.put("star", new Sprite(atlas.findRegion("star")));
->>>>>>> origin/master
 	}
 
 	public TreeMap<String, Sprite> getTexture() {
 		return textureTree;
 	}
-<<<<<<< HEAD
 
 	public TreeMap<String, Animation> getAnimation() {
 		TreeMap<String, Animation> animations = new TreeMap<String, Animation>();
@@ -69,6 +59,4 @@ public class MapAnimation {
 
 		return animations;
 	}
-=======
->>>>>>> origin/master
 }

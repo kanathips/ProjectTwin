@@ -29,10 +29,6 @@ import com.projecttwin.utils.Pair;
 public class GateButtonBuilder {
 
 	private TiledMap tiledMap;
-<<<<<<< HEAD
-=======
-	private short mapCategory;
->>>>>>> origin/master
 	private World world;
 	private String layer;
 	protected static float ppt = 0;
@@ -40,16 +36,9 @@ public class GateButtonBuilder {
 	protected static Vector2 position;
 	protected static ArrayList<TreeMap<String, Object>> renderShape;
 
-<<<<<<< HEAD
 	public GateButtonBuilder(TiledMap tiledMap, float ppt, World world, String layer) {
 		GateButtonBuilder.ppt = ppt;
 		this.tiledMap = tiledMap;
-=======
-	public GateButtonBuilder(TiledMap tiledMap, float ppt, World world, String layer, short mapCategory) {
-		GateButtonBuilder.ppt = ppt;
-		this.tiledMap = tiledMap;
-		this.mapCategory = mapCategory;
->>>>>>> origin/master
 		this.world = world;
 		this.layer = layer;
 		renderShape = new ArrayList<TreeMap<String, Object>>();
@@ -161,16 +150,12 @@ public class GateButtonBuilder {
 	 * @return Pair of body array first is gate body, second is button body
 	 */
 	public Pair<Array<Body>, Array<Body>> buildShapes() {
-<<<<<<< HEAD
 		MapObjects objects;
 		try {
 			objects = tiledMap.getLayers().get(layer).getObjects();
 		} catch (NullPointerException e) {
 			return null;
 		}
-=======
-		MapObjects objects = tiledMap.getLayers().get(layer).getObjects();
->>>>>>> origin/master
 		Array<Body> buttonBodies = new Array<Body>();
 		Array<Body> gateBodies = new Array<Body>();
 
@@ -183,10 +168,6 @@ public class GateButtonBuilder {
 			FixtureDef fdef = new FixtureDef();
 			fdef.density = 1;
 			fdef.shape = shape;
-<<<<<<< HEAD
-=======
-			fdef.filter.categoryBits = mapCategory;
->>>>>>> origin/master
 			BodyDef bd = new BodyDef();
 			bd.type = BodyType.StaticBody;
 			if (name.equals("button")) {
@@ -196,6 +177,8 @@ public class GateButtonBuilder {
 			data.put("name", name);
 			data.put("link", (String) object.getProperties().get("link"));
 			data.put("status", (String) object.getProperties().get("status"));
+			if(name.equals("button"))
+				data.put("condition", (String) object.getProperties().get("condition"));
 			body.createFixture(fdef).setUserData(data);
 			body.setUserData(data);
 			// set name and category to physic body

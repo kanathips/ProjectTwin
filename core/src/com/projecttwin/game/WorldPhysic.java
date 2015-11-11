@@ -77,42 +77,22 @@ public class WorldPhysic implements Disposable {
 		playerBody = WorldController.getPlayer().getBody(world, WorldController.getPlayerSprite());
 		playerForce = new PlayerForce(world);
 		forceBody = playerForce.getPlayerForce(playerBody.getPosition());
-<<<<<<< HEAD
 //		try {
 			// create map
 			mapBodyBuilder = new MapBodyBuilder(worldController.getTiledMap(), Constants.ppm, world, "unwalkable");
 			mapBody = mapBodyBuilder.buildShapes();
 			// create box
 			boxBuilder = new ObjectBuilder(worldController.getTiledMap(), 100, world, "box");
-=======
-		try {
-			// create map
-			mapBodyBuilder = new MapBodyBuilder(worldController.getTiledMap(), Constants.ppm, world, "unwalkable",
-					Constants.MAP_CATEGORY);
-			mapBody = mapBodyBuilder.buildShapes();
-			// create box
-			boxBuilder = new ObjectBuilder(worldController.getTiledMap(), 100, world, "box", Constants.OBJECT_CATEGORY);
->>>>>>> origin/master
 			boxBodys = boxBuilder.buildShapes();
 			sensorBuilder = new MapSensorBuilder(worldController.getTiledMap(), Constants.ppm, world, "sensor");
 			sensorBody = sensorBuilder.buildShapes();
 			// create button
-<<<<<<< HEAD
 			gateButtonBuilder = new GateButtonBuilder(worldController.getTiledMap(), Constants.ppm, world, "button");
 			renderShape = gateButtonBuilder.getRenderShape();
 			gateButtonBody = gateButtonBuilder.buildShapes();
 //		} catch (NullPointerException e) {
 //			Gdx.app.debug(TAG, "World Physic have an error on create map");
 //		}
-=======
-			gateButtonBuilder = new GateButtonBuilder(worldController.getTiledMap(), Constants.ppm, world, "button",
-					Constants.MAP_CATEGORY);
-			renderShape = gateButtonBuilder.getRenderShape();
-			gateButtonBody = gateButtonBuilder.buildShapes();
-		} catch (NullPointerException e) {
-			Gdx.app.debug(TAG, "World Physic have an error on create map");
-		}
->>>>>>> origin/master
 		worldController.setWorldPhysic(this);
 		powercallBack = new QueryPowerCallBack();
 		doorControll = new DoorControll(this);
@@ -169,7 +149,6 @@ public class WorldPhysic implements Disposable {
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scl(Constants.ppm);
 		debugRenderer.render(world, debugMatrix);
 	}
-<<<<<<< HEAD
 	
 	public void updateStar(){
 		for(Body b : Constants.collectedStarBody){
@@ -190,15 +169,5 @@ public class WorldPhysic implements Disposable {
 		sensorBuilder.dispose();
 		world.dispose();
 	}
-=======
-
-	public void dispose() {
-		mapBodyBuilder.dispose();
-		boxBuilder.dispose();
-		gateButtonBuilder.dispose();
-		sensorBuilder.dispose();
-		world.dispose();
-	}
->>>>>>> origin/master
 
 }

@@ -138,11 +138,6 @@ public class Player implements Disposable {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1;
-<<<<<<< HEAD
-=======
-		fixtureDef.filter.categoryBits = Constants.CHARACTER_CATEGORY;
-		fixtureDef.filter.maskBits = ~Constants.CHARACTER_CATEGORY;
->>>>>>> origin/master
 		data.put("name", "player");
 		body.createFixture(fixtureDef).setUserData(data);
 		body.setBullet(true);

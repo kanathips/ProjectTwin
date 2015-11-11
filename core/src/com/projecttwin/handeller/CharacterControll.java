@@ -9,6 +9,10 @@ import com.projecttwin.utils.Constants;
 
 public class CharacterControll extends WorldController {
 
+	public CharacterControll(int stage) {
+		super(stage);
+	}
+
 	// move player character
 	public static void walk(float walkSpeed) {
 		if (getPlayerState() == State.STANDING || getPlayerState() == State.WALKING) {

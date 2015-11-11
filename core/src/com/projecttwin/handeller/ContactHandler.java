@@ -36,20 +36,13 @@ import com.projecttwin.utils.Pair;
 public class ContactHandler extends WorldController implements ContactListener {
 
 	private String TAG = "ContactHandler Class";
-<<<<<<< HEAD
 	public static Array<Contact> doorContact;
 	int currentTarget = 0;
-=======
-	 public static Array<Contact> doorContact;
-	// public static Array<String> doorEContact;
-
->>>>>>> origin/master
 	/**
 	 * Initial
 	 */
-	public ContactHandler() {
-		// doorBContact = new Array<String>();
-		// doorEContact = new Array<String>();
+	public ContactHandler(int i) {
+		super(i);
 		WorldPhysic.world.setContactListener(this);
 	}
 
@@ -68,7 +61,6 @@ public class ContactHandler extends WorldController implements ContactListener {
 	public void beginContact(Contact contact) {
 		Fixture objectA = contact.getFixtureA();
 		Fixture objectB = contact.getFixtureB();
-<<<<<<< HEAD
 		TreeMap<String, String> dataA = (TreeMap<String, String>) objectA.getUserData();
 		TreeMap<String, String> dataB = (TreeMap<String, String>) objectB.getUserData();
 		Pair<Boolean, Body> focusTarget;
@@ -79,16 +71,6 @@ public class ContactHandler extends WorldController implements ContactListener {
 				Constants.collectedStarBody.add(focusTarget.getSecond());
 				Constants.collectedStarNumber++;
 			}
-=======
-		
-		Pair<Boolean, Body> focusTarget;
-		Body focusBody;
-		try {
-			/*
-			 * Check an player at the ground event and change state to STANDING
-			 */
-
->>>>>>> origin/master
 			if (checkAlotThing("playerSensor", Constants.floor, objectA, objectB)) {
 				getPlayer().setAtGround(true);
 				Player.setState(State.STANDING);
@@ -98,7 +80,6 @@ public class ContactHandler extends WorldController implements ContactListener {
 				Constants.gameOver = true;
 				return;
 			}
-<<<<<<< HEAD
 			try {
 				if (dataA.get("color").equals(dataB.get("color"))) {
 					if (dataA.get("name").equals("ball") && dataB.get("name").equals("target")) {
@@ -116,11 +97,6 @@ public class ContactHandler extends WorldController implements ContactListener {
 				}
 			} catch (NullPointerException e) {
 
-=======
-
-			if (checkAlotThing("playerSensor", Constants.dead, objectA, objectB)) {
-				Constants.gameOver = true;
->>>>>>> origin/master
 			}
 
 			// check that player or object on spring or not
@@ -135,10 +111,7 @@ public class ContactHandler extends WorldController implements ContactListener {
 				} else
 					focusBody
 							.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed() * 4));
-<<<<<<< HEAD
 				return;
-=======
->>>>>>> origin/master
 			}
 
 			// //check power area is contact on object or not
@@ -148,10 +121,7 @@ public class ContactHandler extends WorldController implements ContactListener {
 				focusBody.setLinearVelocity(new Vector2(0, 0));
 				focusBody.setGravityScale(0);
 				focusBody.setAngularVelocity(0);
-<<<<<<< HEAD
 				return;
-=======
->>>>>>> origin/master
 			}
 		} catch (NullPointerException e) {
 			Gdx.app.debug("#" + Constants.no + " " + TAG,
@@ -176,29 +146,9 @@ public class ContactHandler extends WorldController implements ContactListener {
 	public void endContact(Contact contact) {
 		Fixture objectA = contact.getFixtureA();
 		Fixture objectB = contact.getFixtureB();
-		// TreeMap<String, String> userDataA = (TreeMap<String, String>)
-		// objectA.getUserData();
-		// TreeMap<String, String> userDataB = (TreeMap<String, String>)
-		// objectB.getUserData();
 		Pair<Boolean, Body> focusTarget;
 		Body focusBody;
 		try {
-<<<<<<< HEAD
-=======
-			// if (userDataA.get("name").equals("button")) {
-			// for (String s : doorBContact) {
-			// if (s.equals(userDataA.get("link")))
-			// doorBContact.removeValue(s, false);
-			// }
-			// doorEContact.add(userDataA.get("link"));
-			// } else if (userDataB.get("name").equals("button")) {
-			// for (String s : doorEContact) {
-			// if (s.equals(userDataB.get("link")))
-			// doorBContact.removeValue(s, false);
-			// }
-			// doorEContact.add(userDataA.get("link"));
-			// }
->>>>>>> origin/master
 			focusTarget = checkAlotThing("spring", Constants.jumpable, objectA, objectB, true);
 			focusBody = focusTarget.getSecond();
 			if (focusTarget.getFirst()) {
@@ -210,10 +160,7 @@ public class ContactHandler extends WorldController implements ContactListener {
 				} else
 					focusBody
 							.setLinearVelocity(new Vector2(focusBody.getLinearVelocity().x, Player.getMovespeed() * 4));
-<<<<<<< HEAD
 				return;
-=======
->>>>>>> origin/master
 			}
 
 			focusTarget = checkAlotThing("power", Constants.forceable, objectA, objectB, true);
@@ -221,10 +168,7 @@ public class ContactHandler extends WorldController implements ContactListener {
 			if (focusTarget.getFirst()) {
 				focusBody.setGravityScale(1);
 				focusBody.setAngularVelocity(1);
-<<<<<<< HEAD
 				return;
-=======
->>>>>>> origin/master
 			}
 		} catch (NullPointerException e) {
 			Gdx.app.debug("#" + Constants.no + " " + TAG,
@@ -290,20 +234,12 @@ public class ContactHandler extends WorldController implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-<<<<<<< HEAD
 		
-=======
-		WorldPhysic.world.getContactList().removeValue(contact, true);
->>>>>>> origin/master
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-<<<<<<< HEAD
 
-=======
-		WorldPhysic.world.getContactList().removeValue(contact, true);
->>>>>>> origin/master
 	}
 
 }

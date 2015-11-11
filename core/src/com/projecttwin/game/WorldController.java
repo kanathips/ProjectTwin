@@ -10,10 +10,7 @@ import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.handeller.Timer;
 import com.projecttwin.utils.Assets;
 import com.projecttwin.utils.Constants;
-<<<<<<< HEAD
 import com.projecttwin.utils.XmlLoader;
-=======
->>>>>>> origin/master
 
 /**
  * This class is initial starter instants and create object in this game
@@ -41,10 +38,6 @@ public class WorldController implements Disposable {
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
-<<<<<<< HEAD
-	private int stateId = 1;
-=======
->>>>>>> origin/master
 
 	public Timer getTimer() {
 		return timer;
@@ -79,6 +72,7 @@ public class WorldController implements Disposable {
 	}
 
 	private Timer timer;
+	private int stage;
 
 	public WorldPhysic getWorldPhysic() {
 		return worldPhysic;
@@ -104,7 +98,8 @@ public class WorldController implements Disposable {
 		WorldController.tiledMapRenderer = tiledMapRenderer;
 	}
 
-	public WorldController() {
+	public WorldController(int stage) {
+		this.stage = stage;
 		init();
 	}
 
@@ -117,11 +112,21 @@ public class WorldController implements Disposable {
 		startPlayerWidth = playerSprite.getWidth();
 		setTimer(new Timer(180));
 		getTimer().start();
-<<<<<<< HEAD
-		tiledMap = new TmxMapLoader().load("maps/map1.tmx");
-=======
-		tiledMap = new TmxMapLoader().load("untitled.tmx");
->>>>>>> origin/master
+		switch(stage){
+			case 1:
+				tiledMap = new TmxMapLoader().load("maps/map1.tmx");
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				tiledMap = new TmxMapLoader().load("maps/map5.tmx");
+				break;
+		}
+		
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
@@ -130,28 +135,25 @@ public class WorldController implements Disposable {
 			player.setPowerType(Constants.powerType);
 		CharacterControll.updatePlayer(deltaTime);
 		if (getTimer().hasCompleted()) {
-			Constants.gameOver = true;
-<<<<<<< HEAD
 			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
-			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stateId, "highscore"))) {
-				xmlLoader.setData(stateId, "highscore", String.format("%d", getTimer().getTimeLeft()));
+			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stage, "highscore"))) {
+				xmlLoader.setData(stage, "highscore", String.format("%d", getTimer().getTimeLeft()));
 				xmlLoader.saveData();
 			}
+			Constants.gameOver = true;
 		}
 		if (Constants.gameFinished) {
 			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
-			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stateId, "highscore"))) {
-				xmlLoader.setData(stateId, "highscore", String.format("%d", getTimer().getTimeLeft()));
+			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stage, "highscore"))) {
+				xmlLoader.setData(stage, "highscore", String.format("%d", getTimer().getTimeLeft()));
 				xmlLoader.saveData();
 			}
 			try {
-				xmlLoader.setData(stateId + 1, "unlock", "true");
+				xmlLoader.setData(stage + 1, "unlock", "true");
 			} catch (Exception e) {
 
 			}
 			xmlLoader.saveData();
-=======
->>>>>>> origin/master
 		}
 	}
 

@@ -122,11 +122,7 @@ public class MenuState extends GameState{
 		
 		Gdx.input.setInputProcessor(new InputAdapter() {
 		    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-<<<<<<< HEAD
 		        if (button == Buttons.LEFT&& alpha_st == 1) {//
-=======
-		        if (button == Buttons.LEFT) {//&& alpha_st == 1
->>>>>>> origin/master
 		        	gsm.setState(new SelectStage(gsm));
 		        }
 				return false;

@@ -24,19 +24,12 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-<<<<<<< HEAD
 import com.projecttwin.utils.Constants;
-=======
->>>>>>> origin/master
 import com.projecttwin.utils.Pair;
 
 public class MapSensorBuilder {
 
 	private TiledMap tiledMap;
-<<<<<<< HEAD
-=======
-	private short mapCategory;
->>>>>>> origin/master
 	private World world;
 	private String layer;
 	protected static float ppt = 0;
@@ -138,7 +131,6 @@ public class MapSensorBuilder {
 			if (shape == null)
 				continue;
 
-<<<<<<< HEAD
         	FixtureDef fdef = new FixtureDef();
             fdef.density = 1;
             fdef.shape = shape;
@@ -153,21 +145,6 @@ public class MapSensorBuilder {
             }
             body.createFixture(fdef).setUserData(data);
             body.setUserData(data);
-=======
-			FixtureDef fdef = new FixtureDef();
-			fdef.density = 1;
-			fdef.isSensor = true;
-			fdef.shape = shape;
-			fdef.filter.categoryBits = mapCategory;
-			BodyDef bd = new BodyDef();
-			bd.type = BodyType.StaticBody;
-			Body body = world.createBody(bd);
-			data.put("name", name);
-			body.createFixture(fdef).setUserData(data);
-			body.setUserData(data);
-			// set name and category to physic body
-			// use in contact handler and filter
->>>>>>> origin/master
 			Bodies.add(new Pair<Body, Vector2>(body, position));
 			shape.dispose();
 		}

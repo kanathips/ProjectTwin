@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="24">
+ <tileset firstgid="1" name="scifi_platformTiles_32x32" tilewidth="16" tileheight="16" tilecount="3220">
+  <image source="scifi_platformTiles_32x32.png" width="1120" height="736"/>
+ </tileset>
+ <tileset firstgid="3221" name="Tile" tilewidth="16" tileheight="16" tilecount="960">
+  <image source="Tile.png" width="640" height="384"/>
+ </tileset>
+ <layer name="forge" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztl0lOw0AQRUuJhASKvWMeJEYJ9rBnvAXsGe/CkCzgOHAFhiRASAjsGdf8jUWr5E63I4Ox+E96KrmdLle77I4sQgghhBBCCCGEEEIIIYQQQgj57zSL6XgJr+A1vIFVWIP1DnNaxaxXL3LaI3IW4wksw4rlvM3jhHOzpoEaHmATtuAjbMMarMNbNR73+6rSnHsH7y3z2o71TwYiU3AazsBZOBf8zn0hhPxd9N5ASCdeSiKv8A2+G/EDfpbi58zjuVqwPFvdntPPra4nSX1JGMa1RuAoHDPiOJzI8P3R9fxUfcvIsQJX4ZoR1+FGhuu31ZV2fdvIsQN34Z4R9+FBhuu31ZV2fXntfxRd+4SLvPY/iq59QnNeELkofB/nvf+uqOnFt3Wf8X3t6v8TfPaMtjGtTz7f/rui7f89iq79NQhFwtAv2sa0PvnS6n8/HICDcMg4jt4P1/66iFqWQr9oG9P65Eur/93etzKswE3UshX6RduY1iffIa59lEL/vwCsqv6o
+  </data>
+ </layer>
+ <objectgroup name="box">
+  <object id="1" name="box" x="304" y="416" width="32" height="32"/>
+  <object id="20" name="ball" x="176" y="544" width="32" height="32">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="unwalkable">
+  <object id="4" name="floor" x="256" y="768">
+   <polyline points="0,0 0,-176 -128,-176 -128,-48 -256,-48 -256,-768 768,-768 768,-112 640,-112 640,-176 416,-176 416,-160 480,-160 480,0"/>
+  </object>
+  <object id="5" name="floor" x="336" y="592" width="32" height="16"/>
+  <object id="6" name="floor" x="448" y="592" width="32" height="16"/>
+  <object id="7" name="floor" x="560" y="592" width="32" height="16"/>
+  <object id="8" name="floor" x="848" y="480" width="96" height="16"/>
+  <object id="9" name="floor" x="960" y="544" width="64" height="16"/>
+  <object id="11" name="floor" x="224" y="448" width="512" height="48"/>
+  <object id="23" name="spring" x="672" y="144">
+   <polyline points="0,0 -128,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="sensor">
+  <object id="16" name="acid" x="256" y="720">
+   <polyline points="0,0 480,0"/>
+  </object>
+  <object id="17" name="target" x="944" y="608" width="48" height="48">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

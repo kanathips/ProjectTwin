@@ -22,11 +22,6 @@ public class StartGame extends GameState implements EventListener{
 	private boolean signal_load;
 	private float deltaTime;
 	
-<<<<<<< HEAD
-=======
-	private Include_gameState include_gameState;
-	
->>>>>>> origin/master
 	private Texture background;
 	private TextureRegion current_start;
 	private TextureRegion current_load;
@@ -51,13 +46,6 @@ public class StartGame extends GameState implements EventListener{
 	@Override
 	public void create() {
 		
-<<<<<<< HEAD
-=======
-		include_gameState = new Include_gameState(gsm, spriteBatch, location_cursor, signal_load, camera);
-		include_gameState.create();
-		
-		
->>>>>>> origin/master
 		atlas = new TextureAtlas("Decoration/pack/start_menu.atlas");
 		sprite_circle = new Array<Sprite>();
 		
@@ -106,7 +94,6 @@ public class StartGame extends GameState implements EventListener{
 		
 		spriteBatch.setProjectionMatrix(camera.combined);
 		
-<<<<<<< HEAD
 		spriteBatch.begin();
 	
 //		if(signal_load){
@@ -145,53 +132,6 @@ public class StartGame extends GameState implements EventListener{
 		Gdx.input.setInputProcessor(new InputAdapter() {
 		    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		        if (button == Buttons.LEFT) {//T&& alpha_lo == 1
-=======
-
-		
-		
-		spriteBatch.begin();
-		
-//		include_gameState.renderStartGame(deltaTime);
-//		include_gameState.renderMenuState(deltaTime);
-//		include_gameState.renderSelectStage();
-		
-//		if(signal_load){
-//			spriteBatch.draw(effect_ligh.getKeyFrame(deltaTime,true), 0,Constants.VIEWPORT_HEIGHT/2.5f,1024,250);
-//			bg_load.draw(spriteBatch);
-//			current_load = load.getKeyFrame(deltaTime,true);	
-//			spriteBatch.draw(current_load,Constants.VIEWPORT_WIDTH-current_load.getRegionWidth(),0,
-//					current_load.getRegionWidth()*1.2f,current_load.getRegionHeight()*1.2f);
-//			timer_load += 0.005;
-//		}
-//		
-//		if(timer_load >= 1 || signal_load == false){
-//			bg_load.setAlpha(0);
-//			spriteBatch.draw(background, 0,0,Constants.VIEWPORT_WIDTH,Constants.VIEWPORT_HEIGHT);
-//				
-//			alpha_lo+= 0.005;
-//			if(alpha_lo >= 1)	alpha_lo = 1;
-//			sprite_logo.setAlpha(alpha_lo);
-//			sprite_logo.draw(spriteBatch);
-//				
-//				
-//			current_start = start.getKeyFrame(deltaTime,true);
-//			if(alpha_lo == 1)					
-//			spriteBatch.draw(current_start,Constants.VIEWPORT_WIDTH/1.5f,0,	//Constants.VIEWPORT_HEIGHT/8f
-//					current_start.getRegionWidth()/1.6f,current_start.getRegionHeight()/1.6f);
-//				
-//			sprite_circle.get(0).rotate(10);
-//			sprite_circle.get(0).draw(spriteBatch);
-//			
-//			sprite_circle.get(1).rotate(5);
-//			sprite_circle.get(1).draw(spriteBatch);
-//				
-//			timer_load=1;
-//		}
-//		
-		Gdx.input.setInputProcessor(new InputAdapter() {
-		    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		        if (button == Buttons.LEFT) {//&& alpha_lo == 1
->>>>>>> origin/master
 		        	gsm.setState(new MenuState(gsm));
 		        }
 				return false;

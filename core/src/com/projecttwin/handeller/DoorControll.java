@@ -13,40 +13,27 @@ public class DoorControll {
 	private HashMap<Body, Integer> command;
 	private Array<Body> gateBodies;
 	private Array<Body> buttonBodies;
-<<<<<<< HEAD
 	private boolean doNotDo;
 	@SuppressWarnings("unchecked")
 	public DoorControll(WorldPhysic worldPhysic) {
 		command = new HashMap<Body, Integer>();
 		doNotDo = false;
 		try{
-=======
-
-	@SuppressWarnings("unchecked")
-	public DoorControll(WorldPhysic worldPhysic) {
-		command = new HashMap<Body, Integer>();
->>>>>>> origin/master
 		gateBodies = worldPhysic.gateButtonBody.getFirst();
 		buttonBodies = worldPhysic.gateButtonBody.getSecond();
 		for (Body b : buttonBodies) {
 			TreeMap<String, String> data = (TreeMap<String, String>) b.getUserData();
-			command.put(b, Integer.parseInt(data.get("status")));
+			command.put(b, Integer.parseInt(data.get("status")) * Integer.parseInt(data.get("condition")));
 		}
-<<<<<<< HEAD
 		}catch(NullPointerException e){
 			doNotDo = true;
 		}
-=======
->>>>>>> origin/master
 	}
 
 	@SuppressWarnings("unchecked")
 	public void checkDoor() {
-<<<<<<< HEAD
 		if(doNotDo)
 			return;
-=======
->>>>>>> origin/master
 		Body button = null;
 		// Trigger = -1 mean button is not press
 		// Trigger = 1 mean button is press
@@ -60,9 +47,10 @@ public class DoorControll {
 				continue;
 			if (userDataB.get("name").equals("button")) {
 				button = fixtureB.getBody();
-				if (!userDataA.get("name").equals("floor") && !userDataA.get("name").equals("power")
-						&& !userDataA.get("name").equals("playerSensor")) {
-					trigger = -1;
+				if (!userDataA.get("name").equals("floor") && !userDataA.get("name").equals("power")) {
+					trigger = -1 * Integer.parseInt(userDataB.get("condition"));
+				} else {
+					trigger = 1 * Integer.parseInt(userDataB.get("condition"));
 				}
 				command.put(button, trigger);
 
@@ -80,7 +68,9 @@ public class DoorControll {
 			}
 		}
 		for (Body b : buttonBodies) {
-			command.put(b, 1);
+			TreeMap<String, String> data = (TreeMap<String, String>) b.getUserData();
+			int condition = Integer.parseInt(data.get("condition"));
+			command.put(b, 1 * condition);
 		}
 	}
 

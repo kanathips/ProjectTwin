@@ -49,12 +49,8 @@ public class InputHandler implements InputProcessor {
 	public void updateKey() {
 		if (keyPressing.get("UP")) {
 			for (Contact c : WorldPhysic.world.getContactList())
-<<<<<<< HEAD
 //				System.out.print("[ " + c.getFixtureA().getUserData() + " " + c.getFixtureB().getUserData() + "] ");
 				System.out.println(Constants.collectedStarNumber);
-=======
-				System.out.print("[ " + c.getFixtureA().getUserData() + " " + c.getFixtureB().getUserData() + "] ");
->>>>>>> origin/master
 			System.out.println();
 		}
 		if (keyPressing.get("W") && !Constants.power) {

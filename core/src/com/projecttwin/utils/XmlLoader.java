@@ -1,6 +1,5 @@
 package com.projecttwin.utils;
 
-<<<<<<< HEAD
 import java.io.File;
 import java.util.TreeMap;
 
@@ -16,16 +15,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-=======
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import java.io.File;
-import java.util.TreeMap;
->>>>>>> origin/master
 
 public class XmlLoader {
 
@@ -34,7 +23,6 @@ public class XmlLoader {
 	private String tag;
 	private NodeList nList;
 
-<<<<<<< HEAD
 	/**
 	 * 
 	 * @param addr
@@ -42,19 +30,13 @@ public class XmlLoader {
 	 * @param tag
 	 * 			tag to read
 	 */
-=======
->>>>>>> origin/master
 	public XmlLoader(String addr, String tag) {
 		this.addr = addr;
 		this.tag = tag;
 		init();
 	}
 
-<<<<<<< HEAD
 	private void init() {
-=======
-	public void init() {
->>>>>>> origin/master
 		try {
 			File fXmlFile = new File(addr);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -66,7 +48,6 @@ public class XmlLoader {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * get data of specific id by dataTag
@@ -74,9 +55,6 @@ public class XmlLoader {
 	 * @param dataTag
 	 * @return data of specific id
 	 */
-=======
-
->>>>>>> origin/master
 	public String getData(Integer id, String dataTag) {
 		String data = null;
 		for (int i = 0; i < nList.getLength(); i++) {
@@ -89,16 +67,12 @@ public class XmlLoader {
 		}
 		return data;
 	}
-<<<<<<< HEAD
 	/**
 	 * get data of specific id by dataTag array
 	 * @param id
 	 * @param dataTag
 	 * @return Map of data
 	 */
-=======
-
->>>>>>> origin/master
 	public TreeMap<String, String> getData(Integer id, String[] dataTag) {
 		TreeMap<String, String> data = new TreeMap<String, String>();
 		for (int i = 0; i < nList.getLength(); i++) {
@@ -112,7 +86,6 @@ public class XmlLoader {
 		}
 		return data;
 	}
-<<<<<<< HEAD
 	
 	public void setData(Integer id, String dataTag, String setData){
 		for(int i = 0; i < nList.getLength(); i++){
@@ -140,6 +113,4 @@ public class XmlLoader {
 			e.printStackTrace();
 		}
 	}
-=======
->>>>>>> origin/master
 }

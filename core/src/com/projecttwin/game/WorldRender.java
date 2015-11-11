@@ -46,17 +46,12 @@ public class WorldRender implements Disposable {
 	private OrthographicCamera hudCam;
 	private TreeMap<String, Sprite> hudTexture;
 	private TreeMap<String, Sprite> mapTexture;
-<<<<<<< HEAD
 	private TreeMap<String, Animation> mapAnimation;
 	private Array<TreeMap<String, Object>> targetAnimation;
 	private float trigger;
 	private static Array<Sprite> ballSprites;
 	private boolean doNotBox;
 	private boolean doNotButton;
-=======
-	private Array<Sprite> starSprites;
-	private static float degreePosition = 0;
->>>>>>> origin/master
 
 	public WorldRender(WorldController worldController, WorldPhysic worldPhysic) {
 		this.worldController = worldController;
@@ -69,10 +64,7 @@ public class WorldRender implements Disposable {
 	 */
 
 	private void init() {
-<<<<<<< HEAD
 		doNotBox = false;
-=======
->>>>>>> origin/master
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 		camera.update();
@@ -87,12 +79,8 @@ public class WorldRender implements Disposable {
 		img.setSize(worldPhysic.playerForce.getRadius() * 2, worldPhysic.playerForce.getRadius() * 2);
 		hudTexture = Assets.instance.getHud().getTexture();
 		mapTexture = Assets.instance.getMapAnimation().getTexture();
-<<<<<<< HEAD
 		mapAnimation = Assets.instance.getMapAnimation().getAnimation();
 		targetAnimation = getTarget(worldPhysic.sensorBody);
-=======
-		starSprites = getStarSprite(worldPhysic.sensorBody);
->>>>>>> origin/master
 		int lineWidth = 5; // pixels
 		Gdx.gl.glLineWidth(lineWidth / camera.zoom);
 	}
@@ -103,9 +91,7 @@ public class WorldRender implements Disposable {
 	public void render(float deltaTime) {
 		renderMap();
 		renderForce(deltaTime);
-		renderGate(worldPhysic.renderShape, worldPhysic.gateButtonBody.getSecond());
 		renderObject();
-<<<<<<< HEAD
 		renderHud();
 //		worldPhysic.render(batch);
 		renderTarget(deltaTime);
@@ -117,11 +103,6 @@ public class WorldRender implements Disposable {
 			Constants.no++;
 			doNotButton = true;
 		}
-=======
-		// worldPhysic.render(batch);
-		renderHud();
-		renderStar(deltaTime);
->>>>>>> origin/master
 	}
 
 	public void renderHud() {
@@ -138,20 +119,14 @@ public class WorldRender implements Disposable {
 				sprite.draw(batch);
 				batch.end();
 			}
-<<<<<<< HEAD
 
 		}
-=======
-		}
-
->>>>>>> origin/master
 	}
 
 	public void renderObject() {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		WorldController.getPlayerSprite().draw(batch);
-<<<<<<< HEAD
 		int boxNo = 0, ballNo = 0;
 		for (Body b : WorldPhysic.boxBodys) {
 			TreeMap<String, String> data = (TreeMap<String, String>) b.getUserData();
@@ -171,19 +146,9 @@ public class WorldRender implements Disposable {
 			for (Body b : worldPhysic.gateButtonBody.getSecond()) {
 				updateButton(b).draw(batch);
 			}
-=======
-		for (int i = 0; i < boxSprite.size; i++) {
-			updateBoxposition(boxSprite.get(i), WorldPhysic.boxBodys.get(i));
-			boxSprite.get(i).draw(batch);
->>>>>>> origin/master
-		}
-		for (Body b : worldPhysic.gateButtonBody.getSecond()) {
-			updateButton(b).draw(batch);
-			;
 		}
 		batch.end();
 
-<<<<<<< HEAD
 	}
 
 	private void updateBallPosition(Sprite sprite, Body body) {
@@ -191,8 +156,6 @@ public class WorldRender implements Disposable {
 				Constants.metersToPixels(body.getPosition().y) - sprite.getHeight() / 2);
 		sprite.setRotation((float) Math.toDegrees(body.getAngle()));
 
-=======
->>>>>>> origin/master
 	}
 
 	/**
@@ -204,12 +167,9 @@ public class WorldRender implements Disposable {
 	}
 
 	public Sprite updateButton(Body b) {
-<<<<<<< HEAD
 		if (doNotButton) {
 			return null;
 		}
-=======
->>>>>>> origin/master
 		@SuppressWarnings("unchecked")
 		TreeMap<String, String> data = (TreeMap<String, String>) b.getUserData();
 		Sprite sprite = null;
@@ -265,15 +225,11 @@ public class WorldRender implements Disposable {
 			img.draw(batch);
 			batch.end();
 			if (Constants.haveObjectinPower) {
-<<<<<<< HEAD
 				if (PlayerForce.checkPosition(Constants.bodyInPower, new Vector2(Constants.clickX, Constants.clickY),
 						Constants.powerType))
 					shapeRenderer.setColor(Color.BLUE);
 				else
 					shapeRenderer.setColor(Color.RED);
-=======
-				shapeRenderer.setColor(0, 0, 255, 1);
->>>>>>> origin/master
 				shapeRenderer.begin(ShapeType.Line);
 				shapeRenderer.line(new Vector2(Constants.clickX, Constants.clickY),
 						Constants.metersToPixels(Constants.bodyInPower.getPosition()));
@@ -282,7 +238,6 @@ public class WorldRender implements Disposable {
 		}
 	}
 
-<<<<<<< HEAD
 	public Array<Sprite> getBoxSprite(Array<Body> bodys) {
 		if (bodys == null) {
 			doNotBox = true;
@@ -301,24 +256,10 @@ public class WorldRender implements Disposable {
 						Constants.metersToPixels(y) - sprite.getHeight() / 2);
 				boxSprites.add(sprite);
 			}
-=======
-	public Array<Sprite> getBoxSprite(Array<Body> bodyArray) {
-		Box box = Assets.instance.getBox();
-		Array<Sprite> boxSprites = new Array<Sprite>();
-		for (Body b : bodyArray) {
-			Sprite sprite = new Sprite(box.boxTextute);
-			float x = b.getPosition().x;
-			float y = b.getPosition().y;
-			sprite.setOriginCenter();
-			sprite.setPosition(Constants.metersToPixels(x) - sprite.getWidth() / 2,
-					Constants.metersToPixels(y) - sprite.getHeight() / 2);
-			boxSprites.add(sprite);
->>>>>>> origin/master
 		}
 		return boxSprites;
 	}
 
-<<<<<<< HEAD
 	public Array<Sprite> getBallSprites(Array<Body> bodys) {
 		TreeMap<String, Sprite> ballTextures = Assets.instance.getBall().getTexture();
 		Array<Sprite> ballSprites = new Array<Sprite>();
@@ -348,9 +289,6 @@ public class WorldRender implements Disposable {
 			doNotButton = true;
 			return;
 		}
-=======
-	public Sprite renderGate(ArrayList<TreeMap<String, Object>> shape, Array<Body> bodys) {
->>>>>>> origin/master
 		shapeRenderer.begin(ShapeType.Line);
 		TreeMap<String, String> linkStatus = new TreeMap<String, String>();
 		for (Body b : bodys) {
@@ -389,24 +327,16 @@ public class WorldRender implements Disposable {
 			}
 		}
 		shapeRenderer.end();
-<<<<<<< HEAD
 	}
 
 	private void updateBoxPosition(Sprite sprite, Body body) {
 		if (doNotBox)
 			return;
-=======
-		return null;
-	}
-
-	private void updateBoxposition(Sprite sprite, Body body) {
->>>>>>> origin/master
 		sprite.setPosition(Constants.metersToPixels(body.getPosition().x) - sprite.getWidth() / 2,
 				Constants.metersToPixels(body.getPosition().y) - sprite.getHeight() / 2);
 		sprite.setRotation((float) Math.toDegrees(body.getAngle()));
 	}
 
-<<<<<<< HEAD
 	public Array<TreeMap<String, Object>> getTarget(Array<Pair<Body, Vector2>> sensorBody) {
 		Array<TreeMap<String, Object>> returnObject = new Array<TreeMap<String, Object>>();
 		for (Pair<Body, Vector2> b : sensorBody) {
@@ -440,42 +370,5 @@ public class WorldRender implements Disposable {
 			}
 		}
 
-=======
-	public Array<Sprite> getStarSprite(Array<Pair<Body, Vector2>> sensorBody) {
-		Array<Sprite> starSprites = new Array<Sprite>();
-		Sprite starTexture = mapTexture.get("star");
-		for (Pair<Body, Vector2> b : sensorBody) {
-			Body body = b.getFirst();
-			Vector2 position = b.getSecond();
-			TreeMap<String, String> data = (TreeMap<String, String>) body.getUserData();
-			if (data.get("name").equals("star")) {
-				Sprite sprite = new Sprite(starTexture);
-				float x = position.x;
-				float y = position.y;
-				sprite.setOriginCenter();
-				sprite.setPosition(Constants.metersToPixels(x) - sprite.getWidth() / 2,
-						Constants.metersToPixels(y) - sprite.getHeight() / 2);
-				starSprites.add(sprite);
-			}
-		}
-		return starSprites;
-	}
-
-	public void updateStarSprite(Sprite sprite, float degreePosition) {
-		final float shakeAmplitudeInDegrees = 5.0f;
-		float shake = MathUtils.sin(degreePosition) * shakeAmplitudeInDegrees;
-		sprite.setRotation(shake);
-	}
-
-	public void renderStar(float deltaTime) {
-		float degressPerSecond = 10.0f;
-		degreePosition = (degreePosition + deltaTime * degressPerSecond) % 360;
-		batch.begin();
-		for (Sprite s : starSprites) {
-			updateStarSprite(s, degreePosition);
-			s.draw(batch);
-		}
-		batch.end();
->>>>>>> origin/master
 	}
 }

@@ -21,10 +21,7 @@ public class PlayerForce {
 	private final float max_radius = 200;
 	private final float increate_rate = 2;
 	private TreeMap<String, String> data;
-<<<<<<< HEAD
 	public static boolean fire = false;
-=======
->>>>>>> origin/master
 	public PlayerForce(World world) {
 		this.world = world;
 		data = new TreeMap<String, String>();
@@ -105,18 +102,13 @@ public class PlayerForce {
 	 *            if mode true = pull mode otherwise push
 	 */
 	public static void applyPowerToObject(Body object, Vector2 destination, int powerType) {
-<<<<<<< HEAD
 		fire = false;
-=======
-		boolean fire = false;
->>>>>>> origin/master
 		double degree = Constants.getAngle(new Vector2(Constants.metersToPixels(object.getPosition().x),
 				Constants.metersToPixels(object.getPosition().y)), destination);
 		double xPow = Constants.metersToPixels((float) Math.cos(Math.toRadians(degree)) * 0.5f);
 		double yPow = Constants.metersToPixels((float) Math.sin(Math.toRadians(degree)) * 0.5f);
 
 		// push = 0 pull = 1
-<<<<<<< HEAD
 		if (checkPosition(object, destination, powerType))
 			object.applyForce((float) xPow, (float) yPow, object.getPosition().x, Constants.bodyInPower.getPosition().y,
 					true);
@@ -141,21 +133,4 @@ public class PlayerForce {
 		}
 		return fire;
 	}
-=======
-		if (powerType == 0) {
-			if (!(body.getPosition().x < object.getPosition().x) && degree < 270 && degree > 90) {
-				fire = true;
-			} else if (!(body.getPosition().x > object.getPosition().x) && degree > 270 || degree < 90)
-				fire = true;
-		} else if (powerType == 1) {
-			if (!(body.getPosition().x > object.getPosition().x) && degree < 270 && degree > 90)
-				fire = true;
-			else if (!(body.getPosition().x < object.getPosition().x) && degree > 270 || degree < 90)
-				fire = true;
-		}
-		if (fire)
-			object.applyForce((float) xPow, (float) yPow, object.getPosition().x, Constants.bodyInPower.getPosition().y,
-					true);
-	}
->>>>>>> origin/master
 }
