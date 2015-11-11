@@ -43,11 +43,14 @@ public class Constants {
 	public static int powerType;
 	public static boolean gameOver;
 	public static String[] dead;
+<<<<<<< HEAD
 	public static Array<Body> collectedStarBody;
 	public static int collectedStarNumber;
 	public static Array<Body> finishTarget;
 	public static int target;
 	public static boolean gameFinished;
+=======
+>>>>>>> origin/master
 
 	/**
 	 * Pixel to Meter converter
@@ -89,6 +92,10 @@ public class Constants {
 		if (angle < 0) {
 			angle += 360;
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		return angle;
 	}
 
@@ -101,6 +108,7 @@ public class Constants {
 		clickedRight = false;
 		power = false;
 		gameOver = false;
+<<<<<<< HEAD
 		floor = new String[] { "floor", "box", "button", "gate", "ball" };
 		jumpable = new String[] { "playerSensor", "box", "ball" };
 		forceable = new String[] { "box", "ball" };
@@ -112,6 +120,14 @@ public class Constants {
 		collectedStarBody = new Array<Body>();
 		collectedStarNumber = 0;
 		finishTarget = new Array<Body>();
+=======
+		floor = new String[] { "floor", "box", "button", "gate" };
+		jumpable = new String[] { "playerSensor", "box" };
+		forceable = new String[] { "box" };
+		dead = new String[] { "acid", "sprike" };
+		no = 0;
+		button = 0;
+>>>>>>> origin/master
 		haveObjectinPower = false;
 		powerType = 1;
 	}

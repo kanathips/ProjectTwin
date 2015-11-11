@@ -17,17 +17,35 @@ public class MapBodyBuilder extends AbstractMapBuilder {
 
 	// The pixels per tile. If your tiles are 16x16, this is set to 16f
 
+<<<<<<< HEAD
+=======
+	private short mapCategory;
+>>>>>>> origin/master
 	private TiledMap tiledMap;
 	private World world;
 	private String layer;
 
+<<<<<<< HEAD
 	public MapBodyBuilder(TiledMap tiledMap, float ppt, World world, String layer) {
 		super(ppt);
 		this.tiledMap = tiledMap;
+=======
+	public MapBodyBuilder(TiledMap tiledMap, float ppt, World world, String layer, short mapCategory) {
+		super(ppt);
+		this.tiledMap = tiledMap;
+		this.mapCategory = mapCategory;
+>>>>>>> origin/master
 		this.world = world;
 		this.layer = layer;
 	}
 
+<<<<<<< HEAD
+=======
+	public void setMapCategory(short mapCategory) {
+		this.mapCategory = mapCategory;
+	}
+
+>>>>>>> origin/master
 	public void setTiledMap(TiledMap tiledMap) {
 		this.tiledMap = tiledMap;
 	}
@@ -51,6 +69,10 @@ public class MapBodyBuilder extends AbstractMapBuilder {
 			fdef.density = 1;
 			fdef.shape = shape;
 			fdef.restitution = 0.3f;
+<<<<<<< HEAD
+=======
+			fdef.filter.categoryBits = mapCategory;
+>>>>>>> origin/master
 			BodyDef bd = new BodyDef();
 			bd.type = BodyType.StaticBody;
 			Body body = world.createBody(bd);

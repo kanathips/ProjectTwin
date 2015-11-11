@@ -13,27 +13,40 @@ public class DoorControll {
 	private HashMap<Body, Integer> command;
 	private Array<Body> gateBodies;
 	private Array<Body> buttonBodies;
+<<<<<<< HEAD
 	private boolean doNotDo;
 	@SuppressWarnings("unchecked")
 	public DoorControll(WorldPhysic worldPhysic) {
 		command = new HashMap<Body, Integer>();
 		doNotDo = false;
 		try{
+=======
+
+	@SuppressWarnings("unchecked")
+	public DoorControll(WorldPhysic worldPhysic) {
+		command = new HashMap<Body, Integer>();
+>>>>>>> origin/master
 		gateBodies = worldPhysic.gateButtonBody.getFirst();
 		buttonBodies = worldPhysic.gateButtonBody.getSecond();
 		for (Body b : buttonBodies) {
 			TreeMap<String, String> data = (TreeMap<String, String>) b.getUserData();
 			command.put(b, Integer.parseInt(data.get("status")));
 		}
+<<<<<<< HEAD
 		}catch(NullPointerException e){
 			doNotDo = true;
 		}
+=======
+>>>>>>> origin/master
 	}
 
 	@SuppressWarnings("unchecked")
 	public void checkDoor() {
+<<<<<<< HEAD
 		if(doNotDo)
 			return;
+=======
+>>>>>>> origin/master
 		Body button = null;
 		// Trigger = -1 mean button is not press
 		// Trigger = 1 mean button is press

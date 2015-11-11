@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.projecttwin.game.ProjectTwin;
+<<<<<<< HEAD
 import com.projecttwin.utils.Constants;
+=======
+>>>>>>> origin/master
 
 
 public class SelectStage extends GameState{
@@ -18,8 +21,15 @@ public class SelectStage extends GameState{
 	private float index_x=0f;
 	private float alpha_star=0f;
 	private int clear_stage=1;
+<<<<<<< HEAD
 	public static int stage;
 	
+=======
+	private int count_star=0;
+	public static int stage;
+	
+	
+>>>>>>> origin/master
 	protected SelectStage(GameStateManager gsm) {
 		super(gsm);
 		create();
@@ -28,16 +38,23 @@ public class SelectStage extends GameState{
 
 	@Override
 	public void create() {
+<<<<<<< HEAD
 		for(int i = 0;i <= 11;i++)	arr_select.add(new Sprite(new Texture(Gdx.files.internal("selectStage/stage"+(i+1)+".png"))));
+=======
+		for(int i = 0;i <= 9;i++)	arr_select.add(new Sprite(new Texture(Gdx.files.internal("selectStage/stage"+(i+1)+".png"))));
+>>>>>>> origin/master
 		
 		for(int i = 0;i <= 4;i++){
 			arr_select.get(i).setBounds(index_x, 0, arr_select.get(1).getWidth(), arr_select.get(1).getHeight());
 			index_x += arr_select.get(1).getWidth();
 		}
 		
+<<<<<<< HEAD
 		arr_select.get(5).setBounds(0, 0, arr_select.get(5).getWidth(), arr_select.get(5).getHeight());
 		arr_select.get(7).setBounds(arr_select.get(1).getWidth()*3, 0, arr_select.get(5).getWidth(), arr_select.get(5).getHeight());
 		arr_select.get(8).setBounds(arr_select.get(1).getWidth()*4, 0, arr_select.get(5).getWidth(), arr_select.get(5).getHeight());
+=======
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -78,6 +95,7 @@ public class SelectStage extends GameState{
 		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))		
 			gsm.setState(new MenuState(gsm));
 		
+<<<<<<< HEAD
 		
 		spriteBatch.end();
 		
@@ -102,6 +120,26 @@ public class SelectStage extends GameState{
 			index_x+=arr_select.get(0).getWidth();
 		}
 			
+=======
+			
+		spriteBatch.end();
+		
+		for(int i=5;i<=8;i++){
+			index_x = 0;
+			for(int j = 1;j<=5;j++){
+				arr_select.get(i).setPosition(index_x, 0);
+				index_x+=arr_select.get(0).getWidth();
+				spriteBatch.begin();
+				arr_select.get(i).draw(spriteBatch);
+				spriteBatch.end();
+			}
+			if(i >= 6 )	arr_select.get(i).setAlpha(0);
+//			if((i >= 7 || i == 5) && count_star == 1)	arr_select.get(i).setAlpha(0);
+//			if((i == 8 || i <= 6)&& count_star == 2)	arr_select.get(i).setAlpha(0);
+//			if(i <= 7 && count_star == 3)	arr_select.get(i).setAlpha(0);
+			
+		}
+>>>>>>> origin/master
 	}
 
 	@Override

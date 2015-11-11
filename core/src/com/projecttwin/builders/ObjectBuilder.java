@@ -29,11 +29,21 @@ public class ObjectBuilder {
 	private TiledMap tiledMap;
 	private World world;
 	private String layer;
+<<<<<<< HEAD
 	private Vector2 position;
 
 	public ObjectBuilder(TiledMap tiledMap, float ppt, World world, String layer) {
 		ObjectBuilder.ppt = ppt;
 		this.tiledMap = tiledMap;
+=======
+	private short category;
+	private Vector2 position;
+
+	public ObjectBuilder(TiledMap tiledMap, float ppt, World world, String layer, short category) {
+		ObjectBuilder.ppt = ppt;
+		this.tiledMap = tiledMap;
+		this.category = category;
+>>>>>>> origin/master
 		this.world = world;
 		this.layer = layer;
 	}
@@ -51,15 +61,23 @@ public class ObjectBuilder {
 			FixtureDef fdef = new FixtureDef();
 			fdef.density = 1;
 			fdef.shape = shape;
+<<<<<<< HEAD
+=======
+			fdef.filter.categoryBits = category;
+>>>>>>> origin/master
 			BodyDef bd = new BodyDef();
 			bd.type = BodyType.DynamicBody;
 			bd.position.set(position);
 			Body body = world.createBody(bd);
 			data.put("name", name);
+<<<<<<< HEAD
 			if(name.equals("ball"))
 				data.put("color", (String) object.getProperties().get("color"));
 			body.createFixture(fdef).setUserData(data);
 			body.setUserData(data);
+=======
+			body.createFixture(fdef).setUserData(data);
+>>>>>>> origin/master
 
 			// set name and category to physic body
 			// use in contact handler and filter

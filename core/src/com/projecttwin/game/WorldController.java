@@ -10,7 +10,10 @@ import com.projecttwin.handeller.CharacterControll;
 import com.projecttwin.handeller.Timer;
 import com.projecttwin.utils.Assets;
 import com.projecttwin.utils.Constants;
+<<<<<<< HEAD
 import com.projecttwin.utils.XmlLoader;
+=======
+>>>>>>> origin/master
 
 /**
  * This class is initial starter instants and create object in this game
@@ -38,7 +41,10 @@ public class WorldController implements Disposable {
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
+<<<<<<< HEAD
 	private int stateId = 1;
+=======
+>>>>>>> origin/master
 
 	public Timer getTimer() {
 		return timer;
@@ -111,7 +117,11 @@ public class WorldController implements Disposable {
 		startPlayerWidth = playerSprite.getWidth();
 		setTimer(new Timer(180));
 		getTimer().start();
+<<<<<<< HEAD
 		tiledMap = new TmxMapLoader().load("maps/map1.tmx");
+=======
+		tiledMap = new TmxMapLoader().load("untitled.tmx");
+>>>>>>> origin/master
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
@@ -121,6 +131,7 @@ public class WorldController implements Disposable {
 		CharacterControll.updatePlayer(deltaTime);
 		if (getTimer().hasCompleted()) {
 			Constants.gameOver = true;
+<<<<<<< HEAD
 			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
 			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stateId, "highscore"))) {
 				xmlLoader.setData(stateId, "highscore", String.format("%d", getTimer().getTimeLeft()));
@@ -139,6 +150,8 @@ public class WorldController implements Disposable {
 
 			}
 			xmlLoader.saveData();
+=======
+>>>>>>> origin/master
 		}
 	}
 

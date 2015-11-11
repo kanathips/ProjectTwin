@@ -5,75 +5,116 @@ filter: Nearest,Nearest
 repeat: none
 push0
   rotate: false
+<<<<<<< HEAD
   xy: 1, 169
+=======
+  xy: 1, 161
+>>>>>>> origin/master
   size: 72, 86
   orig: 72, 86
   offset: 0, 0
   index: -1
 lock
   rotate: false
+<<<<<<< HEAD
   xy: 75, 177
+=======
+  xy: 75, 169
+>>>>>>> origin/master
   size: 78, 78
   orig: 78, 78
   offset: 0, 0
   index: -1
 unlock
   rotate: false
+<<<<<<< HEAD
   xy: 155, 177
+=======
+  xy: 155, 169
+>>>>>>> origin/master
   size: 78, 78
   orig: 78, 78
   offset: 0, 0
   index: -1
 pull0
   rotate: false
+<<<<<<< HEAD
   xy: 1, 81
+=======
+  xy: 1, 73
+>>>>>>> origin/master
   size: 69, 86
   orig: 69, 86
   offset: 0, 0
   index: -1
 pull1
   rotate: false
+<<<<<<< HEAD
   xy: 235, 169
+=======
+  xy: 235, 161
+>>>>>>> origin/master
   size: 68, 86
   orig: 68, 86
   offset: 0, 0
   index: -1
 push1
   rotate: false
+<<<<<<< HEAD
   xy: 305, 169
+=======
+  xy: 305, 161
+>>>>>>> origin/master
   size: 68, 86
   orig: 68, 86
   offset: 0, 0
   index: -1
 push3
   rotate: false
+<<<<<<< HEAD
   xy: 375, 169
+=======
+  xy: 375, 161
+>>>>>>> origin/master
   size: 67, 86
   orig: 67, 86
   offset: 0, 0
   index: -1
 pull3
   rotate: false
+<<<<<<< HEAD
   xy: 444, 169
+=======
+  xy: 444, 161
+>>>>>>> origin/master
   size: 66, 86
   orig: 66, 86
   offset: 0, 0
   index: -1
 pull2
   rotate: false
+<<<<<<< HEAD
   xy: 512, 169
+=======
+  xy: 512, 161
+>>>>>>> origin/master
   size: 65, 86
   orig: 65, 86
   offset: 0, 0
   index: -1
 push2
   rotate: false
+<<<<<<< HEAD
   xy: 579, 169
+=======
+  xy: 579, 161
+>>>>>>> origin/master
   size: 63, 86
   orig: 63, 86
   offset: 0, 0
   index: -1
 star2
+<<<<<<< HEAD
   rotate: false
   xy: 644, 214
   size: 103, 41
@@ -148,22 +189,58 @@ target11
   xy: 120, 114
   size: 61, 61
   orig: 61, 61
+=======
+  rotate: false
+  xy: 644, 206
+  size: 103, 41
+  orig: 103, 41
+  offset: 0, 0
+  index: -1
+star0
+  rotate: false
+  xy: 644, 164
+  size: 103, 40
+  orig: 103, 40
+  offset: 0, 0
+  index: -1
+star3
+  rotate: false
+  xy: 749, 210
+  size: 103, 37
+  orig: 103, 37
+  offset: 0, 0
+  index: -1
+star1
+  rotate: false
+  xy: 749, 173
+  size: 100, 35
+  orig: 100, 35
+>>>>>>> origin/master
   offset: 0, 0
   index: -1
 sleep1
   rotate: false
+<<<<<<< HEAD
   xy: 183, 105
+=======
+  xy: 1, 1
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 sleep5
   rotate: false
+<<<<<<< HEAD
   xy: 183, 105
+=======
+  xy: 1, 1
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
+<<<<<<< HEAD
 target12
   rotate: false
   xy: 232, 106
@@ -209,10 +286,16 @@ target3
 sleep2
   rotate: false
   xy: 610, 97
+=======
+sleep0
+  rotate: false
+  xy: 50, 1
+>>>>>>> origin/master
   size: 46, 70
   orig: 46, 70
   offset: 0, 0
   index: -1
+<<<<<<< HEAD
 target4
   rotate: false
   xy: 658, 109
@@ -223,6 +306,11 @@ target4
 sleep3
   rotate: false
   xy: 721, 100
+=======
+sleep3
+  rotate: false
+  xy: 854, 177
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
@@ -264,7 +352,11 @@ walk3
   index: -1
 sleep4
   rotate: false
+<<<<<<< HEAD
   xy: 183, 33
+=======
+  xy: 903, 177
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
@@ -278,47 +370,79 @@ target9
   index: -1
 stand
   rotate: false
+<<<<<<< HEAD
   xy: 295, 34
+=======
+  xy: 952, 177
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk0
   rotate: false
+<<<<<<< HEAD
   xy: 295, 34
+=======
+  xy: 952, 177
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
+sleep2
+  rotate: false
+  xy: 72, 89
+  size: 46, 70
+  orig: 46, 70
+  offset: 0, 0
+  index: -1
 walk1
   rotate: false
+<<<<<<< HEAD
   xy: 344, 34
+=======
+  xy: 120, 97
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk10
   rotate: false
+<<<<<<< HEAD
   xy: 393, 34
+=======
+  xy: 169, 97
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk2
   rotate: false
+<<<<<<< HEAD
   xy: 442, 34
+=======
+  xy: 218, 89
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk4
   rotate: false
+<<<<<<< HEAD
   xy: 491, 34
+=======
+  xy: 267, 89
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk6
+<<<<<<< HEAD
   rotate: false
   xy: 540, 34
   size: 47, 70
@@ -328,10 +452,15 @@ walk6
 walk7
   rotate: false
   xy: 589, 25
+=======
+  rotate: false
+  xy: 316, 89
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
+<<<<<<< HEAD
 walk5
   rotate: false
   xy: 638, 25
@@ -342,19 +471,29 @@ walk5
 walk8
   rotate: false
   xy: 959, 104
+=======
+walk7
+  rotate: false
+  xy: 365, 89
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 walk9
   rotate: false
+<<<<<<< HEAD
   xy: 686, 28
+=======
+  xy: 414, 89
+>>>>>>> origin/master
   size: 47, 70
   orig: 47, 70
   offset: 0, 0
   index: -1
 number0
   rotate: false
+<<<<<<< HEAD
   xy: 980, 213
   size: 28, 42
   orig: 28, 42
@@ -449,5 +588,129 @@ number8
   xy: 945, 61
   size: 28, 41
   orig: 28, 41
+=======
+  xy: 463, 89
+  size: 47, 70
+  orig: 47, 70
+  offset: 0, 0
+  index: -1
+walk3
+  rotate: false
+  xy: 512, 89
+  size: 46, 70
+  orig: 46, 70
+  offset: 0, 0
+  index: -1
+walk5
+  rotate: false
+  xy: 560, 89
+  size: 46, 70
+  orig: 46, 70
+>>>>>>> origin/master
+  offset: 0, 0
+  index: -1
+switch0
+  rotate: false
+  xy: 749, 155
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+number0
+  rotate: false
+  xy: 608, 117
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+switch1
+  rotate: false
+  xy: 120, 79
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+ball
+  rotate: false
+  xy: 608, 83
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+number1
+  rotate: false
+  xy: 638, 117
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+number2
+  rotate: false
+  xy: 668, 120
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+number3
+  rotate: false
+  xy: 698, 120
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+Box
+  rotate: false
+  xy: 642, 83
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+number5
+  rotate: false
+  xy: 676, 76
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+number4
+  rotate: false
+  xy: 706, 76
+  size: 26, 42
+  orig: 26, 42
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 815, 141
+  size: 32, 30
+  orig: 32, 30
+  offset: 0, 0
+  index: -1
+number6
+  rotate: false
+  xy: 186, 53
+  size: 28, 42
+  orig: 28, 42
+  offset: 0, 0
+  index: -1
+number7
+  rotate: false
+  xy: 216, 46
+  size: 28, 41
+  orig: 28, 41
+  offset: 0, 0
+  index: -1
+number8
+  rotate: false
+  xy: 246, 46
+  size: 28, 41
+  orig: 28, 41
+  offset: 0, 0
+  index: -1
+number9
+  rotate: false
+  xy: 276, 45
+  size: 28, 42
+  orig: 28, 42
   offset: 0, 0
   index: -1
