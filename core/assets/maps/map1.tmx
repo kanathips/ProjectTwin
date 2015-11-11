@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="18">
+ <tileset firstgid="1" name="decorations-background" tilewidth="16" tileheight="16" tilecount="112">
+  <image source="decorations-background.png" trans="6f6d51" width="224" height="128"/>
+ </tileset>
+ <tileset firstgid="113" name="decorations-foreground" tilewidth="16" tileheight="16" tilecount="256">
+  <image source="decorations-foreground.png" trans="6f6d51" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="369" name="passable-rocks" tilewidth="16" tileheight="16" tilecount="108">
+  <image source="passable-rocks.png" trans="6f6d51" width="144" height="192"/>
+ </tileset>
+ <tileset firstgid="477" name="rocks" tilewidth="16" tileheight="16" tilecount="720">
+  <image source="rocks.png" trans="6f6d51" width="480" height="384"/>
+ </tileset>
+ <tileset firstgid="1197" name="rocks-foreground" tilewidth="16" tileheight="16" tilecount="54">
+  <image source="rocks-foreground.png" trans="6f6d51" width="144" height="96"/>
+ </tileset>
+ <tileset firstgid="1251" name="walls" tilewidth="16" tileheight="16" tilecount="360">
+  <image source="walls.png" trans="6f6d51" width="320" height="288"/>
+ </tileset>
+ <tileset firstgid="1611" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="704">
+  <image source="dirt-tiles.png" trans="6f6d51" width="709" height="256"/>
+ </tileset>
+ <imagelayer name="backGround">
+  <image source="skyBackground.jpg"/>
+ </imagelayer>
+ <layer name="Tile Layer 2" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0rcRAjEYBeE/ugvwtINpBRNBLZiAZrDdYMtgc8gYpED7zWyi4KQ3cxGSJEmSJEmSJEmSJEmSSjSpIqY0o3mV+zXprdi8pg1tC9y/Z/OBjnQqcP+VzTe606PA/Z06oks96te5X5PegM1DGtE40/4z917+dPfuy3cbnDWpRW1a0LL+PE/lyV2vAv89SfrVG946EWs=
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt00sKwjAUQNGMsj83IjgVt+EKCtKp2+jUz3pskVIRGwI2WOI5cKGjpo+8hgAAAAAAAAAAsD5NDGH7Vhd//VWwrMZe/x13Xqd9fHaJ0/PYofL7vvXznRK1Fc8/zH7vOyc6Fpz/dc82H3ZviebemzP7OP+3Z839X6m9K901Y/ahXcFvyDlfUp09AHAtHPo=
+  </data>
+ </layer>
+ <objectgroup name="sensor">
+  <object id="3" name="target" x="880" y="480" width="32" height="32">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+  </object>
+  <object id="4" name="target" x="32" y="656" width="32" height="32">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="box">
+  <object id="6" name="ball" x="880" y="624" width="32" height="32">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="8" name="ball" x="320" y="624" width="32" height="32">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="unwalkable">
+  <object id="14" name="floor" x="752" y="560">
+   <polyline points="0,0 0,16 32,16 32,0 0,0"/>
+  </object>
+  <object id="15" name="floor" x="848" y="512">
+   <polyline points="0,0 0,16 96,16 96,0 0,0"/>
+  </object>
+  <object id="16" name="floor" x="720" y="608">
+   <polyline points="0,0 16,0 16,-16 -16,-16 -16,0 0,0"/>
+  </object>
+  <object id="17" name="floor" x="0" y="688">
+   <polyline points="0,0 0,-688 1024,-688 1024,0 672,0 672,-48 544,-48 496,0 0,0"/>
+  </object>
+ </objectgroup>
+</map>

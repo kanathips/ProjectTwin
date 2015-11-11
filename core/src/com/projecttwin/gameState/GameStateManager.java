@@ -3,7 +3,7 @@ package com.projecttwin.gameState;
 import java.util.Stack;
 
 
-public class GameStateManager {
+public class GameStateManager{
 	
 	private GameCore game;
 	

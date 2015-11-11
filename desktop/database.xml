@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><state>
+	<level id="0">
+		<highscore>0</highscore>
+		<unlock>true</unlock>
+	</level>
+	<level id="1">
+		<highscore>162</highscore>
+		<unlock>false</unlock>
+	</level>
+	<level id="2">
+		<highscore>0</highscore>
+		<unlock>true</unlock>
+	</level>
+	<level id="3">
+		<highscore>0</highscore>
+		<unlock>false</unlock>
+	</level>
+	<level id="4">
+		<highscore>0</highscore>
+		<unlock>false</unlock>
+	</level>
+	<level id="5">
+		<highscore>0</highscore>
+		<unlock>false</unlock>
+	</level>
+</state>
