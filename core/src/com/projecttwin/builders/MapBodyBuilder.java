@@ -41,7 +41,6 @@ public class MapBodyBuilder extends AbstractMapBuilder {
 		Array<Body> bodies = new Array<Body>();
 
 		for (MapObject object : objects) {
-			TreeMap<String, String> data = new TreeMap<String, String>();
 			Shape shape = checkShape(object);
 			if (shape == null)
 				continue;
@@ -53,6 +52,7 @@ public class MapBodyBuilder extends AbstractMapBuilder {
 			BodyDef bd = new BodyDef();
 			bd.type = BodyType.StaticBody;
 			Body body = world.createBody(bd);
+			TreeMap<String, String> data = new TreeMap<String, String>();
 			data.put("name", name);
 			body.createFixture(fdef).setUserData(data);
 			body.setUserData(data);

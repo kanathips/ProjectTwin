@@ -55,6 +55,12 @@ public class MapAnimation {
 				k++;
 			}
 		}
+		TextureRegion[] springFrame = new TextureRegion[4];
+		springFrame[0] = new TextureRegion(atlas.findRegion("spring2"));
+		springFrame[1] = new TextureRegion(atlas.findRegion("spring1"));
+		springFrame[2] = new TextureRegion(atlas.findRegion("spring0"));
+		springFrame[3] = new TextureRegion(atlas.findRegion("spring1"));
+		animations.put("spring", new Animation(0.05f, springFrame));
 		animations.put("targetBlue", new Animation(0.1f, targetBlueFrame));
 
 		return animations;

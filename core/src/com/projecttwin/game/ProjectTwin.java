@@ -44,9 +44,17 @@ public class ProjectTwin extends GameState {
 		deltaTime = Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		worldRender.render(deltaTime);
+		if(Constants.gameFinished){
+			renderFinGame();
+		}else{
+			worldRender.render(deltaTime);
+		}
 	}
-
+	
+	public void renderFinGame(){
+		worldController.getTimer().getTimeLeft();
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 		worldRender.resize(width, height);
@@ -65,8 +73,8 @@ public class ProjectTwin extends GameState {
 		if (Constants.gameOver) {
 			create(); // stage
 		}
-		if(Constants.gameFinished){
-			create(); // stage + 1;
+		if(Constants.gameFinished && worldController.saved){
+
 		}
 		worldController.update(deltaTime);
 		worldPhysic.update(deltaTime);

@@ -45,9 +45,21 @@ public class DoorControll {
 			Integer trigger = -1;
 			if (!c.isTouching())
 				continue;
+			
+			if (userDataA.get("name").equals("button")) {
+				button = fixtureA.getBody();
+				if (!userDataB.get("name").equals("floor") && !userDataB.get("name").equals("power") && !userDataB.get("name").equals("player")) {
+					trigger = -1 * Integer.parseInt(userDataA.get("condition"));
+				} else {
+					trigger = 1 * Integer.parseInt(userDataA.get("condition"));
+				}
+				command.put(button, trigger);
+
+			}
+			
 			if (userDataB.get("name").equals("button")) {
 				button = fixtureB.getBody();
-				if (!userDataA.get("name").equals("floor") && !userDataA.get("name").equals("power")) {
+				if (!userDataA.get("name").equals("floor") && !userDataA.get("name").equals("power") && !userDataA.get("name").equals("player")) {
 					trigger = -1 * Integer.parseInt(userDataB.get("condition"));
 				} else {
 					trigger = 1 * Integer.parseInt(userDataB.get("condition"));

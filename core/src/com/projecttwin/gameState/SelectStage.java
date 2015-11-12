@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.projecttwin.game.ProjectTwin;
 import com.projecttwin.utils.Constants;
+import com.projecttwin.utils.XmlLoader;
 
 
 public class SelectStage extends GameState{
@@ -29,6 +30,13 @@ public class SelectStage extends GameState{
 
 	@Override
 	public void create() {
+		XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
+		for(int i = 5; i > 0; i--){
+			if(xmlLoader.getData(i, "unlock").equals("true")){
+				clear_stage = i;
+				break;
+			}
+		}
 		for(int i = 0;i <= 11;i++)	arr_select.add(new Sprite(new Texture(Gdx.files.internal("selectStage/stage"+(i+1)+".png"))));
 		
 		for(int i = 0;i <= 4;i++){

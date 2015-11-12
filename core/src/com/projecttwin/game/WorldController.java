@@ -37,6 +37,7 @@ public class WorldController implements Disposable {
 	public static float startPlayerHeigth;
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
+	public boolean saved;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
 
 	public Timer getTimer() {
@@ -107,27 +108,32 @@ public class WorldController implements Disposable {
 		player = Assets.instance.getPlayer();
 		player.setPowerType(Constants.powerType);
 		playerSprite = new Sprite(player.playerFrame);
-		playerSprite.setPosition(50, 160);
+		playerSprite.setPosition(50, 60);
 		startPlayerHeigth = playerSprite.getHeight();
 		startPlayerWidth = playerSprite.getWidth();
 		setTimer(new Timer(180));
-		getTimer().start();
+		String mapLocation = null;
+		saved = false;
 		switch(stage){
 			case 1:
-				tiledMap = new TmxMapLoader().load("maps/map1.tmx");
+				mapLocation = "maps/map1.tmx";
 				break;
 			case 2:
+				mapLocation = "maps/map2.tmx";
 				break;
 			case 3:
+				mapLocation = "maps/map3.tmx";
 				break;
 			case 4:
+				mapLocation = "maps/map4.tmx";
 				break;
 			case 5:
-				tiledMap = new TmxMapLoader().load("maps/map5.tmx");
+				mapLocation = "maps/map5.tmx";
 				break;
 		}
-		
+		tiledMap = new TmxMapLoader().load(mapLocation);
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+		getTimer().start();
 	}
 
 	public void update(float deltaTime) {
@@ -143,6 +149,7 @@ public class WorldController implements Disposable {
 			Constants.gameOver = true;
 		}
 		if (Constants.gameFinished) {
+			System.out.println("fin stage" + stage);
 			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
 			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stage, "highscore"))) {
 				xmlLoader.setData(stage, "highscore", String.format("%d", getTimer().getTimeLeft()));
@@ -151,9 +158,10 @@ public class WorldController implements Disposable {
 			try {
 				xmlLoader.setData(stage + 1, "unlock", "true");
 			} catch (Exception e) {
-
+				
 			}
 			xmlLoader.saveData();
+			saved = true;
 		}
 	}
 

@@ -103,6 +103,11 @@ public class ContactHandler extends WorldController implements ContactListener {
 			focusTarget = checkAlotThing("spring", Constants.jumpable, objectA, objectB, true);
 			if (focusTarget.getFirst()) {
 				focusBody = focusTarget.getSecond();
+				if(!objectA.equals(focusBody)){
+					dataB.replace("playAnimation", "true");
+				}else if(!objectB.equals(focusBody)){
+					dataA.replace("playAnimation", "true");
+				}
 				if (focusBody.equals(WorldPhysic.playerBody)) {
 					getPlayer().setAtGround(true);
 					getPlayer();

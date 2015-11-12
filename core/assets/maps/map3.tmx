@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="77">
+ <tileset firstgid="1" name="walls" tilewidth="16" tileheight="16" tilecount="360">
+  <image source="walls.png" trans="6f6d51" width="320" height="288"/>
+ </tileset>
+ <tileset firstgid="361" name="decorations-background" tilewidth="16" tileheight="16" tilecount="112">
+  <image source="decorations-background.png" trans="6f6d51" width="224" height="128"/>
+ </tileset>
+ <tileset firstgid="473" name="decorations-foreground" tilewidth="16" tileheight="16" tilecount="256">
+  <image source="decorations-foreground.png" trans="6f6d51" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="729" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="704">
+  <image source="dirt-tiles.png" trans="6f6d51" width="709" height="256"/>
+ </tileset>
+ <tileset firstgid="1433" name="passable-rocks" tilewidth="16" tileheight="16" tilecount="108">
+  <image source="passable-rocks.png" trans="6f6d51" width="144" height="192"/>
+ </tileset>
+ <tileset firstgid="1541" name="rocks" tilewidth="16" tileheight="16" tilecount="720">
+  <image source="rocks.png" trans="6f6d51" width="480" height="384"/>
+ </tileset>
+ <tileset firstgid="2261" name="rocks-foreground" tilewidth="16" tileheight="16" tilecount="54">
+  <image source="rocks-foreground.png" trans="6f6d51" width="144" height="96"/>
+ </tileset>
+ <imagelayer name="Image Layer 1">
+  <image source="Brick-Background.png"/>
+ </imagelayer>
+ <layer name="Tile Layer 1" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt10EOwiAQQFF2dl03xrOiK09RddNTqCfxILpzIcSYmEYIGQYL5r9kEoOxw0wLVGMAAAAAAAAAAAAAAJifXRizyYjWDa6Gm4uzMFrn6z/8QR1SufVL189WkNMGfpezhpedMX33+rwTzOkUWRuPyHcXQa7QvZrOIZY3FHcXo7AHIUfldZX6rEry+mvvC/RAU8m96l1/zT34Vf219qBk/d/2sZXbF68V9YCzmvqpf+5ZpGvp/JeKvXuuO913YV9/n3DNWN7PXFZhbHpuSiL1mdbONSiMtVq/v3/+v0/u2BMfFrM2
+  </data>
+ </layer>
+ <objectgroup name="unwalkable">
+  <object id="60" name="floor" x="0" y="720">
+   <polyline points="0,0 0,48 288,48 288,0 128,0 128,-16 112,-16 112,0 0,0"/>
+  </object>
+  <object id="61" name="floor" x="0" y="544">
+   <polyline points="0,0 0,32 112,32 112,48 128,48 128,32 240,32 240,0 0,0"/>
+  </object>
+  <object id="62" name="floor" x="432" y="544">
+   <polyline points="0,0 32,0 32,176 160,176 160,160 176,160 176,176 288,176 288,224 16,224 0,224 0,0"/>
+  </object>
+  <object id="64" name="floor" x="528" y="576">
+   <polyline points="0,0 0,-32 240,-32 240,-96 496,-96 496,-64 272,-64 272,-32 368,48 384,48 384,64 272,64 272,0 80,0 80,16 64,16 64,0 0,0"/>
+  </object>
+  <object id="65" name="floor" x="1024" y="768">
+   <polyline points="0,0 0,-768 -1024,-768 -1024,-48"/>
+  </object>
+  <object id="67" name="floor" x="736" y="768">
+   <polyline points="0,0 0,-16 16,-16 16,-48 64,-48 64,0"/>
+  </object>
+  <object id="68" name="floor" x="816" y="768">
+   <polyline points="0,0 0,-16 16,-16 16,-48 64,-48 64,0"/>
+  </object>
+  <object id="69" name="floor" x="896" y="768">
+   <polyline points="0,0 0,-16 16,-16 16,-48 64,-48 64,0"/>
+  </object>
+  <object id="70" name="floor" x="976" y="768">
+   <polyline points="0,0 0,-16 16,-16 16,-48 48,-48 48,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="box">
+  <object id="24" name="box" x="128" y="512" width="32" height="32"/>
+  <object id="25" name="ball" x="816" y="400" width="32" height="32">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="73" name="box" x="944" y="432" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="sensor">
+  <object id="38" name="target" x="800" y="512" width="48" height="48">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+  <object id="39" name="acid" x="288" y="736">
+   <polyline points="0,0 144,0"/>
+  </object>
+  <object id="76" name="spring" x="240" y="704" width="48" height="16"/>
+ </objectgroup>
+ <objectgroup name="button">
+  <object id="40" name="button" x="48" y="528" width="48" height="16">
+   <properties>
+    <property name="condition" value="-1"/>
+    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="42" name="gate" x="112" y="592" width="16" height="112">
+   <properties>
+    <property name="link" value="1"/>
+   </properties>
+  </object>
+  <object id="72" name="button" x="656" y="528" width="48" height="16">
+   <properties>
+    <property name="condition" value="-1"/>
+    <property name="link" value="2"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="74" name="gate" x="592" y="592" width="16" height="112">
+   <properties>
+    <property name="link" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
@@ -52,6 +53,8 @@ public class WorldRender implements Disposable {
 	private static Array<Sprite> ballSprites;
 	private boolean doNotBox;
 	private boolean doNotButton;
+	private Array<TreeMap<String, Object>> springAnimations;
+
 
 	public WorldRender(WorldController worldController, WorldPhysic worldPhysic) {
 		this.worldController = worldController;
@@ -81,6 +84,7 @@ public class WorldRender implements Disposable {
 		mapTexture = Assets.instance.getMapAnimation().getTexture();
 		mapAnimation = Assets.instance.getMapAnimation().getAnimation();
 		targetAnimation = getTarget(worldPhysic.sensorBody);
+		springAnimations = getSpringAnimation(worldPhysic.sensorBody);
 		int lineWidth = 5; // pixels
 		Gdx.gl.glLineWidth(lineWidth / camera.zoom);
 	}
@@ -93,7 +97,11 @@ public class WorldRender implements Disposable {
 		renderForce(deltaTime);
 		renderObject();
 		renderHud();
-//		worldPhysic.render(batch);
+		try{
+			renderSpring(deltaTime);
+		}catch(NullPointerException e){
+			
+		}
 		renderTarget(deltaTime);
 		try{
 			if(!doNotButton)
@@ -356,7 +364,7 @@ public class WorldRender implements Disposable {
 		return returnObject;
 	}
 
-	public void renderTarget(float deltaTime) {
+	private void renderTarget(float deltaTime) {
 		trigger += deltaTime;
 		Vector2 position;
 		for (TreeMap<String, Object> a : targetAnimation) {
@@ -369,6 +377,56 @@ public class WorldRender implements Disposable {
 				batch.end();
 			}
 		}
-
+	}
+	
+	private Array<TreeMap<String, Object>> getSpringAnimation(Array<Pair<Body, Vector2>> sensorBody){
+		Array<TreeMap<String, Object>> animation = new Array<TreeMap<String, Object>>();
+		for(Pair<Body, Vector2> b : sensorBody){
+			TreeMap<String, String> bodyData = (TreeMap<String, String>) b.getFirst().getUserData();
+			if(bodyData.get("name").equals("spring")){
+				TreeMap<String, Object> data = new TreeMap<String, Object>();
+				Animation a = mapAnimation.get("spring");
+				data.put("body", b.getFirst());
+				data.put("position", b.getSecond());
+				data.put("animation", a);
+				data.put("time", 0.1f);
+				Sprite sprite = new Sprite(a.getKeyFrame(0.0f));
+				batch.begin();
+				sprite.draw(batch);
+				batch.end();
+				animation.add(data);
+				bodyData.put("playAnimation", "false");
+				b.getFirst().setUserData(bodyData);
+			}
+		}
+		return animation;
+	}
+	
+	public void renderSpring(float deltaTime){
+		for(TreeMap<String, Object> t : springAnimations){
+			Sprite sprite;
+			TreeMap<String, String> data = (TreeMap<String, String>)((Body)t.get("body")).getUserData();
+			if(data.get("playAnimation").equals("true")){
+				Animation a = ((Animation)t.get("animation"));
+				t.replace("time", (Float)t.get("time") + deltaTime);
+				TextureRegion frame = a.getKeyFrame((Float)t.get("time"), false);
+				sprite = new Sprite(frame);
+				Vector2 position = Constants.metersToPixels((Vector2)t.get("position"));
+				sprite.setPosition(position.x, position.y);
+				if(a.isAnimationFinished((Float)t.get("time"))){
+					data.replace("playAnimation", "false");
+					t.replace("time", 0.0f);
+				}
+			}else{
+				Animation a = ((Animation)t.get("animation"));
+				TextureRegion frame = a.getKeyFrame(0.0f, false);
+				sprite = new Sprite(frame);
+				Vector2 position = Constants.metersToPixels((Vector2)t.get("position"));
+				sprite.setPosition(position.x, position.y);
+			}
+			batch.begin();
+			sprite.draw(batch);
+			batch.end();
+		}
 	}
 }

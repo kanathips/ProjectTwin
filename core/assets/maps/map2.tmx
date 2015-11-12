@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="12">
+ <tileset firstgid="1" name="rocks" tilewidth="16" tileheight="16" tilecount="720">
+  <image source="rocks.png" trans="6f6d51" width="480" height="384"/>
+ </tileset>
+ <tileset firstgid="721" name="passable-rocks" tilewidth="16" tileheight="16" tilecount="108">
+  <image source="passable-rocks.png" trans="6f6d51" width="144" height="192"/>
+ </tileset>
+ <tileset firstgid="829" name="rocks" tilewidth="16" tileheight="16" tilecount="720">
+  <image source="rocks.png" trans="6f6d51" width="480" height="384"/>
+ </tileset>
+ <tileset firstgid="1549" name="rocks-foreground" tilewidth="16" tileheight="16" tilecount="54">
+  <image source="rocks-foreground.png" trans="6f6d51" width="144" height="96"/>
+ </tileset>
+ <tileset firstgid="1603" name="scifi_platformTiles_32x32" tilewidth="16" tileheight="16" tilecount="3220">
+  <image source="scifi_platformTiles_32x32.png" trans="6f6d51" width="1120" height="736"/>
+ </tileset>
+ <tileset firstgid="4823" name="Tile" tilewidth="16" tileheight="16" tilecount="960">
+  <image source="Tile.png" trans="6f6d51" width="640" height="384"/>
+ </tileset>
+ <tileset firstgid="5783" name="walls" tilewidth="16" tileheight="16" tilecount="360">
+  <image source="walls.png" trans="6f6d51" width="320" height="288"/>
+ </tileset>
+ <tileset firstgid="6143" name="decorations-background" tilewidth="16" tileheight="16" tilecount="112">
+  <image source="decorations-background.png" trans="6f6d51" width="224" height="128"/>
+ </tileset>
+ <tileset firstgid="6255" name="decorations-foreground" tilewidth="16" tileheight="16" tilecount="256">
+  <image source="decorations-foreground.png" trans="6f6d51" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="6511" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="704">
+  <image source="dirt-tiles.png" trans="6f6d51" width="709" height="256"/>
+ </tileset>
+ <imagelayer name="Image Layer 1">
+  <image source="skyBackground.jpg"/>
+ </imagelayer>
+ <layer name="Tile Layer 2" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1rcRwkAURdEPAa4DSUXgBO1g6gASTIIpRZheIMDVwgsIFCpawe49MzdTsC/5IzMAAAAAAAAAAAAAcGMZma3UWm2isl/j3lGbT+qsLgHuf2jzU73UO8D99disoZqqFZf9Gvf62pyqgRp6sv+qHbeCW0b6bqwmaurJ/kpiVk2KfbvV5p3aq4Mn+wEgb6bbtvg2587hx2UB/ovn3QPb39ZN6qiu6qkaNwr4ex8uoBc0
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1j0OgkAQhuG5xp4SK65hhaWx4BJU9oaW3t4TSMVakGwMZEaW4ATeJ/nKSeYr9kcEAAAAAAAAAAAAAAAAmFcGkauSW1hvzpsi7vhQ0k70WDrnTR13fCppJnosnfOG/sfsP95R1h73JL/MefRO7qiToUcV80pinfPY/9O9j+kM++fGW/+0+9H6b919zf7aP0vLP7qP/XP2PgfbP0vLVuf9O1Xm3pdge2f2mob+MgCLbcc7
+  </data>
+ </layer>
+ <objectgroup name="unwalkable">
+  <object id="1" name="floor" x="0" y="768">
+   <polyline points="0,0 0,-48 272,-48 352,-128 384,-128 384,-208 544,-208 544,-128 608,-128 608,-208 768,-208 768,-48 1024,-48 1024,-768 0,-768 0,-48"/>
+  </object>
+  <object id="6" name="spring" x="352" y="608" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="sensor">
+  <object id="2" name="sprike" x="544" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object id="3" name="target" x="864" y="672" width="48" height="48">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+  </object>
+  <object id="5" name="spring" x="768" y="688" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="button">
+  <object id="9" name="button" x="944" y="704" width="48" height="16">
+   <properties>
+    <property name="condition" value="-1"/>
+    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="11" name="gate" x="32" y="656">
+   <properties>
+    <property name="link" value="1"/>
+   </properties>
+   <polyline points="0,0 32,0 32,-32 0,-32 0,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="box">
+  <object id="8" name="ball" x="48" y="608" width="32" height="32">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

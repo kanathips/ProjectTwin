@@ -77,7 +77,7 @@ public class WorldPhysic implements Disposable {
 		playerBody = WorldController.getPlayer().getBody(world, WorldController.getPlayerSprite());
 		playerForce = new PlayerForce(world);
 		forceBody = playerForce.getPlayerForce(playerBody.getPosition());
-//		try {
+		try {
 			// create map
 			mapBodyBuilder = new MapBodyBuilder(worldController.getTiledMap(), Constants.ppm, world, "unwalkable");
 			mapBody = mapBodyBuilder.buildShapes();
@@ -90,9 +90,9 @@ public class WorldPhysic implements Disposable {
 			gateButtonBuilder = new GateButtonBuilder(worldController.getTiledMap(), Constants.ppm, world, "button");
 			renderShape = gateButtonBuilder.getRenderShape();
 			gateButtonBody = gateButtonBuilder.buildShapes();
-//		} catch (NullPointerException e) {
-//			Gdx.app.debug(TAG, "World Physic have an error on create map");
-//		}
+		} catch (NullPointerException e) {
+			Gdx.app.debug(TAG, "World Physic have an error on create map");
+		}
 		worldController.setWorldPhysic(this);
 		powercallBack = new QueryPowerCallBack();
 		doorControll = new DoorControll(this);
@@ -161,12 +161,8 @@ public class WorldPhysic implements Disposable {
 			b.setActive(false);
 		}
 	}
-
+	
 	public void dispose() {
-		mapBodyBuilder.dispose();
-		boxBuilder.dispose();
-		gateButtonBuilder.dispose();
-		sensorBuilder.dispose();
 		world.dispose();
 	}
 

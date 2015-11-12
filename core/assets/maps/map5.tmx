@@ -18,8 +18,8 @@
  <tileset firstgid="1251" name="walls" tilewidth="16" tileheight="16" tilecount="360">
   <image source="walls.png" trans="6f6d51" width="320" height="288"/>
  </tileset>
- <tileset firstgid="1611" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="384">
-  <image source="dirt-tiles.png" trans="6f6d51" width="384" height="256"/>
+ <tileset firstgid="1611" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="704">
+  <image source="dirt-tiles.png" trans="6f6d51" width="709" height="256"/>
  </tileset>
  <imagelayer name="backGround">
   <image source="forestBackground.png"/>
@@ -92,12 +92,14 @@
   </object>
   <object id="93" name="button" x="766" y="528" width="48" height="16">
    <properties>
+    <property name="condition" value="1"/>
     <property name="link" value="1"/>
     <property name="status" value="-1"/>
    </properties>
   </object>
   <object id="95" name="button" x="960" y="720" width="48" height="16">
    <properties>
+    <property name="condition" value="1"/>
     <property name="link" value="2"/>
     <property name="status" value="-1"/>
    </properties>
