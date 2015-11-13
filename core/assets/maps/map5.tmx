@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="131">
+ <tileset firstgid="1" name="decorations-background" tilewidth="16" tileheight="16" tilecount="112">
+  <image source="decorations-background.png" trans="6f6d51" width="224" height="128"/>
+ </tileset>
+ <tileset firstgid="113" name="decorations-foreground" tilewidth="16" tileheight="16" tilecount="256">
+  <image source="decorations-foreground.png" trans="6f6d51" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="369" name="passable-rocks" tilewidth="16" tileheight="16" tilecount="108">
+  <image source="passable-rocks.png" trans="6f6d51" width="144" height="192"/>
+ </tileset>
+ <tileset firstgid="477" name="rocks" tilewidth="16" tileheight="16" tilecount="720">
+  <image source="rocks.png" trans="6f6d51" width="480" height="384"/>
+ </tileset>
+ <tileset firstgid="1197" name="rocks-foreground" tilewidth="16" tileheight="16" tilecount="54">
+  <image source="rocks-foreground.png" trans="6f6d51" width="144" height="96"/>
+ </tileset>
+ <tileset firstgid="1251" name="walls" tilewidth="16" tileheight="16" tilecount="360">
+  <image source="walls.png" trans="6f6d51" width="320" height="288"/>
+ </tileset>
+ <tileset firstgid="1611" name="dirt-tiles" tilewidth="16" tileheight="16" tilecount="384">
+  <image source="dirt-tiles.png" trans="6f6d51" width="384" height="256"/>
+ </tileset>
+ <imagelayer name="backGround">
+  <image source="forestBackground.png"/>
+ </imagelayer>
+ <layer name="Front" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztl1sOwiAQRUnLt2tQF6L++VhD9c/HknQp6uacJo1pKmAbiwV6TnLTD8KEywxDUQoAAABCpdBK7Rs66KFXBdAfBTUN8MZ2Hjgn4BP+NeKEvgCxYOox9BpIGfrz+CDnkDq8FwAgZgp6VxS43o3kD3zAP7wf6vuayTevpPXneOpMxees0jwAzz733hTb5X8MdRBa/n3gymMb/z7qIJTaSjn/bfa4i/++c7aWWBvRVrT7Me63WLbxofJf3rtH0Ul0Fl1q92/XOLkhVt6QbfxW8381zHOpzXozy7yFaNnQSjTJuskU518q13sXjw+Lnsru8wVCQz0i
+  </data>
+ </layer>
+ <objectgroup name="unwalkable">
+  <object id="40" name="floor" x="0" y="0">
+   <polyline points="0,0 1024,0 1024,768 0,768 0,0"/>
+  </object>
+  <object id="41" name="floor" x="0" y="736">
+   <polyline points="0,0 96,0 96,32"/>
+  </object>
+  <object id="42" name="floor" x="288" y="768">
+   <polyline points="0,0 0,-32 256,-32 256,-160 320,-160 320,-32 512,-32 512,0"/>
+  </object>
+  <object id="45" name="floor" x="928" y="768">
+   <polyline points="0,0 0,-32 96,-32"/>
+  </object>
+  <object id="46" name="floor" x="704" y="544" width="160" height="16"/>
+  <object id="47" name="floor" x="496" y="608" width="32" height="16"/>
+  <object id="48" name="floor" x="464" y="640" width="32" height="16"/>
+  <object id="49" name="floor" x="432" y="672" width="32" height="16"/>
+  <object id="50" name="floor" x="400" y="704" width="32" height="16"/>
+  <object id="51" name="floor" x="720" y="704" width="32" height="16"/>
+  <object id="52" name="floor" x="688" y="672" width="32" height="16"/>
+  <object id="53" name="floor" x="656" y="640" width="32" height="16"/>
+  <object id="54" name="floor" x="624" y="608" width="32" height="16"/>
+  <object id="70" name="floor" x="80" y="256" width="96" height="16"/>
+  <object id="72" name="floor" x="272" y="448" width="96" height="16"/>
+  <object id="73" name="floor" x="478" y="320" width="128" height="16"/>
+  <object id="74" name="floor" x="384" y="400" width="32" height="16"/>
+  <object id="75" name="floor" x="432" y="368" width="32" height="16"/>
+  <object id="78" name="floor" x="96" y="640" width="32" height="16"/>
+  <object id="79" name="floor" x="144" y="592" width="32" height="16"/>
+  <object id="85" name="floor" x="32" y="528" width="64" height="16"/>
+  <object id="98" name="floor" x="0" y="688" width="32" height="16"/>
+  <object id="121" name="floor" x="560" y="160" width="32" height="16"/>
+  <object id="122" name="floor" x="624" y="208" width="32" height="16"/>
+  <object id="123" name="floor" x="672" y="112" width="96" height="16"/>
+  <object id="124" name="floor" x="816" y="272" width="32" height="16"/>
+  <object id="125" name="floor" x="720" y="208" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="box">
+  <object id="56" name="box" x="48" y="496" width="32" height="32"/>
+  <object id="86" name="box" x="768" y="704" width="32" height="32"/>
+  <object id="114" name="ball" x="512" y="288" width="32" height="32">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="120" name="ball" x="688" y="80" width="32" height="32">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="button">
+  <object id="92" name="gate" x="96" y="736">
+   <properties>
+    <property name="link" value="2"/>
+    <property name="status" value="-1"/>
+   </properties>
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object id="93" name="button" x="766" y="528" width="48" height="16">
+   <properties>
+    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="95" name="button" x="960" y="720" width="48" height="16">
+   <properties>
+    <property name="link" value="2"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="96" name="gate" x="176" y="512" width="64" height="16">
+   <properties>
+    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="118" name="gate" x="352" y="256" width="64" height="16">
+   <properties>
+    <property name="link" value="1"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+  <object id="119" name="gate" x="688" y="304" width="64" height="16">
+   <properties>
+    <property name="link" value="2"/>
+    <property name="status" value="-1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="sensor">
+  <object id="102" name="acid" x="96" y="752">
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object id="103" name="sprike" x="797" y="752">
+   <polyline points="0,0 128,0"/>
+  </object>
+  <object id="127" name="target" x="112" y="208" width="48" height="48">
+   <properties>
+    <property name="color" value="purple"/>
+   </properties>
+  </object>
+  <object id="130" name="target" x="544" y="560" width="48" height="48">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

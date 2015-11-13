@@ -1,0 +1,54 @@
+
+eff_menu.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+effs (1)
+  rotate: false
+  xy: 1, 597
+  size: 367, 296
+  orig: 367, 296
+  offset: 0, 0
+  index: -1
+effs (2)
+  rotate: false
+  xy: 1, 299
+  size: 367, 296
+  orig: 367, 296
+  offset: 0, 0
+  index: -1
+effs (4)
+  rotate: false
+  xy: 370, 597
+  size: 367, 296
+  orig: 367, 296
+  offset: 0, 0
+  index: -1
+effs (5)
+  rotate: false
+  xy: 1, 1
+  size: 367, 296
+  orig: 367, 296
+  offset: 0, 0
+  index: -1
+effs (7)
+  rotate: false
+  xy: 370, 299
+  size: 367, 296
+  orig: 367, 296
+  offset: 0, 0
+  index: -1
+effs (3)
+  rotate: false
+  xy: 739, 597
+  size: 366, 296
+  orig: 366, 296
+  offset: 0, 0
+  index: -1
+effs (6)
+  rotate: false
+  xy: 370, 1
+  size: 366, 296
+  orig: 366, 296
+  offset: 0, 0
+  index: -1

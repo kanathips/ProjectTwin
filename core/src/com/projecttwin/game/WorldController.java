@@ -4,49 +4,47 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
-import com.projecttwin.character.Box;
 import com.projecttwin.character.Player;
-import com.projecttwin.character.PlayerForce;
 import com.projecttwin.handeller.CharacterControll;
+import com.projecttwin.handeller.Timer;
 import com.projecttwin.utils.Assets;
-import com.projecttwin.utils.CameraHelper;
 import com.projecttwin.utils.Constants;
+import com.projecttwin.utils.XmlLoader;
+
 /**
  * This class is initial starter instants and create object in this game
- * <p><b>Thing this class do : </b>
- * <p>create player texture
- * <p>create game state
- * <p>something
- * <p>something
+ * <p>
+ * <b>Thing this class do : </b>
+ * <p>
+ * create player texture
+ * <p>
+ * create game state
+ * <p>
+ * something
+ * <p>
+ * something
+ * 
  * @author NewWy
  *
  */
-public class WorldController implements Disposable{
+public class WorldController implements Disposable {
 	public static final String TAG = WorldController.class.getName();
-	private static CameraHelper cameraHelper;
-	protected StageLevel level;
 	private static Sprite playerSprite;
 	private static Sprite[] boxSprites;
 	private static Player player;
-	private static Box box;
 	public static float startPlayerWidth;
 	public static float startPlayerHeigth;
 	private static WorldPhysic worldPhysic;
 	private static TiledMap tiledMap;
 	private static OrthogonalTiledMapRenderer tiledMapRenderer;
-	
-	public enum StageLevel{
-		INTRO, ONE, TWO, THREE, FOUR, FIVE;
-	}
-	
-	public static CameraHelper getCameraHelper() {
-		return cameraHelper;
+
+	public Timer getTimer() {
+		return timer;
 	}
 
-	public static void setCameraHelper(CameraHelper cameraHelper) {
-		WorldController.cameraHelper = cameraHelper;
+	public void setTimer(Timer timer) {
+		this.timer = timer;
 	}
 
 	public static Sprite getPlayerSprite() {
@@ -73,13 +71,8 @@ public class WorldController implements Disposable{
 		WorldController.player = player;
 	}
 
-	public static Box getBox() {
-		return box;
-	}
-
-	public static void setBox(Box box) {
-		WorldController.box = box;
-	}
+	private Timer timer;
+	private int stage;
 
 	public WorldPhysic getWorldPhysic() {
 		return worldPhysic;
@@ -105,46 +98,67 @@ public class WorldController implements Disposable{
 		WorldController.tiledMapRenderer = tiledMapRenderer;
 	}
 
-
-	
-	public WorldController(){
+	public WorldController(int stage) {
+		this.stage = stage;
 		init();
 	}
-	
-	public void init(){
-		level = StageLevel.INTRO;
+
+	public void init() {
 		player = Assets.instance.getPlayer();
-		
+		player.setPowerType(Constants.powerType);
 		playerSprite = new Sprite(player.playerFrame);
 		playerSprite.setPosition(50, 160);
 		startPlayerHeigth = playerSprite.getHeight();
 		startPlayerWidth = playerSprite.getWidth();
+		setTimer(new Timer(180));
+		getTimer().start();
+		switch(stage){
+			case 1:
+				tiledMap = new TmxMapLoader().load("maps/map1.tmx");
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				tiledMap = new TmxMapLoader().load("maps/map5.tmx");
+				break;
+		}
 		
-		box = Assets.instance.getBox();
-		boxSprites = new Sprite[3];
-		for(int i = 0; i < boxSprites.length; i++){
-			boxSprites[i] = new Sprite(box.boxTextute);
-			float randomX = MathUtils.random(100, Constants.VIEWPORT_WIDTH - 100);
-			float randomY = MathUtils.random(100, Constants.VIEWPORT_HEIGHT - 100);
-			boxSprites[i].setOriginCenter();
-			boxSprites[i].setPosition(randomX, randomY);
-		}		
-		
-		cameraHelper = new CameraHelper();
-		cameraHelper.setTarget(playerSprite);
-		tiledMap = new TmxMapLoader().load("Testing_map.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);       
-	}
-	
-	public void update(float deltaTime){
-			
-		cameraHelper.update();
-		CharacterControll.updateBox();
-		CharacterControll.updatePlayer(deltaTime);
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 	}
 
-	public void dispose(){
+	public void update(float deltaTime) {
+		if (!Constants.power)
+			player.setPowerType(Constants.powerType);
+		CharacterControll.updatePlayer(deltaTime);
+		if (getTimer().hasCompleted()) {
+			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
+			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stage, "highscore"))) {
+				xmlLoader.setData(stage, "highscore", String.format("%d", getTimer().getTimeLeft()));
+				xmlLoader.saveData();
+			}
+			Constants.gameOver = true;
+		}
+		if (Constants.gameFinished) {
+			XmlLoader xmlLoader = new XmlLoader("database.xml", "level");
+			if (getTimer().getTimeLeft() > Integer.parseInt(xmlLoader.getData(stage, "highscore"))) {
+				xmlLoader.setData(stage, "highscore", String.format("%d", getTimer().getTimeLeft()));
+				xmlLoader.saveData();
+			}
+			try {
+				xmlLoader.setData(stage + 1, "unlock", "true");
+			} catch (Exception e) {
+
+			}
+			xmlLoader.saveData();
+		}
+	}
+
+	public void dispose() {
 		player.dispose();
 	}
-	
+
 }

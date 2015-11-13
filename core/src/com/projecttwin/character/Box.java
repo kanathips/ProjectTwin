@@ -1,45 +1,21 @@
 package com.projecttwin.character;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.projecttwin.utils.Constants;
 
 public class Box {
 	public TextureRegion boxTextute;
-	public static float torque = 0.0f;
-	
-	public Box(TextureAtlas atlas){
-		boxTextute = atlas.findRegion("Box");
-	}
-	
-	public Body[] initBox(World world, Sprite[] sprites){
-		Body[] bodys = new Body[sprites.length];
-		for(int i = 0; i < sprites.length; i++){
-			BodyDef bodyDef = new BodyDef();
-			bodyDef.type = BodyType.DynamicBody;
-			bodyDef.position.set(Constants.pixelsToMeters(sprites[i].getX() + sprites[i].getWidth() / 2),
-					Constants.pixelsToMeters(sprites[i].getY() + sprites[i].getHeight() / 2));
-			bodys[i] = world.createBody(bodyDef);
-			
-			PolygonShape shape = new PolygonShape();
-			shape.setAsBox(Constants.pixelsToMeters(sprites[i].getWidth() / 2), Constants.pixelsToMeters(sprites[i].getHeight() / 2));
-			
-			FixtureDef fixtureDef = new FixtureDef();
-			fixtureDef.shape = shape;
-			fixtureDef.density = 1;
-			fixtureDef.restitution = 0.5f;
-			fixtureDef.filter.categoryBits = Constants.OBJECT_CATEGORY;
-			fixtureDef.filter.maskBits = -1;
-			bodys[i].createFixture(fixtureDef).setUserData("object");
-			shape.dispose();
+
+	public Box(TextureAtlas atlas) {
+		try {
+			boxTextute = atlas.findRegion("Box");
+			Gdx.app.debug(Constants.no + " Box", "Create Box Complete");
+			Constants.no++;
+		} catch (Exception e) {
+			Gdx.app.debug(Constants.no + " Box", "Create Box Error");
+			Constants.no++;
 		}
-		return bodys;
 	}
 }

@@ -1,0 +1,145 @@
+
+mouse_def.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+def_01
+  rotate: false
+  xy: 1, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 1
+def_02
+  rotate: false
+  xy: 1, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 2
+def_03
+  rotate: false
+  xy: 195, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 3
+def_04
+  rotate: false
+  xy: 1, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 4
+def_05
+  rotate: false
+  xy: 195, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 5
+def_06
+  rotate: false
+  xy: 389, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 6
+def_07
+  rotate: false
+  xy: 1, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 7
+def_08
+  rotate: false
+  xy: 195, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 8
+def_09
+  rotate: false
+  xy: 389, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 9
+def_10
+  rotate: false
+  xy: 583, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 10
+def_11
+  rotate: false
+  xy: 1, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 11
+def_12
+  rotate: false
+  xy: 195, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 12
+def_13
+  rotate: false
+  xy: 389, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 13
+def_14
+  rotate: false
+  xy: 583, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 14
+def_15
+  rotate: false
+  xy: 777, 777
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 15
+def_16
+  rotate: false
+  xy: 195, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 16
+def_17
+  rotate: false
+  xy: 389, 195
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 17
+def_18
+  rotate: false
+  xy: 583, 389
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 18
+def_19
+  rotate: false
+  xy: 777, 583
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 19
+def_20
+  rotate: false
+  xy: 389, 1
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: 20
