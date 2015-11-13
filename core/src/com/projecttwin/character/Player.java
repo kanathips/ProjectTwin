@@ -18,13 +18,13 @@ import com.badlogic.gdx.utils.Disposable;
 import com.projecttwin.utils.Constants;
 
 public class Player implements Disposable {
-	private TextureRegion standLeft;
-	private TextureRegion standRight;
+	public TextureRegion standLeft;
+	public TextureRegion standRight;
 
-	private Animation walkingLeft;
-	private Animation walkingRight;
-	private Animation sleepingLeft;
-	private Animation sleepingRight;
+	public Animation walkingLeft;
+	public Animation walkingRight;
+	public Animation sleepingLeft;
+	public Animation sleepingRight;
 	public static State state = State.STANDING;
 	private static boolean facingLeft = false;
 	private final float walkUpdateTrigger = 0.1f;
@@ -34,25 +34,25 @@ public class Player implements Disposable {
 	private TextureAtlas atlas;
 	private BodyDef bodyDef;
 	private int powerType = 1;
-	private Animation pullingLeft;
-	private float pullUpdateTrigger = 0.3f;
-	private Animation pullingRight;
-	private Animation pushingLeft;
-	private float pushUpdateTrigger = 0.3f;
-	private Animation pushingRight;
+	public Animation pullingLeft;
+	private float pullUpdateTrigger = 0.2f;
+	public Animation pullingRight;
+	public Animation pushingLeft;
+	private float pushUpdateTrigger = 0.2f;
+	public Animation pushingRight;
 	private final static float moveSpeed = 2f;
 	private static boolean atGround = true;
 
 	public Player(TextureAtlas atlas) {
 		this.atlas = atlas;
-//		try {
+		try {
 			init();
 			Gdx.app.debug(Constants.no + " Player", "Create Player Complete");
 			Constants.no++;
-//		} catch (Exception e) {
-//			Gdx.app.debug(Constants.no + " Player", "Create Player Error");
-//			Constants.no++;
-//		}
+		} catch (Exception e) {
+			Gdx.app.debug(Constants.no + " Player", "Create Player Error");
+			Constants.no++;
+		}
 	}
 
 	/**

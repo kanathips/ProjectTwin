@@ -125,6 +125,9 @@ public class MenuState extends GameState{
 		        if (button == Buttons.LEFT&& alpha_st == 1) {//
 		        	gsm.setState(new SelectStage(gsm));
 		        }
+		        if(button == Buttons.LEFT&& alpha_hw == 1){
+		        	gsm.setState(new HowToStage(gsm));
+		        }
 				return false;
 		    }
 		});

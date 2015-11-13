@@ -61,7 +61,6 @@ public class GameCore implements ApplicationListener {
 		
 		gsm = new GameStateManager(this);
 		gsm.pushState(new StartGame(gsm,true));
-		
 	}
 	
 	public void render() {
